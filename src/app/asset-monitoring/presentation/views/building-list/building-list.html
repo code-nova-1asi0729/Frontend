@@ -1,0 +1,62 @@
+<div class="toolbar-actions">
+  <h1>{{ 'buildings.title' | translate }}</h1>
+  <button mat-flat-button (click)="navigateToNew()">
+    <mat-icon>add</mat-icon> {{ 'buildings.new' | translate }}
+  </button>
+</div>
+
+@if (store.loading()) {
+  <mat-spinner diameter="40" />
+}
+@if (store.error()) {
+  <p class="error">{{ store.error() }}</p>
+}
+
+<table mat-table [dataSource]="dataSource()" matSort class="full-width-table">
+  <ng-container matColumnDef="code">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'buildings.code' | translate }}</th>
+    <td mat-cell *matCellDef="let building">{{ building.code }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'buildings.name' | translate }}</th>
+    <td mat-cell *matCellDef="let building">{{ building.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef>{{ 'buildings.address' | translate }}</th>
+    <td mat-cell *matCellDef="let building">{{ building.address }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="district">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'buildings.district' | translate }}</th>
+    <td mat-cell *matCellDef="let building">{{ building.district }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="totalUnits">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'buildings.total-units' | translate }}</th>
+    <td mat-cell *matCellDef="let building">{{ building.totalUnits }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>{{ 'buildings.status' | translate }}</th>
+    <td mat-cell *matCellDef="let building">{{ 'buildings.statuses.' + building.status | translate }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>{{ 'buildings.actions' | translate }}</th>
+    <td mat-cell *matCellDef="let building">
+      <button mat-icon-button [attr.aria-label]="'buildings.edit' | translate" (click)="editBuilding(building.id)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button [attr.aria-label]="'buildings.delete' | translate" (click)="deleteBuilding(building.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons />
