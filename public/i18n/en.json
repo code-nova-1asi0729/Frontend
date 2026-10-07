@@ -1,0 +1,44 @@
+{
+  "option": {
+    "home": "Home",
+    "buildings": "Buildings"
+  },
+  "home": {
+    "title": "Welcome to Vigilia",
+    "content": "Monitor the critical equipment of your condominium and act before a failure happens.",
+    "go-to-buildings": "Go to my buildings"
+  },
+  "page-not-found": {
+    "title": "Page not found",
+    "content": "The path {{ invalidPath }} does not exist.",
+    "go-home": "Go home"
+  },
+  "validation": {
+    "required": "This field is required.",
+    "min": "The value is too low.",
+    "max-length": "The value is too long.",
+    "invalid": "The value is not valid."
+  },
+  "buildings": {
+    "title": "Buildings",
+    "new": "New building",
+    "new-title": "Register building",
+    "edit-title": "Edit building",
+    "code": "Code",
+    "name": "Name",
+    "address": "Address",
+    "district": "District",
+    "total-units": "Units",
+    "status": "Status",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "create": "Register",
+    "update": "Save changes",
+    "cancel": "Cancel",
+    "statuses": {
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive"
+    }
+  }
+}

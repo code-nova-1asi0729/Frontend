@@ -1,0 +1,15 @@
+.brand {
+  font-weight: 500;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.active {
+  text-decoration: underline;
+}
+
+.content {
+  padding: 16px;
+}

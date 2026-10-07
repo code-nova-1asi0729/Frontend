@@ -1,0 +1,50 @@
+<h1>{{ (isEdit ? 'buildings.edit-title' : 'buildings.new-title') | translate }}</h1>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-container">
+  <mat-form-field>
+    <mat-label>{{ 'buildings.name' | translate }}</mat-label>
+    <input matInput formControlName="name" />
+    @if (isInvalidControl(form, 'name')) {
+      <mat-error>{{ errorMessageForControl(form, 'name') | translate }}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'buildings.code' | translate }}</mat-label>
+    <input matInput formControlName="code" />
+    @if (isInvalidControl(form, 'code')) {
+      <mat-error>{{ errorMessageForControl(form, 'code') | translate }}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'buildings.address' | translate }}</mat-label>
+    <input matInput formControlName="address" />
+    @if (isInvalidControl(form, 'address')) {
+      <mat-error>{{ errorMessageForControl(form, 'address') | translate }}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'buildings.district' | translate }}</mat-label>
+    <input matInput formControlName="district" />
+    @if (isInvalidControl(form, 'district')) {
+      <mat-error>{{ errorMessageForControl(form, 'district') | translate }}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'buildings.total-units' | translate }}</mat-label>
+    <input matInput type="number" formControlName="totalUnits" />
+    @if (isInvalidControl(form, 'totalUnits')) {
+      <mat-error>{{ errorMessageForControl(form, 'totalUnits') | translate }}</mat-error>
+    }
+  </mat-form-field>
+
+  <div class="form-actions">
+    <button mat-flat-button type="submit" [disabled]="form.invalid">
+      {{ (isEdit ? 'buildings.update' : 'buildings.create') | translate }}
+    </button>
+    <button mat-button type="button" (click)="navigateBack()">{{ 'buildings.cancel' | translate }}</button>
+  </div>
+</form>

@@ -1,0 +1,153 @@
+@startuml cd-09-web-incidents
+' ---- Shared style (same block in every CD file) ----
+!$ctx = "#1f4e9c"
+skinparam backgroundColor #ffffff
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 70
+skinparam class {
+  BackgroundColor #ffffff
+  BorderColor $ctx
+  FontColor $ctx
+  ArrowColor #333333
+  StereotypeFontColor $ctx
+}
+skinparam package {
+  BorderColor $ctx
+  FontColor $ctx
+}
+hide circle
+' ----------------------------------------------------
+
+title CD-09 Web Application - Incidents
+
+package "shared" {
+  interface BaseEntity <<interface>>
+  interface BaseAssembler <<interface>>
+  abstract class BaseApiEndpoint
+  abstract class BaseApi
+  abstract class BaseForm
+}
+
+package "asset-monitoring.application" {
+  class AssetMonitoringStore <<service>>
+}
+
+package "incidents" {
+
+  package "domain.model" {
+    class Incident {
+      - #id: number
+      - #buildingId: number
+      - #residentId: number
+      - #equipmentId: number | null
+      - #category: IncidentCategory
+      - #description: string
+      - #status: IncidentStatus
+      - #ratingScore: number | null
+      - #ratingComment: string | null
+      - #reportedAt: Date
+      - #startedAt: Date | null
+      - #resolvedAt: Date | null
+      - #ratedAt: Date | null
+      + startManagement(): void
+      + resolve(): void
+      + canBeRated(): boolean
+      + rate(score: number, comment: string): void
+    }
+
+    enum IncidentStatus <<enumeration>> {
+      REPORTED
+      IN_PROGRESS
+      RESOLVED
+    }
+
+    enum IncidentCategory <<enumeration>> {
+      WATER
+      ELECTRICITY
+      ELEVATOR
+      HVAC
+      OTHER
+    }
+  }
+
+  package "application" {
+    class IncidentsStore <<service>> {
+      - incidentsApi: IncidentsApi
+      - incidentsSignal: WritableSignal<Incident[]>
+      - loadingSignal: WritableSignal<boolean>
+      - errorSignal: WritableSignal<string | null>
+      + incidents: Signal<Incident[]>
+      + loading: Signal<boolean>
+      + error: Signal<string | null>
+      + getIncidentById(id: number): Signal<Incident | undefined>
+      + reportIncident(incident: Incident): void
+      + startManagement(incident: Incident): void
+      + resolveIncident(incident: Incident): void
+      + rateIncident(incident: Incident, score: number, comment: string): void
+      - save(incident: Incident): void
+      - loadIncidents(): void
+      - formatError(error: unknown, fallback: string): string
+    }
+  }
+
+  package "infrastructure" {
+    class IncidentsApi <<service>> {
+      - incidentsEndpoint: IncidentsApiEndpoint
+      + getIncidents(): Observable<Incident[]>
+      + createIncident(incident: Incident): Observable<Incident>
+      + updateIncident(incident: Incident): Observable<Incident>
+    }
+    class IncidentsApiEndpoint {
+      + constructor(http: HttpClient)
+    }
+    class IncidentAssembler {
+      + toEntityFromResource(resource: IncidentResource): Incident
+      + toResourceFromEntity(entity: Incident): IncidentResource
+      + toEntitiesFromResponse(response: IncidentsResponse): Incident[]
+    }
+  }
+
+  package "presentation.views" {
+    class IncidentList <<component>> {
+      + displayedColumns: string[]
+      + navigateToNew(): void
+      + startManagement(incident: Incident): void
+      + resolve(incident: Incident): void
+      + rate(id: number): void
+    }
+    class IncidentForm <<component>> {
+      + form: FormGroup
+      + submit(): void
+      + navigateBack(): void
+    }
+    class IncidentRatingForm <<component>> {
+      + form: FormGroup
+      + submit(): void
+      + navigateBack(): void
+    }
+  }
+}
+
+Incident ..|> BaseEntity
+Incident --> IncidentStatus : has >
+Incident --> IncidentCategory : classified as >
+IncidentsStore "1" o--> "0..*" Incident : holds >
+IncidentsStore "1" --> "1" IncidentsApi : uses >
+IncidentsApi --|> BaseApi
+IncidentsApi "1" *--> "1" IncidentsApiEndpoint : composes >
+IncidentsApiEndpoint --|> BaseApiEndpoint
+IncidentsApiEndpoint "1" --> "1" IncidentAssembler : maps with >
+IncidentAssembler ..|> BaseAssembler
+IncidentList "0..*" --> "1" IncidentsStore : reads >
+IncidentForm "0..*" --> "1" IncidentsStore : saves through >
+IncidentRatingForm "0..*" --> "1" IncidentsStore : saves through >
+IncidentForm ..> AssetMonitoringStore : reads buildings >
+IncidentForm --|> BaseForm
+IncidentRatingForm --|> BaseForm
+
+@enduml

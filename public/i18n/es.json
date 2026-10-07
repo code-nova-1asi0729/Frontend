@@ -1,0 +1,44 @@
+{
+  "option": {
+    "home": "Inicio",
+    "buildings": "Edificios"
+  },
+  "home": {
+    "title": "Bienvenido a Vigilia",
+    "content": "Monitorea los equipos críticos de tu condominio y actúa antes de que ocurra una falla.",
+    "go-to-buildings": "Ir a mis edificios"
+  },
+  "page-not-found": {
+    "title": "Página no encontrada",
+    "content": "La ruta {{ invalidPath }} no existe.",
+    "go-home": "Ir al inicio"
+  },
+  "validation": {
+    "required": "Este campo es obligatorio.",
+    "min": "El valor es muy bajo.",
+    "max-length": "El valor es muy largo.",
+    "invalid": "El valor no es válido."
+  },
+  "buildings": {
+    "title": "Edificios",
+    "new": "Nuevo edificio",
+    "new-title": "Registrar edificio",
+    "edit-title": "Editar edificio",
+    "code": "Código",
+    "name": "Nombre",
+    "address": "Dirección",
+    "district": "Distrito",
+    "total-units": "Unidades",
+    "status": "Estado",
+    "actions": "Acciones",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "create": "Registrar",
+    "update": "Guardar cambios",
+    "cancel": "Cancelar",
+    "statuses": {
+      "ACTIVE": "Activo",
+      "INACTIVE": "Inactivo"
+    }
+  }
+}

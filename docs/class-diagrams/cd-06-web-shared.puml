@@ -1,0 +1,101 @@
+@startuml cd-06-web-shared
+' ---- Shared style (same block in every CD file) ----
+!$ctx = "#6b7280"
+skinparam backgroundColor #ffffff
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 70
+skinparam class {
+  BackgroundColor #ffffff
+  BorderColor $ctx
+  FontColor $ctx
+  ArrowColor #333333
+  StereotypeFontColor $ctx
+}
+skinparam package {
+  BorderColor $ctx
+  FontColor $ctx
+}
+hide circle
+' ----------------------------------------------------
+
+title CD-06 Web Application - Shared
+
+package "shared" {
+
+  package "domain.model" {
+    interface BaseEntity <<interface>> {
+      + id: number
+    }
+  }
+
+  package "infrastructure" {
+    interface BaseResource <<interface>> {
+      + id: number
+    }
+
+    interface BaseResponse <<interface>> {
+    }
+
+    interface "BaseAssembler<TEntity, TResource, TResponse>" as BaseAssembler <<interface>> {
+      + toEntityFromResource(resource: TResource): TEntity
+      + toResourceFromEntity(entity: TEntity): TResource
+      + toEntitiesFromResponse(response: TResponse): TEntity[]
+    }
+
+    abstract class "BaseApiEndpoint<TEntity, TResource, TResponse, TAssembler>" as BaseApiEndpoint {
+      # http: HttpClient
+      # endpointUrl: string
+      # assembler: TAssembler
+      + getAll(): Observable<TEntity[]>
+      + getById(id: number): Observable<TEntity>
+      + create(entity: TEntity): Observable<TEntity>
+      + update(entity: TEntity, id: number): Observable<TEntity>
+      + delete(id: number): Observable<void>
+      # handleError(operation: string): (error: HttpErrorResponse) => Observable<never>
+    }
+
+    abstract class BaseApi {
+    }
+  }
+
+  package "presentation" {
+    abstract class BaseForm {
+      # isInvalidControl(form: FormGroup, controlName: string): boolean
+      # errorMessageForControl(form: FormGroup, controlName: string): string
+    }
+
+    class Layout <<component>> {
+      + options: WritableSignal<Array<{link: string, label: string}>>
+    }
+
+    class LanguageSwitcher <<component>> {
+      # currentLang: string
+      # languages: string[]
+      + useLanguage(language: string): void
+    }
+
+    class Home <<component>> {
+    }
+
+    class PageNotFound <<component>> {
+      + invalidPath: string
+      + navigateToHome(): void
+    }
+  }
+}
+
+BaseApiEndpoint "1" --> "1" BaseAssembler : maps with >
+BaseApi "1" o--> "1..*" BaseApiEndpoint : composes >
+BaseAssembler ..> BaseEntity : creates >
+BaseAssembler ..> BaseResource : reads and writes >
+BaseAssembler ..> BaseResponse : reads >
+Layout "1" *--> "1" LanguageSwitcher : contains >
+Layout "1" --> "0..1" Home : renders >
+Layout "1" --> "0..1" PageNotFound : renders >
+
+@enduml
