@@ -1,0 +1,192 @@
+@startuml cd-08-web-asset-monitoring-ui
+' ---- Shared style (same block in every CD file) ----
+!$ctx = "#1f4e9c"
+skinparam backgroundColor #ffffff
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 70
+skinparam class {
+  BackgroundColor #ffffff
+  BorderColor $ctx
+  FontColor $ctx
+  ArrowColor #333333
+  StereotypeFontColor $ctx
+}
+skinparam package {
+  BorderColor $ctx
+  FontColor $ctx
+}
+hide circle
+skinparam linetype polyline
+' ----------------------------------------------------
+
+title CD-08 Web Application - Asset Monitoring: infrastructure and presentation
+
+package "shared" {
+  interface BaseAssembler <<interface>>
+  abstract class BaseApiEndpoint
+  abstract class BaseApi
+  abstract class BaseForm
+}
+
+package "asset-monitoring" {
+
+  package "application" {
+    class AssetMonitoringStore <<service>>
+  }
+
+  package "infrastructure" {
+    class AssetMonitoringApi <<service>> {
+      - buildingsEndpoint: BuildingsApiEndpoint
+      - equipmentEndpoint: EquipmentApiEndpoint
+      - sensorsEndpoint: SensorsApiEndpoint
+      - sensorReadingsEndpoint: SensorReadingsApiEndpoint
+      - alertsEndpoint: AlertsApiEndpoint
+      + getBuildings(): Observable<Building[]>
+      + createBuilding(building: Building): Observable<Building>
+      + updateBuilding(building: Building): Observable<Building>
+      + deleteBuilding(id: number): Observable<void>
+      + getEquipment(): Observable<CriticalEquipment[]>
+      + createEquipment(equipment: CriticalEquipment): Observable<CriticalEquipment>
+      + updateEquipment(equipment: CriticalEquipment): Observable<CriticalEquipment>
+      + getSensors(): Observable<Sensor[]>
+      + updateSensor(sensor: Sensor): Observable<Sensor>
+      + getSensorReadings(): Observable<SensorReading[]>
+      + getAlerts(): Observable<Alert[]>
+      + updateAlert(alert: Alert): Observable<Alert>
+    }
+
+    class BuildingsApiEndpoint {
+      + constructor(http: HttpClient)
+    }
+    class EquipmentApiEndpoint {
+      + constructor(http: HttpClient)
+    }
+    class SensorsApiEndpoint {
+      + constructor(http: HttpClient)
+    }
+    class SensorReadingsApiEndpoint {
+      + constructor(http: HttpClient)
+    }
+    class AlertsApiEndpoint {
+      + constructor(http: HttpClient)
+    }
+
+    class BuildingAssembler {
+      + toEntityFromResource(resource: BuildingResource): Building
+      + toResourceFromEntity(entity: Building): BuildingResource
+      + toEntitiesFromResponse(response: BuildingsResponse): Building[]
+    }
+    class EquipmentAssembler {
+      + toEntityFromResource(resource: EquipmentResource): CriticalEquipment
+      + toResourceFromEntity(entity: CriticalEquipment): EquipmentResource
+      + toEntitiesFromResponse(response: EquipmentResponse): CriticalEquipment[]
+    }
+    class SensorAssembler {
+      + toEntityFromResource(resource: SensorResource): Sensor
+      + toResourceFromEntity(entity: Sensor): SensorResource
+      + toEntitiesFromResponse(response: SensorsResponse): Sensor[]
+    }
+    class SensorReadingAssembler {
+      + toEntityFromResource(resource: SensorReadingResource): SensorReading
+      + toResourceFromEntity(entity: SensorReading): SensorReadingResource
+      + toEntitiesFromResponse(response: SensorReadingsResponse): SensorReading[]
+    }
+    class AlertAssembler {
+      + toEntityFromResource(resource: AlertResource): Alert
+      + toResourceFromEntity(entity: Alert): AlertResource
+      + toEntitiesFromResponse(response: AlertsResponse): Alert[]
+    }
+  }
+
+  package "presentation.views" {
+    class BuildingList <<component>> {
+      + displayedColumns: string[]
+      + navigateToNew(): void
+      + editBuilding(id: number): void
+      + deleteBuilding(id: number): void
+    }
+    class BuildingForm <<component>> {
+      + form: FormGroup
+      + isEdit: boolean
+      + submit(): void
+      + navigateBack(): void
+    }
+    class EquipmentList <<component>> {
+      + displayedColumns: string[]
+      + selectedBuildingId: WritableSignal<number | null>
+      + navigateToNew(): void
+      + editEquipment(id: number): void
+      + decommissionEquipment(equipment: CriticalEquipment): void
+    }
+    class EquipmentForm <<component>> {
+      + form: FormGroup
+      + isEdit: boolean
+      + submit(): void
+      + navigateBack(): void
+    }
+    class SensorList <<component>> {
+      + displayedColumns: string[]
+      + assignSensor(id: number): void
+      + unassignSensor(sensor: Sensor): void
+    }
+    class SensorAssignForm <<component>> {
+      + form: FormGroup
+      + submit(): void
+      + navigateBack(): void
+    }
+    class ReadingHistory <<component>> {
+      + selectedEquipmentId: WritableSignal<number | null>
+      + range: FormGroup
+      + displayedColumns: string[]
+      + refresh(): void
+    }
+    class AlertList <<component>> {
+      + displayedColumns: string[]
+      + showResolved: WritableSignal<boolean>
+      + acknowledge(alert: Alert): void
+      + resolve(alert: Alert): void
+    }
+  }
+}
+
+AssetMonitoringStore "1" --> "1" AssetMonitoringApi : uses >
+AssetMonitoringApi --|> BaseApi
+AssetMonitoringApi "1" *--> "1" BuildingsApiEndpoint : composes >
+AssetMonitoringApi "1" *--> "1" EquipmentApiEndpoint : composes >
+AssetMonitoringApi "1" *--> "1" SensorsApiEndpoint : composes >
+AssetMonitoringApi "1" *--> "1" SensorReadingsApiEndpoint : composes >
+AssetMonitoringApi "1" *--> "1" AlertsApiEndpoint : composes >
+BuildingsApiEndpoint --|> BaseApiEndpoint
+EquipmentApiEndpoint --|> BaseApiEndpoint
+SensorsApiEndpoint --|> BaseApiEndpoint
+SensorReadingsApiEndpoint --|> BaseApiEndpoint
+AlertsApiEndpoint --|> BaseApiEndpoint
+BuildingsApiEndpoint "1" --> "1" BuildingAssembler : maps with >
+EquipmentApiEndpoint "1" --> "1" EquipmentAssembler : maps with >
+SensorsApiEndpoint "1" --> "1" SensorAssembler : maps with >
+SensorReadingsApiEndpoint "1" --> "1" SensorReadingAssembler : maps with >
+AlertsApiEndpoint "1" --> "1" AlertAssembler : maps with >
+BuildingAssembler ..|> BaseAssembler
+EquipmentAssembler ..|> BaseAssembler
+SensorAssembler ..|> BaseAssembler
+SensorReadingAssembler ..|> BaseAssembler
+AlertAssembler ..|> BaseAssembler
+
+BuildingList "0..*" --> "1" AssetMonitoringStore : reads >
+BuildingForm "0..*" --> "1" AssetMonitoringStore : saves through >
+EquipmentList "0..*" --> "1" AssetMonitoringStore : reads >
+EquipmentForm "0..*" --> "1" AssetMonitoringStore : saves through >
+SensorList "0..*" --> "1" AssetMonitoringStore : reads >
+SensorAssignForm "0..*" --> "1" AssetMonitoringStore : saves through >
+ReadingHistory "0..*" --> "1" AssetMonitoringStore : reads >
+AlertList "0..*" --> "1" AssetMonitoringStore : reads >
+BuildingForm --|> BaseForm
+EquipmentForm --|> BaseForm
+SensorAssignForm --|> BaseForm
+
+@enduml

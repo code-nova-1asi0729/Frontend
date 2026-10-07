@@ -1,59 +1,69 @@
-# VigiliaFrontend
+# Vigilia - Frontend Web Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.1.
+Angular application of **Vigilia**, the preventive maintenance platform for critical equipment
+(water pumps, electrical panels, elevators and HVAC) in residential condominiums. Developed by CodeNova.
 
-## Development server
+## Sprint 2 scope
 
-To start a local development server, run:
+- Buildings: list, register and edit (US07)
+- Critical equipment: list by building, register, edit and decommission (US08, US09, US11)
+- Sensors: list and assign to equipment (US10)
+- Reading history by equipment and date range (US14)
+- Active alerts sorted by severity and status changes (US19, US20)
+- Incidents: report, follow up and rate (US23, US25, US27)
+- English and spanish
 
-```bash
-ng serve
-```
+## Technologies
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Angular 22
+- Angular Material 22
+- ngx-translate 18
+- json-server 0.17.4 as fake API
 
-## Code scaffolding
+## Prerequisites
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Node.js 24 LTS
+- npm
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Run locally
 
 ```bash
-ng build
+npm install
+
+# Terminal 1: fake API on http://localhost:3000/api/v1
+npm run fake-api
+
+# Terminal 2: application on http://localhost:4200
+npm start
+
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Project structure
 
-## Running unit tests
+The code follows Domain-Driven Design. There is one folder per bounded context, and each one has four layers.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
+```text
+src/app/
+├── asset-monitoring/       Core: buildings, equipment, sensors, readings and alerts
+├── incidents/              Core: incidents reported by residents
+└── shared/                 Base classes, layout, i18n and common views
+    <context>/
+    ├── domain/model/       Entities and enums
+    ├── application/        One store per bounded context (signals)
+    ├── infrastructure/     API facade, endpoints, assemblers, resources
+    └── presentation/       Routes and views
+server/                     Fake API data (db.json), routes and sensor simulator
+public/i18n/                en.json and es.json
 ```
 
-## Running end-to-end tests
+## Environments
 
-For end-to-end (e2e) testing, run:
+| File | API used |
+|---|---|
+| `src/environments/environment.development.ts` | json-server on `http://localhost:3000/api/v1` |
+| `src/environments/environment.ts` | json-server deployed on Render (production build) |
 
-```bash
-ng e2e
-```
+## Deployment
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Application: Vercel (`vercel.json` redirects every route to `index.html`).
+- Fake API: Render, Web Service with root directory `server` and start command `npm start`.

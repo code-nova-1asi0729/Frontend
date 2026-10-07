@@ -1,0 +1,197 @@
+@startuml cd-07-web-asset-monitoring-model
+' ---- Shared style (same block in every CD file) ----
+!$ctx = "#1f4e9c"
+skinparam backgroundColor #ffffff
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 70
+skinparam class {
+  BackgroundColor #ffffff
+  BorderColor $ctx
+  FontColor $ctx
+  ArrowColor #333333
+  StereotypeFontColor $ctx
+}
+skinparam package {
+  BorderColor $ctx
+  FontColor $ctx
+}
+hide circle
+' ----------------------------------------------------
+
+title CD-07 Web Application - Asset Monitoring: domain and application
+
+package "shared.domain.model" {
+  interface BaseEntity <<interface>>
+}
+
+package "asset-monitoring" {
+
+  package "domain.model" {
+    class Building {
+      - #id: number
+      - #name: string
+      - #code: string
+      - #address: string
+      - #district: string
+      - #totalUnits: number
+      - #status: string
+      + isActive(): boolean
+    }
+
+    class CriticalEquipment {
+      - #id: number
+      - #buildingId: number
+      - #code: string
+      - #name: string
+      - #type: EquipmentType
+      - #location: string
+      - #installationDate: Date
+      - #status: EquipmentStatus
+      - #building: Building | null
+      + isOperational(): boolean
+      + decommission(): void
+    }
+
+    class Sensor {
+      - #id: number
+      - #equipmentId: number | null
+      - #serialNumber: string
+      - #model: string
+      - #status: SensorStatus
+      - #lastSeenAt: Date | null
+      - #equipment: CriticalEquipment | null
+      + isAssigned(): boolean
+      + assignTo(equipmentId: number): void
+      + unassign(): void
+    }
+
+    class SensorReading {
+      - #id: number
+      - #sensorId: number
+      - #equipmentId: number
+      - #metric: string
+      - #value: number
+      - #unit: string
+      - #status: string
+      - #recordedAt: Date
+      + isValid(): boolean
+    }
+
+    class Alert {
+      - #id: number
+      - #equipmentId: number
+      - #metric: string
+      - #severity: AlertSeverity
+      - #status: AlertStatus
+      - #lastValue: number
+      - #detectedAt: Date
+      - #equipment: CriticalEquipment | null
+      + isActive(): boolean
+      + severityRank(): number
+      + acknowledge(): void
+      + resolve(): void
+    }
+
+    enum EquipmentType <<enumeration>> {
+      WATER_PUMP
+      ELECTRICAL_PANEL
+      ELEVATOR
+      HVAC
+    }
+
+    enum EquipmentStatus <<enumeration>> {
+      OPERATIONAL
+      REQUIRES_FOLLOW_UP
+      OUT_OF_SERVICE
+      DECOMMISSIONED
+    }
+
+    enum SensorStatus <<enumeration>> {
+      UNASSIGNED
+      ASSIGNED
+      MONITORING_ACTIVE
+      DISCONNECTED
+      INACTIVE
+    }
+
+    enum AlertSeverity <<enumeration>> {
+      LOW
+      MEDIUM
+      HIGH
+      CRITICAL
+    }
+
+    enum AlertStatus <<enumeration>> {
+      ACTIVE
+      ACKNOWLEDGED
+      RESOLVED
+    }
+  }
+
+  package "application" {
+    class AssetMonitoringStore <<service>> {
+      - assetMonitoringApi: AssetMonitoringApi
+      - buildingsSignal: WritableSignal<Building[]>
+      - equipmentSignal: WritableSignal<CriticalEquipment[]>
+      - sensorsSignal: WritableSignal<Sensor[]>
+      - readingsSignal: WritableSignal<SensorReading[]>
+      - alertsSignal: WritableSignal<Alert[]>
+      - loadingSignal: WritableSignal<boolean>
+      - errorSignal: WritableSignal<string | null>
+      + buildings: Signal<Building[]>
+      + equipment: Signal<CriticalEquipment[]>
+      + sensors: Signal<Sensor[]>
+      + readings: Signal<SensorReading[]>
+      + alerts: Signal<Alert[]>
+      + activeAlerts: Signal<Alert[]>
+      + loading: Signal<boolean>
+      + error: Signal<string | null>
+      + getBuildingById(id: number): Signal<Building | undefined>
+      + getEquipmentById(id: number): Signal<CriticalEquipment | undefined>
+      + getEquipmentByBuilding(buildingId: number): Signal<CriticalEquipment[]>
+      + getReadingsByEquipment(equipmentId: number): Signal<SensorReading[]>
+      + addBuilding(building: Building): void
+      + updateBuilding(building: Building): void
+      + deleteBuilding(id: number): void
+      + addEquipment(equipment: CriticalEquipment): void
+      + updateEquipment(equipment: CriticalEquipment): void
+      + decommissionEquipment(equipment: CriticalEquipment): void
+      + assignSensor(sensor: Sensor, equipmentId: number): void
+      + unassignSensor(sensor: Sensor): void
+      + reloadReadings(): void
+      + changeAlertStatus(alert: Alert, status: AlertStatus): void
+      - loadAll(): void
+      - saveSensor(sensor: Sensor): void
+      - setError(error: unknown, fallback: string): void
+      - formatError(error: unknown, fallback: string): string
+    }
+  }
+}
+
+Building ..|> BaseEntity
+CriticalEquipment ..|> BaseEntity
+Sensor ..|> BaseEntity
+SensorReading ..|> BaseEntity
+Alert ..|> BaseEntity
+CriticalEquipment "0..*" --> "0..1" Building : belongs to >
+Sensor "0..*" --> "0..1" CriticalEquipment : assigned to >
+SensorReading "0..*" --> "1" Sensor : produced by >
+Alert "0..*" --> "0..1" CriticalEquipment : affects >
+CriticalEquipment --> EquipmentType : typed as >
+CriticalEquipment --> EquipmentStatus : has >
+Sensor --> SensorStatus : has >
+Alert --> AlertSeverity : rated as >
+Alert --> AlertStatus : has >
+
+AssetMonitoringStore "1" o--> "0..*" Building : holds >
+AssetMonitoringStore "1" o--> "0..*" CriticalEquipment : holds >
+AssetMonitoringStore "1" o--> "0..*" Sensor : holds >
+AssetMonitoringStore "1" o--> "0..*" SensorReading : holds >
+AssetMonitoringStore "1" o--> "0..*" Alert : holds >
+
+@enduml
