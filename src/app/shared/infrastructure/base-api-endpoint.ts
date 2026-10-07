@@ -5,12 +5,12 @@ import { BaseAssembler } from './base-assembler';
 import { BaseResource, BaseResponse } from './base-response';
 
 /**
- * Generic CRUD operations for one REST endpoint.
+ * generic crud operations for one rest endpoint.
  *
- * @typeParam TEntity - Domain entity handled by the endpoint.
- * @typeParam TResource - Resource exchanged with the API.
- * @typeParam TResponse - Envelope returned by collection queries.
- * @typeParam TAssembler - Mapper between entities and resources.
+ * @typeparam tentity - domain entity handled by the endpoint.
+ * @typeparam tresource - resource exchanged with the api.
+ * @typeparam tresponse - envelope returned by collection queries.
+ * @typeparam tassembler - mapper between entities and resources.
  */
 export abstract class BaseApiEndpoint<
   TEntity extends BaseEntity,
@@ -25,7 +25,7 @@ export abstract class BaseApiEndpoint<
   ) {}
 
   /**
-   * Gets every entity of the endpoint.
+   * gets every entity of the endpoint.
    */
   getAll(): Observable<TEntity[]> {
     return this.http.get<TResponse | TResource[]>(this.endpointUrl).pipe(
@@ -39,8 +39,8 @@ export abstract class BaseApiEndpoint<
   }
 
   /**
-   * Gets one entity by its identifier.
-   * @param id - Entity identifier.
+   * gets one entity by its identifier.
+   * @param id - entity identifier.
    */
   getById(id: number): Observable<TEntity> {
     return this.http.get<TResource>(`${this.endpointUrl}/${id}`).pipe(
@@ -50,8 +50,8 @@ export abstract class BaseApiEndpoint<
   }
 
   /**
-   * Creates a new entity.
-   * @param entity - Entity to create.
+   * creates a new entity.
+   * @param entity - entity to create.
    */
   create(entity: TEntity): Observable<TEntity> {
     const resource = this.assembler.toResourceFromEntity(entity);
@@ -62,9 +62,9 @@ export abstract class BaseApiEndpoint<
   }
 
   /**
-   * Updates an existing entity.
-   * @param entity - Entity with the new values.
-   * @param id - Identifier of the entity to update.
+   * updates an existing entity.
+   * @param entity - entity with the new values.
+   * @param id - identifier of the entity to update.
    */
   update(entity: TEntity, id: number): Observable<TEntity> {
     const resource = this.assembler.toResourceFromEntity(entity);
@@ -75,8 +75,8 @@ export abstract class BaseApiEndpoint<
   }
 
   /**
-   * Deletes an entity by its identifier.
-   * @param id - Identifier of the entity to delete.
+   * deletes an entity by its identifier.
+   * @param id - identifier of the entity to delete.
    */
   delete(id: number): Observable<void> {
     return this.http
@@ -85,8 +85,8 @@ export abstract class BaseApiEndpoint<
   }
 
   /**
-   * Builds an error handler that turns HTTP errors into readable messages.
-   * @param operation - Name of the operation that failed.
+   * builds an error handler that turns http errors into readable messages.
+   * @param operation - name of the operation that failed.
    */
   protected handleError(operation: string) {
     return (error: HttpErrorResponse): Observable<never> => {
