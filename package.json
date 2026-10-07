@@ -42,5 +42,8 @@
     "karma-jasmine-html-reporter": "~2.3.0",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }
