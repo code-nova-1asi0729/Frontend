@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles. Material theme is in material-theme.scss */
+
+h1 {
+  font: var(--mat-sys-headline-small);
+}
+
+.toolbar-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 600px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+}
