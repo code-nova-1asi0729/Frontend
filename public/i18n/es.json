@@ -4,7 +4,8 @@
     "buildings": "Edificios",
     "equipment": "Equipos",
     "alerts": "Alertas",
-    "sensors": "Sensores"
+    "sensors": "Sensores",
+    "readings": "Lecturas"
   },
   "home": {
     "title": "Bienvenido a Vigilia",
@@ -134,5 +135,20 @@
       "DISCONNECTED": "Desconectado",
       "INACTIVE": "Inactivo"
     }
+  },
+  "readings": {
+    "title": "Historial de lecturas",
+    "refresh": "Actualizar",
+    "equipment": "Equipo",
+    "range": "Rango de fechas",
+    "recorded-at": "Fecha",
+    "metric": "Métrica",
+    "value": "Valor",
+    "sensor": "Sensor",
+    "status": "Estado",
+    "valid": "Válida",
+    "invalid": "Inválida",
+    "select-equipment": "Selecciona un equipo para ver sus lecturas.",
+    "empty": "No hay lecturas registradas en este periodo"
   }
 }

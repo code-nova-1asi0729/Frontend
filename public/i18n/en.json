@@ -4,7 +4,8 @@
     "buildings": "Buildings",
     "equipment": "Equipment",
     "alerts": "Alerts",
-    "sensors": "Sensors"
+    "sensors": "Sensors",
+    "readings": "Readings"
   },
   "home": {
     "title": "Welcome to Vigilia",
@@ -134,5 +135,20 @@
       "DISCONNECTED": "Disconnected",
       "INACTIVE": "Inactive"
     }
+  },
+  "readings": {
+    "title": "Reading history",
+    "refresh": "Refresh",
+    "equipment": "Equipment",
+    "range": "Date range",
+    "recorded-at": "Date",
+    "metric": "Metric",
+    "value": "Value",
+    "sensor": "Sensor",
+    "status": "Status",
+    "valid": "Valid",
+    "invalid": "Invalid",
+    "select-equipment": "Select an equipment to see its readings.",
+    "empty": "There are no readings registered in this period."
   }
 }

@@ -12,6 +12,8 @@ const alertList = () => import('./views/alert-list/alert-list').then((m) => m.Al
 const sensorList = () => import('./views/sensor-list/sensor-list').then((m) => m.SensorList);
 const sensorAssignForm = () =>
   import('./views/sensor-assign-form/sensor-assign-form').then((m) => m.SensorAssignForm);
+const readingHistory = () =>
+  import('./views/reading-history/reading-history').then((m) => m.ReadingHistory);
 
 /**
  * Routes of the Asset Monitoring bounded context.
@@ -26,4 +28,5 @@ export const assetMonitoringRoutes: Routes = [
   { path: 'alerts', loadComponent: alertList },
   { path: 'sensors', loadComponent: sensorList },
   { path: 'sensors/:id/assign', loadComponent: sensorAssignForm },
+  { path: 'readings', loadComponent: readingHistory },
 ];
