@@ -1,13 +1,50 @@
-<mat-toolbar>
-  <span class="brand">Vigilia</span>
-  <span class="spacer"></span>
-  @for (option of options(); track option.link) {
-    <a mat-button [routerLink]="option.link" routerLinkActive="active">
-      {{ option.label | translate }}
+<mat-sidenav-container class="shell">
+  <mat-sidenav
+    class="sidebar"
+    [mode]="isCompact() ? 'over' : 'side'"
+    [opened]="!isCompact()"
+    [fixedInViewport]="isCompact()"
+  >
+    <a class="brand" routerLink="/home" (click)="closeIfCompact()">
+      <span class="brand-logo"><mat-icon>monitor_heart</mat-icon></span>
+      <span class="brand-name">Vigilia</span>
     </a>
-  }
-  <app-language-switcher />
-</mat-toolbar>
-<main class="content">
-  <router-outlet />
-</main>
+
+    <nav class="nav" [attr.aria-label]="'layout.navigation' | translate">
+      @for (option of options(); track option.link) {
+        <a
+          class="nav-item"
+          [routerLink]="option.link"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          (click)="closeIfCompact()"
+        >
+          <mat-icon class="nav-icon">{{ option.icon }}</mat-icon>
+          <span>{{ option.label | translate }}</span>
+        </a>
+      }
+    </nav>
+
+    <div class="sidebar-footer">
+      <app-language-switcher />
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    @if (isCompact()) {
+      <mat-toolbar class="topbar">
+        <button
+          mat-icon-button
+          [attr.aria-label]="'layout.open-menu' | translate"
+          (click)="sidenav()?.open()"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="topbar-title">Vigilia</span>
+      </mat-toolbar>
+    }
+    <main class="content">
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
