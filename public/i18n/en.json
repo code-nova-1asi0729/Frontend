@@ -190,5 +190,9 @@
       "IN_PROGRESS": "In progress",
       "RESOLVED": "Resolved"
     }
+  },
+  "layout": {
+    "navigation": "Main navigation",
+    "open-menu": "Open menu"
   }
 }

@@ -1,15 +1,119 @@
+.shell {
+  height: 100%;
+  background: var(--mat-sys-surface);
+}
+
+.sidebar {
+  width: 248px;
+  border-right: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 0;
+  background: var(--mat-sys-surface-container-low);
+}
+
+/* The sidebar is a column: brand, options and the language switcher at the bottom */
+.sidebar ::ng-deep .mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 12px;
+  box-sizing: border-box;
+}
+
 .brand {
-  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 12px 24px;
+  color: var(--mat-sys-on-surface);
+  text-decoration: none;
 }
 
-.spacer {
-  flex: 1 1 auto;
+.brand-logo {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
 }
 
-.active {
-  text-decoration: underline;
+.brand-logo mat-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+
+.brand-name {
+  font: var(--mat-sys-title-large);
+  font-weight: 700;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--mat-sys-on-surface-variant);
+  font: var(--mat-sys-label-large);
+  font-size: 15px;
+  text-decoration: none;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.nav-item:hover {
+  background: var(--mat-sys-surface-container-high);
+  color: var(--mat-sys-on-surface);
+}
+
+.nav-item:focus-visible {
+  outline: 2px solid var(--mat-sys-primary);
+  outline-offset: -2px;
+}
+
+.nav-item.active {
+  background: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+  font-weight: 600;
+}
+
+.nav-icon {
+  width: 22px;
+  height: 22px;
+  font-size: 22px;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 12px 0;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  gap: 8px;
+}
+
+.topbar-title {
+  font-weight: 600;
 }
 
 .content {
-  padding: 16px;
+  padding: 24px 32px;
+}
+
+@media (max-width: 959.98px) {
+  .content {
+    padding: 16px;
+  }
 }
