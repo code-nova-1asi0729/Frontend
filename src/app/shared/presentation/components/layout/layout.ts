@@ -29,5 +29,10 @@ export class Layout {
   options = signal([
     { link: '/home', label: 'option.home' },
     { link: '/asset-monitoring/buildings', label: 'option.buildings' },
+    { link: '/asset-monitoring/equipment', label: 'option.equipment' },
+    { link: '/asset-monitoring/alerts', label: 'option.alerts' },
+    { link: '/asset-monitoring/sensors', label: 'option.sensors' },
+    { link: '/asset-monitoring/readings', label: 'option.readings' },
+    { link: '/incidents', label: 'option.incidents' },
   ]);
 }

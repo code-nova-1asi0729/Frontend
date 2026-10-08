@@ -1,0 +1,110 @@
+<div class="toolbar-actions">
+  <h1>{{ 'equipment.title' | translate }}</h1>
+  <button mat-flat-button (click)="navigateToNew()">
+    <mat-icon>add</mat-icon> {{ 'equipment.new' | translate }}
+  </button>
+</div>
+
+<mat-form-field class="building-filter" floatLabel="always">
+  <mat-label>{{ 'equipment.filter-building' | translate }}</mat-label>
+  <mat-select
+    [value]="selectedBuildingId()"
+    [placeholder]="'equipment.all-buildings' | translate"
+    (selectionChange)="selectedBuildingId.set($event.value)"
+  >
+    <mat-option [value]="null">{{ 'equipment.all-buildings' | translate }}</mat-option>
+    @for (building of store.buildings(); track building.id) {
+      <mat-option [value]="building.id">{{ building.name }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+@if (store.loading()) {
+  <mat-spinner diameter="40" />
+}
+@if (store.error()) {
+  <p class="error">{{ store.error() }}</p>
+}
+
+<table mat-table [dataSource]="dataSource()" matSort class="full-width-table">
+  <ng-container matColumnDef="code">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'equipment.code' | translate }}</th>
+    <td mat-cell *matCellDef="let item">{{ item.code }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'equipment.name' | translate }}</th>
+    <td mat-cell *matCellDef="let item">{{ item.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'equipment.type' | translate }}</th>
+    <td mat-cell *matCellDef="let item">{{ 'equipment.types.' + item.type | translate }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="building">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      {{ 'equipment.building' | translate }}
+    </th>
+    <td mat-cell *matCellDef="let item">{{ item.building?.name ?? item.buildingId }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="location">
+    <th mat-header-cell *matHeaderCellDef>{{ 'equipment.location' | translate }}</th>
+    <td mat-cell *matCellDef="let item">{{ item.location }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="installationDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      {{ 'equipment.installation-date' | translate }}
+    </th>
+    <td mat-cell *matCellDef="let item">{{ item.installationDate | date: 'dd/MM/yyyy' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'equipment.status' | translate }}</th>
+    <td mat-cell *matCellDef="let item">
+      <span [class]="'status status-' + item.status">
+        {{ 'equipment.statuses.' + item.status | translate }}
+      </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>{{ 'equipment.actions' | translate }}</th>
+    <td mat-cell *matCellDef="let item" class="actions">
+      <button
+        mat-icon-button
+        [attr.aria-label]="'equipment.edit' | translate"
+        [matTooltip]="'equipment.edit' | translate"
+        [disabled]="item.isDecommissioned()"
+        (click)="editEquipment(item.id)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        [attr.aria-label]="'equipment.decommission' | translate"
+        [matTooltip]="'equipment.decommission' | translate"
+        [disabled]="item.isDecommissioned()"
+        (click)="decommissionEquipment(item)"
+      >
+        <mat-icon>block</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    [class.decommissioned]="row.isDecommissioned()"
+  ></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
+      {{ 'equipment.empty' | translate }}
+    </td>
+  </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons />

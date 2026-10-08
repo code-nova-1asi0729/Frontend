@@ -1,12 +1,17 @@
 {
   "option": {
     "home": "Inicio",
-    "buildings": "Edificios"
+    "buildings": "Edificios",
+    "equipment": "Equipos",
+    "alerts": "Alertas",
+    "sensors": "Sensores",
+    "readings": "Lecturas",
+    "incidents": "Incidentes"
   },
   "home": {
     "title": "Bienvenido a Vigilia",
     "content": "Monitorea los equipos críticos de tu condominio y actúa antes de que ocurra una falla.",
-    "go-to-buildings": "Ir a mis edificios"
+    "go-to-alerts": "Ir al panel de alertas"
   },
   "page-not-found": {
     "title": "Página no encontrada",
@@ -39,6 +44,151 @@
     "statuses": {
       "ACTIVE": "Activo",
       "INACTIVE": "Inactivo"
+    }
+  },
+  "equipment": {
+    "title": "Equipos críticos",
+    "new": "Nuevo equipo",
+    "new-title": "Registrar equipo",
+    "edit-title": "Editar equipo",
+    "filter-building": "Edificio",
+    "all-buildings": "Todos los edificios",
+    "code": "Código",
+    "name": "Nombre",
+    "type": "Tipo",
+    "building": "Edificio",
+    "location": "Ubicación",
+    "installation-date": "Fecha de instalación",
+    "status": "Estado",
+    "actions": "Acciones",
+    "edit": "Editar",
+    "decommission": "Dar de baja",
+    "decommission-confirm": "¿Dar de baja {{ name }}? Se conservará en el historial, pero ya no será monitoreado.",
+    "empty": "No hay equipos registrados para este edificio.",
+    "create": "Registrar",
+    "update": "Guardar cambios",
+    "cancel": "Cancelar",
+    "types": {
+      "WATER_PUMP": "Bomba de agua",
+      "ELECTRICAL_PANEL": "Tablero eléctrico",
+      "ELEVATOR": "Ascensor",
+      "HVAC": "Climatización (HVAC)"
+    },
+    "statuses": {
+      "OPERATIONAL": "Operativo",
+      "REQUIRES_FOLLOW_UP": "Requiere seguimiento",
+      "OUT_OF_SERVICE": "Fuera de servicio",
+      "DECOMMISSIONED": "Dado de baja"
+    }
+  },
+  "alerts": {
+    "title": "Panel de alertas",
+    "active-title": "Alertas activas",
+    "show-resolved": "Mostrar resueltas",
+    "severity": "Severidad",
+    "equipment": "Equipo",
+    "metric": "Métrica",
+    "last-value": "Último valor",
+    "detected-at": "Detectada",
+    "status": "Estado",
+    "actions": "Acciones",
+    "acknowledge": "En gestión",
+    "resolve": "Resolver",
+    "empty": "No hay alertas activas.",
+    "severities": {
+      "CRITICAL": "Crítica",
+      "HIGH": "Alta",
+      "MEDIUM": "Media",
+      "LOW": "Baja"
+    },
+    "statuses": {
+      "ACTIVE": "Activa",
+      "ACKNOWLEDGED": "En gestión",
+      "RESOLVED": "Resuelta"
+    }
+  },
+  "metrics": {
+    "VIBRATION": "Vibración",
+    "TEMPERATURE": "Temperatura",
+    "HUMIDITY": "Humedad",
+    "POWER_CONSUMPTION": "Consumo eléctrico"
+  },
+  "sensors": {
+    "title": "Sensores",
+    "assign-title": "Asignar sensor",
+    "serial-number": "Número de serie",
+    "model": "Modelo",
+    "equipment": "Equipo",
+    "status": "Estado",
+    "last-seen-at": "Última señal",
+    "actions": "Acciones",
+    "assign": "Asignar",
+    "unassign": "Desasignar",
+    "cancel": "Cancelar",
+    "no-equipment": "Sin equipo",
+    "never-seen": "Sin señal aún",
+    "already-assigned": "Este sensor ya está asignado a {{ equipment }}. Desasígnalo antes de asignarlo a otro equipo.",
+    "empty": "No hay sensores registrados.",
+    "statuses": {
+      "UNASSIGNED": "Sin asignar",
+      "ASSIGNED": "Asignado",
+      "MONITORING_ACTIVE": "Monitoreando",
+      "DISCONNECTED": "Desconectado",
+      "INACTIVE": "Inactivo"
+    }
+  },
+  "readings": {
+    "title": "Historial de lecturas",
+    "refresh": "Actualizar",
+    "equipment": "Equipo",
+    "range": "Rango de fechas",
+    "recorded-at": "Fecha",
+    "metric": "Métrica",
+    "value": "Valor",
+    "sensor": "Sensor",
+    "status": "Estado",
+    "valid": "Válida",
+    "invalid": "Inválida",
+    "select-equipment": "Selecciona un equipo para ver sus lecturas.",
+    "empty": "No hay lecturas registradas en este periodo"
+  },
+  "incidents": {
+    "title": "Incidentes",
+    "new": "Reportar incidente",
+    "new-title": "Reportar incidente",
+    "rate-title": "Calificar la solución",
+    "reported-at": "Reportado",
+    "building": "Edificio",
+    "equipment": "Equipo (opcional)",
+    "equipment-hint": "Elige el equipo si el problema está relacionado con uno.",
+    "no-equipment": "Ningún equipo en particular",
+    "category": "Categoría",
+    "description": "Descripción",
+    "status": "Estado",
+    "rating": "Calificación",
+    "actions": "Acciones",
+    "start-management": "Iniciar gestión",
+    "resolve": "Resolver",
+    "rate": "Calificar",
+    "report": "Reportar",
+    "cancel": "Cancelar",
+    "score": "Puntaje",
+    "score-hint": "1 = muy malo, 5 = excelente",
+    "comment": "Comentario (opcional)",
+    "send-rating": "Enviar calificación",
+    "cannot-rate": "Este incidente no se puede calificar: no está resuelto o ya fue calificado.",
+    "empty": "No hay incidentes reportados.",
+    "categories": {
+      "WATER": "Agua",
+      "ELECTRICITY": "Electricidad",
+      "ELEVATOR": "Ascensor",
+      "HVAC": "Aire acondicionado",
+      "OTHER": "Otro"
+    },
+    "statuses": {
+      "REPORTED": "Recibido",
+      "IN_PROGRESS": "En gestión",
+      "RESOLVED": "Resuelto"
     }
   }
 }

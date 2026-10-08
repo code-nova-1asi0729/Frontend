@@ -1,12 +1,17 @@
 {
   "option": {
     "home": "Home",
-    "buildings": "Buildings"
+    "buildings": "Buildings",
+    "equipment": "Equipment",
+    "alerts": "Alerts",
+    "sensors": "Sensors",
+    "readings": "Readings",
+    "incidents": "Incidents"
   },
   "home": {
     "title": "Welcome to Vigilia",
     "content": "Monitor the critical equipment of your condominium and act before a failure happens.",
-    "go-to-buildings": "Go to my buildings"
+    "go-to-alerts": "Go to the alerts dashboard"
   },
   "page-not-found": {
     "title": "Page not found",
@@ -39,6 +44,151 @@
     "statuses": {
       "ACTIVE": "Active",
       "INACTIVE": "Inactive"
+    }
+  },
+  "equipment": {
+    "title": "Critical equipment",
+    "new": "New equipment",
+    "new-title": "Register equipment",
+    "edit-title": "Edit equipment",
+    "filter-building": "Building",
+    "all-buildings": "All buildings",
+    "code": "Code",
+    "name": "Name",
+    "type": "Type",
+    "building": "Building",
+    "location": "Location",
+    "installation-date": "Installation date",
+    "status": "Status",
+    "actions": "Actions",
+    "edit": "Edit",
+    "decommission": "Decommission",
+    "decommission-confirm": "Decommission {{ name }}? It will stay in the history but will no longer be monitored.",
+    "empty": "There is no equipment registered for this building.",
+    "create": "Register",
+    "update": "Save changes",
+    "cancel": "Cancel",
+    "types": {
+      "WATER_PUMP": "Water pump",
+      "ELECTRICAL_PANEL": "Electrical panel",
+      "ELEVATOR": "Elevator",
+      "HVAC": "HVAC"
+    },
+    "statuses": {
+      "OPERATIONAL": "Operational",
+      "REQUIRES_FOLLOW_UP": "Requires follow-up",
+      "OUT_OF_SERVICE": "Out of service",
+      "DECOMMISSIONED": "Decommissioned"
+    }
+  },
+  "alerts": {
+    "title": "Alerts dashboard",
+    "active-title": "Active alerts",
+    "show-resolved": "Show resolved",
+    "severity": "Severity",
+    "equipment": "Equipment",
+    "metric": "Metric",
+    "last-value": "Last value",
+    "detected-at": "Detected",
+    "status": "Status",
+    "actions": "Actions",
+    "acknowledge": "In progress",
+    "resolve": "Resolve",
+    "empty": "There are no active alerts.",
+    "severities": {
+      "CRITICAL": "Critical",
+      "HIGH": "High",
+      "MEDIUM": "Medium",
+      "LOW": "Low"
+    },
+    "statuses": {
+      "ACTIVE": "Active",
+      "ACKNOWLEDGED": "In progress",
+      "RESOLVED": "Resolved"
+    }
+  },
+  "metrics": {
+    "VIBRATION": "Vibration",
+    "TEMPERATURE": "Temperature",
+    "HUMIDITY": "Humidity",
+    "POWER_CONSUMPTION": "Power consumption"
+  },
+  "sensors": {
+    "title": "Sensors",
+    "assign-title": "Assign sensor",
+    "serial-number": "Serial number",
+    "model": "Model",
+    "equipment": "Equipment",
+    "status": "Status",
+    "last-seen-at": "Last signal",
+    "actions": "Actions",
+    "assign": "Assign",
+    "unassign": "Unassign",
+    "cancel": "Cancel",
+    "no-equipment": "No equipment",
+    "never-seen": "No signal yet",
+    "already-assigned": "This sensor is already assigned to {{ equipment }}. Unassign it before assigning it to another equipment.",
+    "empty": "There are no sensors registered.",
+    "statuses": {
+      "UNASSIGNED": "Unassigned",
+      "ASSIGNED": "Assigned",
+      "MONITORING_ACTIVE": "Monitoring",
+      "DISCONNECTED": "Disconnected",
+      "INACTIVE": "Inactive"
+    }
+  },
+  "readings": {
+    "title": "Reading history",
+    "refresh": "Refresh",
+    "equipment": "Equipment",
+    "range": "Date range",
+    "recorded-at": "Date",
+    "metric": "Metric",
+    "value": "Value",
+    "sensor": "Sensor",
+    "status": "Status",
+    "valid": "Valid",
+    "invalid": "Invalid",
+    "select-equipment": "Select an equipment to see its readings.",
+    "empty": "There are no readings registered in this period."
+  },
+  "incidents": {
+    "title": "Incidents",
+    "new": "Report incident",
+    "new-title": "Report incident",
+    "rate-title": "Rate the solution",
+    "reported-at": "Reported",
+    "building": "Building",
+    "equipment": "Equipment (optional)",
+    "equipment-hint": "Choose the equipment if the problem is related to one.",
+    "no-equipment": "No specific equipment",
+    "category": "Category",
+    "description": "Description",
+    "status": "Status",
+    "rating": "Rating",
+    "actions": "Actions",
+    "start-management": "Start management",
+    "resolve": "Resolve",
+    "rate": "Rate",
+    "report": "Report",
+    "cancel": "Cancel",
+    "score": "Score",
+    "score-hint": "1 = very bad, 5 = excellent",
+    "comment": "Comment (optional)",
+    "send-rating": "Send rating",
+    "cannot-rate": "This incident cannot be rated: it is not resolved or it was already rated.",
+    "empty": "There are no incidents reported.",
+    "categories": {
+      "WATER": "Water",
+      "ELECTRICITY": "Electricity",
+      "ELEVATOR": "Elevator",
+      "HVAC": "Air conditioning",
+      "OTHER": "Other"
+    },
+    "statuses": {
+      "REPORTED": "Received",
+      "IN_PROGRESS": "In progress",
+      "RESOLVED": "Resolved"
     }
   }
 }
