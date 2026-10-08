@@ -1,6 +1,7 @@
 import { Injectable, Signal, computed, inject, signal } from '@angular/core';
 import { AssetMonitoringApi } from '../infrastructure/asset-monitoring-api';
 import { Building } from '../domain/model/building.entity';
+import { CriticalEquipment } from '../domain/model/critical-equipment.entity';
 
 /**
  * application state of the asset monitoring bounded context.
@@ -11,12 +12,24 @@ export class AssetMonitoringStore {
   private assetMonitoringApi = inject(AssetMonitoringApi);
 
   private buildingsSignal = signal<Building[]>([]);
+  private equipmentSignal = signal<CriticalEquipment[]>([]);
   private loadingSignal = signal<boolean>(false);
   private errorSignal = signal<string | null>(null);
 
   readonly buildings = this.buildingsSignal.asReadonly();
   readonly loading = this.loadingSignal.asReadonly();
   readonly error = this.errorSignal.asReadonly();
+
+  /**
+   * equipment linked with its building.
+   */
+  readonly equipment = computed(() => {
+    const buildings = this.buildings();
+    return this.equipmentSignal().map((item) => {
+      item.building = buildings.find((building) => building.id === item.buildingId) ?? null;
+      return item;
+    });
+  });
 
   constructor() {
     this.loadAll();
@@ -66,6 +79,55 @@ export class AssetMonitoringStore {
   }
 
   /**
+   * returns an equipment by id, or undefined while it is not loaded.
+   * @param id - equipment identifier.
+   */
+  getEquipmentById(id: number): Signal<CriticalEquipment | undefined> {
+    return computed(() => this.equipment().find((item) => item.id === id));
+  }
+
+  /**
+   * returns the equipment of one building (US08).
+   * @param buildingId - building identifier.
+   */
+  getEquipmentByBuilding(buildingId: number): Signal<CriticalEquipment[]> {
+    return computed(() => this.equipment().filter((item) => item.buildingId === buildingId));
+  }
+
+  addEquipment(equipment: CriticalEquipment): void {
+    this.loadingSignal.set(true);
+    this.assetMonitoringApi.createEquipment(equipment).subscribe({
+      next: (created) => {
+        this.equipmentSignal.update((items) => [...items, created]);
+        this.loadingSignal.set(false);
+      },
+      error: (error) => this.setError(error, 'Failed to create equipment'),
+    });
+  }
+
+  updateEquipment(equipment: CriticalEquipment): void {
+    this.loadingSignal.set(true);
+    this.assetMonitoringApi.updateEquipment(equipment).subscribe({
+      next: (updated) => {
+        this.equipmentSignal.update((items) =>
+          items.map((current) => (current.id === updated.id ? updated : current)),
+        );
+        this.loadingSignal.set(false);
+      },
+      error: (error) => this.setError(error, 'Failed to update equipment'),
+    });
+  }
+
+  /**
+   * takes an equipment out of service (US09). it is updated, never deleted.
+   * @param equipment - equipment to decommission.
+   */
+  decommissionEquipment(equipment: CriticalEquipment): void {
+    equipment.decommission();
+    this.updateEquipment(equipment);
+  }
+
+  /**
    * loads the initial data of the context. add here the loaders of new resources.
    */
   private loadAll(): void {
@@ -76,6 +138,10 @@ export class AssetMonitoringStore {
         this.loadingSignal.set(false);
       },
       error: (error) => this.setError(error, 'Failed to load buildings'),
+    });
+    this.assetMonitoringApi.getEquipment().subscribe({
+      next: (equipment) => this.equipmentSignal.set(equipment),
+      error: (error) => this.setError(error, 'Failed to load equipment'),
     });
   }
 
