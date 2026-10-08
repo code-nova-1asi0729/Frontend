@@ -20,11 +20,26 @@ const metricsByEquipmentType = {
   HVAC: ['TEMPERATURE', 'HUMIDITY'],
 };
 
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// json-server --watch reloads db.json after each write and may drop the next request,
+// so every request is retried a few times before the round is skipped
+async function request(url, options) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await fetch(url, options);
+    } catch (error) {
+      if (attempt === 3) throw error;
+      await wait(500);
+    }
+  }
+}
+
 const randomValue = ({ min, max }) => Math.round((min + Math.random() * (max - min)) * 10) / 10;
 
 async function sendReadings() {
-  const sensors = await (await fetch(`${API_URL}/sensors?status=MONITORING_ACTIVE`)).json();
-  const equipment = await (await fetch(`${API_URL}/equipment`)).json();
+  const sensors = await (await request(`${API_URL}/sensors?status=MONITORING_ACTIVE`)).json();
+  const equipment = await (await request(`${API_URL}/equipment`)).json();
   const now = new Date().toISOString();
 
   for (const sensor of sensors) {
@@ -40,14 +55,14 @@ async function sendReadings() {
         status: 'VALID',
         recordedAt: now,
       };
-      await fetch(`${API_URL}/sensor-readings`, {
+      await request(`${API_URL}/sensor-readings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reading),
       });
       console.log(`${now} ${sensor.serialNumber} ${metric} ${reading.value} ${reading.unit}`);
     }
-    await fetch(`${API_URL}/sensors/${sensor.id}`, {
+    await request(`${API_URL}/sensors/${sensor.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ lastSeenAt: now }),
@@ -55,6 +70,16 @@ async function sendReadings() {
   }
 }
 
+// json-server --watch reloads db.json after each write and may drop the connection;
+// a failed round is skipped instead of stopping the simulator
+async function tick() {
+  try {
+    await sendReadings();
+  } catch (error) {
+    console.warn(`Round skipped: ${error.cause?.code ?? error.message}`);
+  }
+}
+
 console.log(`Sending readings to ${API_URL} every ${INTERVAL_MS / 1000} s. Press Ctrl+C to stop.`);
-sendReadings();
-setInterval(sendReadings, INTERVAL_MS);
+tick();
+setInterval(tick, INTERVAL_MS);
