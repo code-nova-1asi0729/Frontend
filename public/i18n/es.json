@@ -1,7 +1,8 @@
 {
   "option": {
     "home": "Inicio",
-    "buildings": "Edificios"
+    "buildings": "Edificios",
+    "equipment": "Equipos"
   },
   "home": {
     "title": "Bienvenido a Vigilia",
@@ -39,6 +40,41 @@
     "statuses": {
       "ACTIVE": "Activo",
       "INACTIVE": "Inactivo"
+    }
+  },
+  "equipment": {
+    "title": "Equipos críticos",
+    "new": "Nuevo equipo",
+    "new-title": "Registrar equipo",
+    "edit-title": "Editar equipo",
+    "filter-building": "Edificio",
+    "all-buildings": "Todos los edificios",
+    "code": "Código",
+    "name": "Nombre",
+    "type": "Tipo",
+    "building": "Edificio",
+    "location": "Ubicación",
+    "installation-date": "Fecha de instalación",
+    "status": "Estado",
+    "actions": "Acciones",
+    "edit": "Editar",
+    "decommission": "Dar de baja",
+    "decommission-confirm": "¿Dar de baja {{ name }}? Se conservará en el historial, pero ya no será monitoreado.",
+    "empty": "No hay equipos registrados para este edificio.",
+    "create": "Registrar",
+    "update": "Guardar cambios",
+    "cancel": "Cancelar",
+    "types": {
+      "WATER_PUMP": "Bomba de agua",
+      "ELECTRICAL_PANEL": "Tablero eléctrico",
+      "ELEVATOR": "Ascensor",
+      "HVAC": "Climatización (HVAC)"
+    },
+    "statuses": {
+      "OPERATIONAL": "Operativo",
+      "REQUIRES_FOLLOW_UP": "Requiere seguimiento",
+      "OUT_OF_SERVICE": "Fuera de servicio",
+      "DECOMMISSIONED": "Dado de baja"
     }
   }
 }

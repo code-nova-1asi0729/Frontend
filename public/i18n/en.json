@@ -1,7 +1,8 @@
 {
   "option": {
     "home": "Home",
-    "buildings": "Buildings"
+    "buildings": "Buildings",
+    "equipment": "Equipment"
   },
   "home": {
     "title": "Welcome to Vigilia",
@@ -39,6 +40,41 @@
     "statuses": {
       "ACTIVE": "Active",
       "INACTIVE": "Inactive"
+    }
+  },
+  "equipment": {
+    "title": "Critical equipment",
+    "new": "New equipment",
+    "new-title": "Register equipment",
+    "edit-title": "Edit equipment",
+    "filter-building": "Building",
+    "all-buildings": "All buildings",
+    "code": "Code",
+    "name": "Name",
+    "type": "Type",
+    "building": "Building",
+    "location": "Location",
+    "installation-date": "Installation date",
+    "status": "Status",
+    "actions": "Actions",
+    "edit": "Edit",
+    "decommission": "Decommission",
+    "decommission-confirm": "Decommission {{ name }}? It will stay in the history but will no longer be monitored.",
+    "empty": "There is no equipment registered for this building.",
+    "create": "Register",
+    "update": "Save changes",
+    "cancel": "Cancel",
+    "types": {
+      "WATER_PUMP": "Water pump",
+      "ELECTRICAL_PANEL": "Electrical panel",
+      "ELEVATOR": "Elevator",
+      "HVAC": "HVAC"
+    },
+    "statuses": {
+      "OPERATIONAL": "Operational",
+      "REQUIRES_FOLLOW_UP": "Requires follow-up",
+      "OUT_OF_SERVICE": "Out of service",
+      "DECOMMISSIONED": "Decommissioned"
     }
   }
 }
