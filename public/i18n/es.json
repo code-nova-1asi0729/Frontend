@@ -8,7 +8,7 @@
   "home": {
     "title": "Bienvenido a Vigilia",
     "content": "Monitorea los equipos críticos de tu condominio y actúa antes de que ocurra una falla.",
-    "go-to-buildings": "Ir a mis edificios"
+    "go-to-alerts": "Ir al panel de alertas"
   },
   "page-not-found": {
     "title": "Página no encontrada",

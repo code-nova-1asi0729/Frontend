@@ -8,7 +8,7 @@
   "home": {
     "title": "Welcome to Vigilia",
     "content": "Monitor the critical equipment of your condominium and act before a failure happens.",
-    "go-to-buildings": "Go to my buildings"
+    "go-to-alerts": "Go to the alerts dashboard"
   },
   "page-not-found": {
     "title": "Page not found",
