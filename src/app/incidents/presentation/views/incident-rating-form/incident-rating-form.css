@@ -1,0 +1,29 @@
+.error {
+  color: var(--mat-sys-error);
+}
+
+.summary {
+  max-width: 600px;
+}
+
+.warning {
+  max-width: 600px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #fff4d6;
+  color: #7a5200;
+}
+
+.score-label {
+  font: var(--mat-sys-title-small);
+}
+
+mat-button-toggle-group {
+  align-self: flex-start;
+}
+
+.hint {
+  font: var(--mat-sys-body-small);
+  color: var(--mat-sys-on-surface-variant);
+  margin-bottom: 8px;
+}

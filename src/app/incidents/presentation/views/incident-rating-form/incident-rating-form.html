@@ -1,0 +1,42 @@
+<h1>{{ 'incidents.rate-title' | translate }}</h1>
+
+@if (incident(); as incident) {
+  <p class="summary">
+    <strong>{{ 'incidents.categories.' + incident.category | translate }}:</strong>
+    {{ incident.description }}
+  </p>
+  @if (!incident.canBeRated()) {
+    <p class="warning">{{ 'incidents.cannot-rate' | translate }}</p>
+  }
+}
+
+@if (store.error()) {
+  <p class="error">{{ store.error() }}</p>
+}
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-container">
+  <label id="score-label" class="score-label">{{ 'incidents.score' | translate }}</label>
+  <mat-button-toggle-group formControlName="score" aria-labelledby="score-label">
+    @for (score of scores; track score) {
+      <mat-button-toggle [value]="score">{{ score }}</mat-button-toggle>
+    }
+  </mat-button-toggle-group>
+  <span class="hint">{{ 'incidents.score-hint' | translate }}</span>
+
+  <mat-form-field>
+    <mat-label>{{ 'incidents.comment' | translate }}</mat-label>
+    <textarea matInput rows="3" formControlName="comment"></textarea>
+    @if (isInvalidControl(form, 'comment')) {
+      <mat-error>{{ errorMessageForControl(form, 'comment') | translate }}</mat-error>
+    }
+  </mat-form-field>
+
+  <div class="form-actions">
+    <button mat-flat-button type="submit" [disabled]="form.invalid || !incident()?.canBeRated()">
+      {{ 'incidents.send-rating' | translate }}
+    </button>
+    <button mat-button type="button" (click)="navigateBack()">
+      {{ 'incidents.cancel' | translate }}
+    </button>
+  </div>
+</form>

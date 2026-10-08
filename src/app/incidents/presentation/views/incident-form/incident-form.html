@@ -1,0 +1,57 @@
+<h1>{{ 'incidents.new-title' | translate }}</h1>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-container">
+  <mat-form-field>
+    <mat-label>{{ 'incidents.building' | translate }}</mat-label>
+    <mat-select formControlName="buildingId">
+      @for (building of assetMonitoringStore.buildings(); track building.id) {
+        <mat-option [value]="building.id">{{ building.name }}</mat-option>
+      }
+    </mat-select>
+    @if (isInvalidControl(form, 'buildingId')) {
+      <mat-error>{{ errorMessageForControl(form, 'buildingId') | translate }}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'incidents.equipment' | translate }}</mat-label>
+    <mat-select formControlName="equipmentId">
+      <mat-option [value]="null">{{ 'incidents.no-equipment' | translate }}</mat-option>
+      @for (item of buildingEquipment(); track item.id) {
+        <mat-option [value]="item.id">{{ item.name }} ({{ item.location }})</mat-option>
+      }
+    </mat-select>
+    <mat-hint>{{ 'incidents.equipment-hint' | translate }}</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'incidents.category' | translate }}</mat-label>
+    <mat-select formControlName="category">
+      @for (category of categories; track category) {
+        <mat-option [value]="category">
+          {{ 'incidents.categories.' + category | translate }}
+        </mat-option>
+      }
+    </mat-select>
+    @if (isInvalidControl(form, 'category')) {
+      <mat-error>{{ errorMessageForControl(form, 'category') | translate }}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'incidents.description' | translate }}</mat-label>
+    <textarea matInput rows="4" formControlName="description"></textarea>
+    @if (isInvalidControl(form, 'description')) {
+      <mat-error>{{ errorMessageForControl(form, 'description') | translate }}</mat-error>
+    }
+  </mat-form-field>
+
+  <div class="form-actions">
+    <button mat-flat-button type="submit" [disabled]="form.invalid">
+      {{ 'incidents.report' | translate }}
+    </button>
+    <button mat-button type="button" (click)="navigateBack()">
+      {{ 'incidents.cancel' | translate }}
+    </button>
+  </div>
+</form>

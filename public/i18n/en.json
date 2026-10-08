@@ -5,7 +5,8 @@
     "equipment": "Equipment",
     "alerts": "Alerts",
     "sensors": "Sensors",
-    "readings": "Readings"
+    "readings": "Readings",
+    "incidents": "Incidents"
   },
   "home": {
     "title": "Welcome to Vigilia",
@@ -150,5 +151,44 @@
     "invalid": "Invalid",
     "select-equipment": "Select an equipment to see its readings.",
     "empty": "There are no readings registered in this period."
+  },
+  "incidents": {
+    "title": "Incidents",
+    "new": "Report incident",
+    "new-title": "Report incident",
+    "rate-title": "Rate the solution",
+    "reported-at": "Reported",
+    "building": "Building",
+    "equipment": "Equipment (optional)",
+    "equipment-hint": "Choose the equipment if the problem is related to one.",
+    "no-equipment": "No specific equipment",
+    "category": "Category",
+    "description": "Description",
+    "status": "Status",
+    "rating": "Rating",
+    "actions": "Actions",
+    "start-management": "Start management",
+    "resolve": "Resolve",
+    "rate": "Rate",
+    "report": "Report",
+    "cancel": "Cancel",
+    "score": "Score",
+    "score-hint": "1 = very bad, 5 = excellent",
+    "comment": "Comment (optional)",
+    "send-rating": "Send rating",
+    "cannot-rate": "This incident cannot be rated: it is not resolved or it was already rated.",
+    "empty": "There are no incidents reported.",
+    "categories": {
+      "WATER": "Water",
+      "ELECTRICITY": "Electricity",
+      "ELEVATOR": "Elevator",
+      "HVAC": "Air conditioning",
+      "OTHER": "Other"
+    },
+    "statuses": {
+      "REPORTED": "Received",
+      "IN_PROGRESS": "In progress",
+      "RESOLVED": "Resolved"
+    }
   }
 }

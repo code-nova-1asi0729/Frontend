@@ -7,6 +7,8 @@ const assetMonitoringRoutes = () =>
   import('./asset-monitoring/presentation/asset-monitoring.routes').then(
     (m) => m.assetMonitoringRoutes,
   );
+const incidentsRoutes = () =>
+  import('./incidents/presentation/incidents.routes').then((m) => m.incidentsRoutes);
 
 const baseTitle = 'Vigilia';
 
@@ -16,6 +18,7 @@ const baseTitle = 'Vigilia';
 export const routes: Routes = [
   { path: 'home', component: Home, title: `${baseTitle} - Home` },
   { path: 'asset-monitoring', loadChildren: assetMonitoringRoutes },
+  { path: 'incidents', loadChildren: incidentsRoutes },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', loadComponent: pageNotFound, title: `${baseTitle} - Page Not Found` },
 ];
