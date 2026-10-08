@@ -25,71 +25,77 @@
   <p class="error">{{ store.error() }}</p>
 }
 
-<table mat-table [dataSource]="visibleAlerts()" class="full-width-table">
-  <ng-container matColumnDef="severity">
-    <th mat-header-cell *matHeaderCellDef>{{ 'alerts.severity' | translate }}</th>
-    <td mat-cell *matCellDef="let alert">
-      <span [class]="'badge severity-' + alert.severity">
-        {{ 'alerts.severities.' + alert.severity | translate }}
-      </span>
-    </td>
-  </ng-container>
+<div class="table-container">
+  <table mat-table [dataSource]="visibleAlerts()" class="full-width-table">
+    <ng-container matColumnDef="severity">
+      <th mat-header-cell *matHeaderCellDef>{{ 'alerts.severity' | translate }}</th>
+      <td mat-cell *matCellDef="let alert">
+        <span [class]="'badge severity-' + alert.severity">
+          {{ 'alerts.severities.' + alert.severity | translate }}
+        </span>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="equipment">
-    <th mat-header-cell *matHeaderCellDef>{{ 'alerts.equipment' | translate }}</th>
-    <td mat-cell *matCellDef="let alert">
-      {{ alert.equipment?.name ?? alert.equipmentId }}
-      @if (alert.equipment?.building) {
-        <div class="secondary">{{ alert.equipment.building.name }}</div>
-      }
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="equipment">
+      <th mat-header-cell *matHeaderCellDef>{{ 'alerts.equipment' | translate }}</th>
+      <td mat-cell *matCellDef="let alert">
+        {{ alert.equipment?.name ?? alert.equipmentId }}
+        @if (alert.equipment?.building) {
+          <div class="secondary">{{ alert.equipment.building.name }}</div>
+        }
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="metric">
-    <th mat-header-cell *matHeaderCellDef>{{ 'alerts.metric' | translate }}</th>
-    <td mat-cell *matCellDef="let alert">{{ 'metrics.' + alert.metric | translate }}</td>
-  </ng-container>
+    <ng-container matColumnDef="metric">
+      <th mat-header-cell *matHeaderCellDef>{{ 'alerts.metric' | translate }}</th>
+      <td mat-cell *matCellDef="let alert">{{ 'metrics.' + alert.metric | translate }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="lastValue">
-    <th mat-header-cell *matHeaderCellDef>{{ 'alerts.last-value' | translate }}</th>
-    <td mat-cell *matCellDef="let alert">
-      {{ alert.lastValue | number: '1.0-1' }} {{ unitOf(alert.metric) }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="lastValue">
+      <th mat-header-cell *matHeaderCellDef>{{ 'alerts.last-value' | translate }}</th>
+      <td mat-cell *matCellDef="let alert">
+        {{ alert.lastValue | number: '1.0-1' }} {{ unitOf(alert.metric) }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="detectedAt">
-    <th mat-header-cell *matHeaderCellDef>{{ 'alerts.detected-at' | translate }}</th>
-    <td mat-cell *matCellDef="let alert">{{ alert.detectedAt | date: 'dd/MM/yyyy HH:mm' }}</td>
-  </ng-container>
+    <ng-container matColumnDef="detectedAt">
+      <th mat-header-cell *matHeaderCellDef>{{ 'alerts.detected-at' | translate }}</th>
+      <td mat-cell *matCellDef="let alert">{{ alert.detectedAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef>{{ 'alerts.status' | translate }}</th>
-    <td mat-cell *matCellDef="let alert">{{ 'alerts.statuses.' + alert.status | translate }}</td>
-  </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>{{ 'alerts.status' | translate }}</th>
+      <td mat-cell *matCellDef="let alert">{{ 'alerts.statuses.' + alert.status | translate }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>{{ 'alerts.actions' | translate }}</th>
-    <td mat-cell *matCellDef="let alert">
-      <div class="actions">
-        <button mat-stroked-button [disabled]="!canAcknowledge(alert)" (click)="acknowledge(alert)">
-          {{ 'alerts.acknowledge' | translate }}
-        </button>
-        <button mat-flat-button [disabled]="!alert.isActive()" (click)="resolve(alert)">
-          {{ 'alerts.resolve' | translate }}
-        </button>
-      </div>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>{{ 'alerts.actions' | translate }}</th>
+      <td mat-cell *matCellDef="let alert">
+        <div class="actions">
+          <button
+            mat-stroked-button
+            [disabled]="!canAcknowledge(alert)"
+            (click)="acknowledge(alert)"
+          >
+            {{ 'alerts.acknowledge' | translate }}
+          </button>
+          <button mat-flat-button [disabled]="!alert.isActive()" (click)="resolve(alert)">
+            {{ 'alerts.resolve' | translate }}
+          </button>
+        </div>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr
-    mat-row
-    *matRowDef="let row; columns: displayedColumns"
-    [class.resolved]="!row.isActive()"
-  ></tr>
-  <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
-      {{ 'alerts.empty' | translate }}
-    </td>
-  </tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [class.resolved]="!row.isActive()"
+    ></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
+        {{ 'alerts.empty' | translate }}
+      </td>
+    </tr>
+  </table>
+</div>
