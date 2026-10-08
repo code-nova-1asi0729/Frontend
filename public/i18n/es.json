@@ -5,7 +5,8 @@
     "equipment": "Equipos",
     "alerts": "Alertas",
     "sensors": "Sensores",
-    "readings": "Lecturas"
+    "readings": "Lecturas",
+    "incidents": "Incidentes"
   },
   "home": {
     "title": "Bienvenido a Vigilia",
@@ -150,5 +151,44 @@
     "invalid": "Inválida",
     "select-equipment": "Selecciona un equipo para ver sus lecturas.",
     "empty": "No hay lecturas registradas en este periodo"
+  },
+  "incidents": {
+    "title": "Incidentes",
+    "new": "Reportar incidente",
+    "new-title": "Reportar incidente",
+    "rate-title": "Calificar la solución",
+    "reported-at": "Reportado",
+    "building": "Edificio",
+    "equipment": "Equipo (opcional)",
+    "equipment-hint": "Elige el equipo si el problema está relacionado con uno.",
+    "no-equipment": "Ningún equipo en particular",
+    "category": "Categoría",
+    "description": "Descripción",
+    "status": "Estado",
+    "rating": "Calificación",
+    "actions": "Acciones",
+    "start-management": "Iniciar gestión",
+    "resolve": "Resolver",
+    "rate": "Calificar",
+    "report": "Reportar",
+    "cancel": "Cancelar",
+    "score": "Puntaje",
+    "score-hint": "1 = muy malo, 5 = excelente",
+    "comment": "Comentario (opcional)",
+    "send-rating": "Enviar calificación",
+    "cannot-rate": "Este incidente no se puede calificar: no está resuelto o ya fue calificado.",
+    "empty": "No hay incidentes reportados.",
+    "categories": {
+      "WATER": "Agua",
+      "ELECTRICITY": "Electricidad",
+      "ELEVATOR": "Ascensor",
+      "HVAC": "Aire acondicionado",
+      "OTHER": "Otro"
+    },
+    "statuses": {
+      "REPORTED": "Recibido",
+      "IN_PROGRESS": "En gestión",
+      "RESOLVED": "Resuelto"
+    }
   }
 }

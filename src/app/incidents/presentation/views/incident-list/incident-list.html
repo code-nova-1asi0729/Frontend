@@ -1,0 +1,86 @@
+<div class="toolbar-actions">
+  <h1>{{ 'incidents.title' | translate }}</h1>
+  <button mat-flat-button (click)="navigateToNew()">
+    <mat-icon>add</mat-icon> {{ 'incidents.new' | translate }}
+  </button>
+</div>
+
+@if (store.loading()) {
+  <mat-spinner diameter="40" />
+}
+@if (store.error()) {
+  <p class="error">{{ store.error() }}</p>
+}
+
+<table mat-table [dataSource]="store.incidents()" class="full-width-table">
+  <ng-container matColumnDef="reportedAt">
+    <th mat-header-cell *matHeaderCellDef>{{ 'incidents.reported-at' | translate }}</th>
+    <td mat-cell *matCellDef="let incident">
+      {{ incident.reportedAt | date: 'dd/MM/yyyy HH:mm' }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef>{{ 'incidents.category' | translate }}</th>
+    <td mat-cell *matCellDef="let incident">
+      {{ 'incidents.categories.' + incident.category | translate }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>{{ 'incidents.description' | translate }}</th>
+    <td mat-cell *matCellDef="let incident" class="description">{{ incident.description }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>{{ 'incidents.status' | translate }}</th>
+    <td mat-cell *matCellDef="let incident">
+      <span [class]="'status status-' + incident.status">
+        {{ 'incidents.statuses.' + incident.status | translate }}
+      </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="rating">
+    <th mat-header-cell *matHeaderCellDef>{{ 'incidents.rating' | translate }}</th>
+    <td mat-cell *matCellDef="let incident">
+      @if (incident.ratingScore !== null) {
+        <span class="stars" [attr.aria-label]="incident.ratingScore + '/5'">
+          @for (star of stars; track star) {
+            <mat-icon [class.filled]="star <= incident.ratingScore">star</mat-icon>
+          }
+        </span>
+        @if (incident.ratingComment) {
+          <div class="secondary">{{ incident.ratingComment }}</div>
+        }
+      }
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>{{ 'incidents.actions' | translate }}</th>
+    <td mat-cell *matCellDef="let incident">
+      @if (isReported(incident)) {
+        <button mat-stroked-button (click)="startManagement(incident)">
+          {{ 'incidents.start-management' | translate }}
+        </button>
+      } @else if (isInProgress(incident)) {
+        <button mat-flat-button (click)="resolve(incident)">
+          {{ 'incidents.resolve' | translate }}
+        </button>
+      } @else if (incident.canBeRated()) {
+        <button mat-flat-button (click)="rate(incident.id)">
+          <mat-icon>star</mat-icon> {{ 'incidents.rate' | translate }}
+        </button>
+      }
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
+      {{ 'incidents.empty' | translate }}
+    </td>
+  </tr>
+</table>
