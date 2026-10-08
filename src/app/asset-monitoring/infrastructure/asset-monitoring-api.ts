@@ -6,6 +6,8 @@ import { Building } from '../domain/model/building.entity';
 import { BuildingsApiEndpoint } from './buildings-api-endpoint';
 import { CriticalEquipment } from '../domain/model/critical-equipment.entity';
 import { EquipmentApiEndpoint } from './equipment-api-endpoint';
+import { Alert } from '../domain/model/alert.entity';
+import { AlertsApiEndpoint } from './alerts-api-endpoint';
 
 /**
  * API facade of the asset monitoring bounded context.
@@ -15,6 +17,7 @@ export class AssetMonitoringApi extends BaseApi {
   private http = inject(HttpClient);
   private buildingsEndpoint = new BuildingsApiEndpoint(this.http);
   private equipmentEndpoint = new EquipmentApiEndpoint(this.http);
+  private alertsEndpoint = new AlertsApiEndpoint(this.http);
 
   getBuildings(): Observable<Building[]> {
     return this.buildingsEndpoint.getAll();
@@ -42,5 +45,13 @@ export class AssetMonitoringApi extends BaseApi {
 
   updateEquipment(equipment: CriticalEquipment): Observable<CriticalEquipment> {
     return this.equipmentEndpoint.update(equipment, equipment.id);
+  }
+
+  getAlerts(): Observable<Alert[]> {
+    return this.alertsEndpoint.getAll();
+  }
+
+  updateAlert(alert: Alert): Observable<Alert> {
+    return this.alertsEndpoint.update(alert, alert.id);
   }
 }

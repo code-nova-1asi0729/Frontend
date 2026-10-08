@@ -2,6 +2,8 @@ import { Injectable, Signal, computed, inject, signal } from '@angular/core';
 import { AssetMonitoringApi } from '../infrastructure/asset-monitoring-api';
 import { Building } from '../domain/model/building.entity';
 import { CriticalEquipment } from '../domain/model/critical-equipment.entity';
+import { Alert } from '../domain/model/alert.entity';
+import { AlertStatus } from '../domain/model/alert-status';
 
 /**
  * application state of the asset monitoring bounded context.
@@ -13,6 +15,7 @@ export class AssetMonitoringStore {
 
   private buildingsSignal = signal<Building[]>([]);
   private equipmentSignal = signal<CriticalEquipment[]>([]);
+  private alertsSignal = signal<Alert[]>([]);
   private loadingSignal = signal<boolean>(false);
   private errorSignal = signal<string | null>(null);
 
@@ -30,6 +33,29 @@ export class AssetMonitoringStore {
       return item;
     });
   });
+
+  /**
+   * alerts linked with the equipment they affect.
+   */
+  readonly alerts = computed(() => {
+    const equipment = this.equipment();
+    return this.alertsSignal().map((alert) => {
+      alert.equipment = equipment.find((item) => item.id === alert.equipmentId) ?? null;
+      return alert;
+    });
+  });
+
+  /**
+   * alerts that are not resolved yet, the most severe first (US19).
+   */
+  readonly activeAlerts = computed(() =>
+    this.alerts()
+      .filter((alert) => alert.isActive())
+      .sort(
+        (a, b) =>
+          b.severityRank() - a.severityRank() || b.detectedAt.getTime() - a.detectedAt.getTime(),
+      ),
+  );
 
   constructor() {
     this.loadAll();
@@ -128,6 +154,32 @@ export class AssetMonitoringStore {
   }
 
   /**
+   * moves an alert to "acknowledged" or "resolved" (US20).
+   * the entity validates the change before it is saved.
+   * @param alert - alert to change.
+   * @param status - new status.
+   */
+  changeAlertStatus(alert: Alert, status: AlertStatus): void {
+    try {
+      if (status === AlertStatus.ACKNOWLEDGED) alert.acknowledge();
+      else if (status === AlertStatus.RESOLVED) alert.resolve();
+    } catch (error) {
+      this.setError(error, 'Invalid alert status change');
+      return;
+    }
+    this.loadingSignal.set(true);
+    this.assetMonitoringApi.updateAlert(alert).subscribe({
+      next: (updated) => {
+        this.alertsSignal.update((alerts) =>
+          alerts.map((current) => (current.id === updated.id ? updated : current)),
+        );
+        this.loadingSignal.set(false);
+      },
+      error: (error) => this.setError(error, 'Failed to update alert'),
+    });
+  }
+
+  /**
    * loads the initial data of the context. add here the loaders of new resources.
    */
   private loadAll(): void {
@@ -142,6 +194,10 @@ export class AssetMonitoringStore {
     this.assetMonitoringApi.getEquipment().subscribe({
       next: (equipment) => this.equipmentSignal.set(equipment),
       error: (error) => this.setError(error, 'Failed to load equipment'),
+    });
+    this.assetMonitoringApi.getAlerts().subscribe({
+      next: (alerts) => this.alertsSignal.set(alerts),
+      error: (error) => this.setError(error, 'Failed to load alerts'),
     });
   }
 
