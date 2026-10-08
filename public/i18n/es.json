@@ -3,7 +3,9 @@
     "home": "Inicio",
     "buildings": "Edificios",
     "equipment": "Equipos",
-    "alerts": "Alertas"
+    "alerts": "Alertas",
+    "sensors": "Sensores",
+    "readings": "Lecturas"
   },
   "home": {
     "title": "Bienvenido a Vigilia",
@@ -109,5 +111,44 @@
     "TEMPERATURE": "Temperatura",
     "HUMIDITY": "Humedad",
     "POWER_CONSUMPTION": "Consumo eléctrico"
+  },
+  "sensors": {
+    "title": "Sensores",
+    "assign-title": "Asignar sensor",
+    "serial-number": "Número de serie",
+    "model": "Modelo",
+    "equipment": "Equipo",
+    "status": "Estado",
+    "last-seen-at": "Última señal",
+    "actions": "Acciones",
+    "assign": "Asignar",
+    "unassign": "Desasignar",
+    "cancel": "Cancelar",
+    "no-equipment": "Sin equipo",
+    "never-seen": "Sin señal aún",
+    "already-assigned": "Este sensor ya está asignado a {{ equipment }}. Desasígnalo antes de asignarlo a otro equipo.",
+    "empty": "No hay sensores registrados.",
+    "statuses": {
+      "UNASSIGNED": "Sin asignar",
+      "ASSIGNED": "Asignado",
+      "MONITORING_ACTIVE": "Monitoreando",
+      "DISCONNECTED": "Desconectado",
+      "INACTIVE": "Inactivo"
+    }
+  },
+  "readings": {
+    "title": "Historial de lecturas",
+    "refresh": "Actualizar",
+    "equipment": "Equipo",
+    "range": "Rango de fechas",
+    "recorded-at": "Fecha",
+    "metric": "Métrica",
+    "value": "Valor",
+    "sensor": "Sensor",
+    "status": "Estado",
+    "valid": "Válida",
+    "invalid": "Inválida",
+    "select-equipment": "Selecciona un equipo para ver sus lecturas.",
+    "empty": "No hay lecturas registradas en este periodo"
   }
 }

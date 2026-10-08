@@ -4,6 +4,8 @@ import { Building } from '../domain/model/building.entity';
 import { CriticalEquipment } from '../domain/model/critical-equipment.entity';
 import { Alert } from '../domain/model/alert.entity';
 import { AlertStatus } from '../domain/model/alert-status';
+import { Sensor } from '../domain/model/sensor.entity';
+import { SensorReading } from '../domain/model/sensor-reading.entity';
 
 /**
  * application state of the asset monitoring bounded context.
@@ -16,12 +18,15 @@ export class AssetMonitoringStore {
   private buildingsSignal = signal<Building[]>([]);
   private equipmentSignal = signal<CriticalEquipment[]>([]);
   private alertsSignal = signal<Alert[]>([]);
+  private sensorsSignal = signal<Sensor[]>([]);
+  private readingsSignal = signal<SensorReading[]>([]);
   private loadingSignal = signal<boolean>(false);
   private errorSignal = signal<string | null>(null);
 
   readonly buildings = this.buildingsSignal.asReadonly();
   readonly loading = this.loadingSignal.asReadonly();
   readonly error = this.errorSignal.asReadonly();
+  readonly readings = this.readingsSignal.asReadonly();
 
   /**
    * equipment linked with its building.
@@ -56,6 +61,17 @@ export class AssetMonitoringStore {
           b.severityRank() - a.severityRank() || b.detectedAt.getTime() - a.detectedAt.getTime(),
       ),
   );
+
+  /**
+   * sensors linked with the equipment they measure.
+   */
+  readonly sensors = computed(() => {
+    const equipment = this.equipment();
+    return this.sensorsSignal().map((sensor) => {
+      sensor.equipment = equipment.find((item) => item.id === sensor.equipmentId) ?? null;
+      return sensor;
+    });
+  });
 
   constructor() {
     this.loadAll();
@@ -180,6 +196,76 @@ export class AssetMonitoringStore {
   }
 
   /**
+   * readings of one equipment, the most recent first (US14).
+   * @param equipmentId - equipment identifier.
+   */
+  getReadingsByEquipment(equipmentId: number): Signal<SensorReading[]> {
+    return computed(() =>
+      this.readings()
+        .filter((reading) => reading.equipmentId === equipmentId)
+        .sort((a, b) => b.recordedAt.getTime() - a.recordedAt.getTime()),
+    );
+  }
+
+  /**
+   * links a sensor to an equipment (US10).
+   * if the sensor already has an equipment, the error is kept and the API is not called.
+   * @param sensor - sensor to assign.
+   * @param equipmentId - equipment that the sensor will measure.
+   */
+  assignSensor(sensor: Sensor, equipmentId: number): void {
+    this.errorSignal.set(null);
+    try {
+      sensor.assignTo(equipmentId);
+    } catch (error) {
+      this.setError(error, 'The sensor cannot be assigned');
+      return;
+    }
+    this.saveSensor(sensor);
+  }
+
+  /**
+   * releases a sensor so it can be assigned to another equipment.
+   * @param sensor - sensor to unassign.
+   */
+  unassignSensor(sensor: Sensor): void {
+    this.errorSignal.set(null);
+    sensor.unassign();
+    this.saveSensor(sensor);
+  }
+
+  /**
+   * gets the latest readings sent by the sensors, and their last signal.
+   */
+  reloadReadings(): void {
+    this.loadingSignal.set(true);
+    this.assetMonitoringApi.getSensorReadings().subscribe({
+      next: (readings) => {
+        this.readingsSignal.set(readings);
+        this.loadingSignal.set(false);
+      },
+      error: (error) => this.setError(error, 'Failed to load readings'),
+    });
+    this.assetMonitoringApi.getSensors().subscribe({
+      next: (sensors) => this.sensorsSignal.set(sensors),
+      error: (error) => this.setError(error, 'Failed to load sensors'),
+    });
+  }
+
+  private saveSensor(sensor: Sensor): void {
+    this.loadingSignal.set(true);
+    this.assetMonitoringApi.updateSensor(sensor).subscribe({
+      next: (updated) => {
+        this.sensorsSignal.update((sensors) =>
+          sensors.map((current) => (current.id === updated.id ? updated : current)),
+        );
+        this.loadingSignal.set(false);
+      },
+      error: (error) => this.setError(error, 'Failed to update sensor'),
+    });
+  }
+
+  /**
    * loads the initial data of the context. add here the loaders of new resources.
    */
   private loadAll(): void {
@@ -198,6 +284,14 @@ export class AssetMonitoringStore {
     this.assetMonitoringApi.getAlerts().subscribe({
       next: (alerts) => this.alertsSignal.set(alerts),
       error: (error) => this.setError(error, 'Failed to load alerts'),
+    });
+    this.assetMonitoringApi.getSensors().subscribe({
+      next: (sensors) => this.sensorsSignal.set(sensors),
+      error: (error) => this.setError(error, 'Failed to load sensors'),
+    });
+    this.assetMonitoringApi.getSensorReadings().subscribe({
+      next: (readings) => this.readingsSignal.set(readings),
+      error: (error) => this.setError(error, 'Failed to load readings'),
     });
   }
 
