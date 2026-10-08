@@ -2,7 +2,8 @@
   "option": {
     "home": "Home",
     "buildings": "Buildings",
-    "equipment": "Equipment"
+    "equipment": "Equipment",
+    "alerts": "Alerts"
   },
   "home": {
     "title": "Welcome to Vigilia",
@@ -76,5 +77,37 @@
       "OUT_OF_SERVICE": "Out of service",
       "DECOMMISSIONED": "Decommissioned"
     }
+  },
+  "alerts": {
+    "title": "Alerts dashboard",
+    "active-title": "Active alerts",
+    "show-resolved": "Show resolved",
+    "severity": "Severity",
+    "equipment": "Equipment",
+    "metric": "Metric",
+    "last-value": "Last value",
+    "detected-at": "Detected",
+    "status": "Status",
+    "actions": "Actions",
+    "acknowledge": "In progress",
+    "resolve": "Resolve",
+    "empty": "There are no active alerts.",
+    "severities": {
+      "CRITICAL": "Critical",
+      "HIGH": "High",
+      "MEDIUM": "Medium",
+      "LOW": "Low"
+    },
+    "statuses": {
+      "ACTIVE": "Active",
+      "ACKNOWLEDGED": "In progress",
+      "RESOLVED": "Resolved"
+    }
+  },
+  "metrics": {
+    "VIBRATION": "Vibration",
+    "TEMPERATURE": "Temperature",
+    "HUMIDITY": "Humidity",
+    "POWER_CONSUMPTION": "Power consumption"
   }
 }

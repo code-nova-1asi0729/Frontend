@@ -2,7 +2,8 @@
   "option": {
     "home": "Inicio",
     "buildings": "Edificios",
-    "equipment": "Equipos"
+    "equipment": "Equipos",
+    "alerts": "Alertas"
   },
   "home": {
     "title": "Bienvenido a Vigilia",
@@ -76,5 +77,37 @@
       "OUT_OF_SERVICE": "Fuera de servicio",
       "DECOMMISSIONED": "Dado de baja"
     }
+  },
+  "alerts": {
+    "title": "Panel de alertas",
+    "active-title": "Alertas activas",
+    "show-resolved": "Mostrar resueltas",
+    "severity": "Severidad",
+    "equipment": "Equipo",
+    "metric": "Métrica",
+    "last-value": "Último valor",
+    "detected-at": "Detectada",
+    "status": "Estado",
+    "actions": "Acciones",
+    "acknowledge": "En gestión",
+    "resolve": "Resolver",
+    "empty": "No hay alertas activas.",
+    "severities": {
+      "CRITICAL": "Crítica",
+      "HIGH": "Alta",
+      "MEDIUM": "Media",
+      "LOW": "Baja"
+    },
+    "statuses": {
+      "ACTIVE": "Activa",
+      "ACKNOWLEDGED": "En gestión",
+      "RESOLVED": "Resuelta"
+    }
+  },
+  "metrics": {
+    "VIBRATION": "Vibración",
+    "TEMPERATURE": "Temperatura",
+    "HUMIDITY": "Humedad",
+    "POWER_CONSUMPTION": "Consumo eléctrico"
   }
 }

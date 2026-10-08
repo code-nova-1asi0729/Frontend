@@ -30,5 +30,6 @@ export class Layout {
     { link: '/home', label: 'option.home' },
     { link: '/asset-monitoring/buildings', label: 'option.buildings' },
     { link: '/asset-monitoring/equipment', label: 'option.equipment' },
+    { link: '/asset-monitoring/alerts', label: 'option.alerts' },
   ]);
 }
