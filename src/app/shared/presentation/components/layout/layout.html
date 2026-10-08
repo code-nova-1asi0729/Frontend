@@ -24,15 +24,11 @@
         </a>
       }
     </nav>
-
-    <div class="sidebar-footer">
-      <app-language-switcher />
-    </div>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    @if (isCompact()) {
-      <mat-toolbar class="topbar">
+    <header class="topbar">
+      @if (isCompact()) {
         <button
           mat-icon-button
           [attr.aria-label]="'layout.open-menu' | translate"
@@ -41,8 +37,9 @@
           <mat-icon>menu</mat-icon>
         </button>
         <span class="topbar-title">Vigilia</span>
-      </mat-toolbar>
-    }
+      }
+      <app-language-switcher class="language" />
+    </header>
     <main class="content">
       <router-outlet />
     </main>
