@@ -9,6 +9,9 @@ const equipmentList = () =>
 const equipmentForm = () =>
   import('./views/equipment-form/equipment-form').then((m) => m.EquipmentForm);
 const alertList = () => import('./views/alert-list/alert-list').then((m) => m.AlertList);
+const sensorList = () => import('./views/sensor-list/sensor-list').then((m) => m.SensorList);
+const sensorAssignForm = () =>
+  import('./views/sensor-assign-form/sensor-assign-form').then((m) => m.SensorAssignForm);
 
 /**
  * Routes of the Asset Monitoring bounded context.
@@ -21,4 +24,6 @@ export const assetMonitoringRoutes: Routes = [
   { path: 'equipment/new', loadComponent: equipmentForm },
   { path: 'equipment/:id/edit', loadComponent: equipmentForm },
   { path: 'alerts', loadComponent: alertList },
+  { path: 'sensors', loadComponent: sensorList },
+  { path: 'sensors/:id/assign', loadComponent: sensorAssignForm },
 ];

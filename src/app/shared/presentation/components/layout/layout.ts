@@ -31,5 +31,6 @@ export class Layout {
     { link: '/asset-monitoring/buildings', label: 'option.buildings' },
     { link: '/asset-monitoring/equipment', label: 'option.equipment' },
     { link: '/asset-monitoring/alerts', label: 'option.alerts' },
+    { link: '/asset-monitoring/sensors', label: 'option.sensors' },
   ]);
 }

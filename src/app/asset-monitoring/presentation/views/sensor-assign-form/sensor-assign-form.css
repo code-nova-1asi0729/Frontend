@@ -1,0 +1,11 @@
+.error {
+  color: var(--mat-sys-error);
+}
+
+.warning {
+  max-width: 600px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #fff4d6;
+  color: #7a5200;
+}

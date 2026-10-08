@@ -3,7 +3,8 @@
     "home": "Home",
     "buildings": "Buildings",
     "equipment": "Equipment",
-    "alerts": "Alerts"
+    "alerts": "Alerts",
+    "sensors": "Sensors"
   },
   "home": {
     "title": "Welcome to Vigilia",
@@ -109,5 +110,29 @@
     "TEMPERATURE": "Temperature",
     "HUMIDITY": "Humidity",
     "POWER_CONSUMPTION": "Power consumption"
+  },
+  "sensors": {
+    "title": "Sensors",
+    "assign-title": "Assign sensor",
+    "serial-number": "Serial number",
+    "model": "Model",
+    "equipment": "Equipment",
+    "status": "Status",
+    "last-seen-at": "Last signal",
+    "actions": "Actions",
+    "assign": "Assign",
+    "unassign": "Unassign",
+    "cancel": "Cancel",
+    "no-equipment": "No equipment",
+    "never-seen": "No signal yet",
+    "already-assigned": "This sensor is already assigned to {{ equipment }}. Unassign it before assigning it to another equipment.",
+    "empty": "There are no sensors registered.",
+    "statuses": {
+      "UNASSIGNED": "Unassigned",
+      "ASSIGNED": "Assigned",
+      "MONITORING_ACTIVE": "Monitoring",
+      "DISCONNECTED": "Disconnected",
+      "INACTIVE": "Inactive"
+    }
   }
 }
