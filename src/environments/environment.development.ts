@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  // Fake API (json-server) running locally: npm run fake-api
-  platformProviderApiBaseUrl: 'http://localhost:3000/api/v1',
+  // RESTful API running locally from IntelliJ (VigiliaApplication)
+  platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
   platformProviderBuildingsEndpointPath: '/buildings',
   platformProviderEquipmentEndpointPath: '/equipment',
   platformProviderSensorsEndpointPath: '/sensors',
