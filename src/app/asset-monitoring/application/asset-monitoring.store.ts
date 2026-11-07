@@ -171,7 +171,7 @@ export class AssetMonitoringStore {
 
   /**
    * moves an alert to "acknowledged" or "resolved" (US20).
-   * the entity validates the change before it is saved.
+   * the entity validates the change and the api runs the matching command.
    * @param alert - alert to change.
    * @param status - new status.
    */
@@ -183,8 +183,12 @@ export class AssetMonitoringStore {
       this.setError(error, 'Invalid alert status change');
       return;
     }
+    const request =
+      status === AlertStatus.ACKNOWLEDGED
+        ? this.assetMonitoringApi.acknowledgeAlert(alert.id)
+        : this.assetMonitoringApi.resolveAlert(alert.id);
     this.loadingSignal.set(true);
-    this.assetMonitoringApi.updateAlert(alert).subscribe({
+    request.subscribe({
       next: (updated) => {
         this.alertsSignal.update((alerts) =>
           alerts.map((current) => (current.id === updated.id ? updated : current)),
