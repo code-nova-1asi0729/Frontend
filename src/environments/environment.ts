@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  // Fake API (json-server) deployed on Render until the RESTful API is ready
-  platformProviderApiBaseUrl: 'https://vigilia-fake-api.onrender.com/api/v1',
+  // RESTful API deployed on Render (backend repository, main branch)
+  platformProviderApiBaseUrl: 'https://vigilia-api.onrender.com/api/v1',
   platformProviderBuildingsEndpointPath: '/buildings',
   platformProviderEquipmentEndpointPath: '/equipment',
   platformProviderSensorsEndpointPath: '/sensors',
