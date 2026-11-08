@@ -57,8 +57,12 @@ export class AssetMonitoringApi extends BaseApi {
     return this.alertsEndpoint.getAll();
   }
 
-  updateAlert(alert: Alert): Observable<Alert> {
-    return this.alertsEndpoint.update(alert, alert.id);
+  acknowledgeAlert(id: number): Observable<Alert> {
+    return this.alertsEndpoint.acknowledge(id);
+  }
+
+  resolveAlert(id: number): Observable<Alert> {
+    return this.alertsEndpoint.resolve(id);
   }
 
   getSensors(): Observable<Sensor[]> {
