@@ -11,7 +11,23 @@
   "home": {
     "title": "Bienvenido a Vigilia",
     "content": "Monitorea los equipos críticos de tu condominio y actúa antes de que ocurra una falla.",
-    "go-to-alerts": "Ir al panel de alertas"
+    "roles": {
+      "administrator": {
+        "title": "Administrador del edificio",
+        "text": "Registra tus edificios y equipos críticos, y sigue su estado.",
+        "action": "Gestionar mi edificio"
+      },
+      "resident": {
+        "title": "Residente",
+        "text": "Reporta un problema en tu edificio y síguelo hasta que se resuelva.",
+        "action": "Reportar un incidente"
+      },
+      "maintenance": {
+        "title": "Empresa de mantenimiento",
+        "text": "Revisa las alertas activas ordenadas por severidad y atiende primero la más urgente.",
+        "action": "Ver alertas activas"
+      }
+    }
   },
   "page-not-found": {
     "title": "Página no encontrada",

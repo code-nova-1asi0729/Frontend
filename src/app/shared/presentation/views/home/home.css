@@ -1,3 +1,19 @@
 p {
   max-width: 640px;
 }
+
+.role-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.role-cards mat-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.role-cards mat-card-content {
+  flex: 1;
+}

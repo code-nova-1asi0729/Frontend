@@ -1,3 +1,43 @@
 <h1>{{ 'home.title' | translate }}</h1>
 <p>{{ 'home.content' | translate }}</p>
-<a mat-flat-button routerLink="/asset-monitoring/alerts">{{ 'home.go-to-alerts' | translate }}</a>
+
+<div class="role-cards">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-icon mat-card-avatar>apartment</mat-icon>
+      <mat-card-title>{{ 'home.roles.administrator.title' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ 'home.roles.administrator.text' | translate }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-flat-button routerLink="/asset-monitoring/buildings">{{ 'home.roles.administrator.action' | translate }}</a>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-icon mat-card-avatar>report_problem</mat-icon>
+      <mat-card-title>{{ 'home.roles.resident.title' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ 'home.roles.resident.text' | translate }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-flat-button routerLink="/incidents/new">{{ 'home.roles.resident.action' | translate }}</a>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-icon mat-card-avatar>engineering</mat-icon>
+      <mat-card-title>{{ 'home.roles.maintenance.title' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ 'home.roles.maintenance.text' | translate }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-flat-button routerLink="/asset-monitoring/alerts">{{ 'home.roles.maintenance.action' | translate }}</a>
+    </mat-card-actions>
+  </mat-card>
+</div>
