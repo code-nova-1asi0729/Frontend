@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-09
+
+### Added
+
+- Home: a quick access card for administrators, residents and maintenance companies.
+- Contributing guide and MIT license.
+
+### Changed
+
+- Incidents: starting, resolving and rating an incident now use the `management-starts`, `resolutions` and `ratings` endpoints of the RESTful API.
+- Buttons and cards use the same rounded corners in the whole app.
+- The README explains how to run the app with the RESTful API.
+
+### Removed
+
+- Visual Studio Code settings from the repository.
+
 ## [0.2.0] - 2026-11-07
 
 ### Added
