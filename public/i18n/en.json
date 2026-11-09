@@ -11,7 +11,23 @@
   "home": {
     "title": "Welcome to Vigilia",
     "content": "Monitor the critical equipment of your condominium and act before a failure happens.",
-    "go-to-alerts": "Go to the alerts dashboard"
+    "roles": {
+      "administrator": {
+        "title": "Building administrator",
+        "text": "Register your buildings and critical equipment, and follow their status.",
+        "action": "Manage my building"
+      },
+      "resident": {
+        "title": "Resident",
+        "text": "Report a problem in your building and follow it until it is solved.",
+        "action": "Report an incident"
+      },
+      "maintenance": {
+        "title": "Maintenance company",
+        "text": "See the active alerts sorted by severity and attend the most urgent first.",
+        "action": "See active alerts"
+      }
+    }
   },
   "page-not-found": {
     "title": "Page not found",

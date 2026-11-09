@@ -1,4 +1,5 @@
 import { Injectable, Signal, computed, inject, signal } from '@angular/core';
+import { Observable } from 'rxjs';
 import { IncidentsApi } from '../infrastructure/incidents-api';
 import { Incident } from '../domain/model/incident.entity';
 
@@ -55,7 +56,10 @@ export class IncidentsStore {
    * @param incident - incident to manage.
    */
   startManagement(incident: Incident): void {
-    this.changeAndSave(incident, () => incident.startManagement());
+    this.changeAndSave(
+      () => incident.startManagement(),
+      () => this.incidentsApi.startManagement(incident.id),
+    );
   }
 
   /**
@@ -63,7 +67,10 @@ export class IncidentsStore {
    * @param incident - incident to resolve.
    */
   resolveIncident(incident: Incident): void {
-    this.changeAndSave(incident, () => incident.resolve());
+    this.changeAndSave(
+      () => incident.resolve(),
+      () => this.incidentsApi.resolveIncident(incident.id),
+    );
   }
 
   /**
@@ -73,13 +80,18 @@ export class IncidentsStore {
    * @param comment - comment of the resident.
    */
   rateIncident(incident: Incident, score: number, comment: string): void {
-    this.changeAndSave(incident, () => incident.rate(score, comment));
+    this.changeAndSave(
+      () => incident.rate(score, comment),
+      () => this.incidentsApi.rateIncident(incident.id, score, comment),
+    );
   }
 
   /**
-   * applies a business rule of the entity and saves it only if the rule allows it.
+   * applies a business rule of the entity and, only if the rule allows it, sends the command to the API.
+   * @param change - business rule of the entity.
+   * @param request - API call of the business command.
    */
-  private changeAndSave(incident: Incident, change: () => void): void {
+  private changeAndSave(change: () => void, request: () => Observable<Incident>): void {
     this.errorSignal.set(null);
     try {
       change();
@@ -87,12 +99,12 @@ export class IncidentsStore {
       this.setError(error, 'Invalid incident change');
       return;
     }
-    this.save(incident);
+    this.save(request());
   }
 
-  private save(incident: Incident): void {
+  private save(request: Observable<Incident>): void {
     this.loadingSignal.set(true);
-    this.incidentsApi.updateIncident(incident).subscribe({
+    request.subscribe({
       next: (updated) => {
         this.incidentsSignal.update((incidents) =>
           incidents.map((current) => (current.id === updated.id ? updated : current)),

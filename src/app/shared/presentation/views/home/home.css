@@ -1,3 +1,48 @@
-p {
+h1 {
+  margin-bottom: 8px;
+}
+
+.intro {
   max-width: 640px;
+  margin: 0;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.role-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.role-cards mat-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The text grows so the buttons of the three cards stay on the same line */
+.role-cards mat-card-content {
+  flex: 1;
+}
+
+.role-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font: var(--mat-sys-title-medium);
+}
+
+.role-title mat-icon {
+  color: var(--mat-sys-primary);
+}
+
+.role-cards p {
+  margin: 0;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+/* Same 16px padding as the content, so the button lines up with the text */
+.role-cards mat-card-actions {
+  padding: 16px;
 }

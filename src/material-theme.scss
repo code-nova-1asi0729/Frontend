@@ -7,6 +7,17 @@
 
 :root {
   @include mat.toolbar-overrides((container-background-color: #1f4e9c, container-text-color: white));
+  // One corner family for the whole app: soft rectangles for buttons and cards
+  @include mat.button-overrides(
+    (
+      filled-container-shape: 8px,
+      outlined-container-shape: 8px,
+      protected-container-shape: 8px,
+      tonal-container-shape: 8px,
+      text-container-shape: 8px,
+    )
+  );
+  @include mat.card-overrides((outlined-container-shape: 12px));
 }
 
 html {
