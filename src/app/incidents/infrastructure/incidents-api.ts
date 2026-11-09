@@ -21,10 +21,6 @@ export class IncidentsApi extends BaseApi {
     return this.incidentsEndpoint.create(incident);
   }
 
-  updateIncident(incident: Incident): Observable<Incident> {
-    return this.incidentsEndpoint.update(incident, incident.id);
-  }
-
   startManagement(id: number): Observable<Incident> {
     return this.incidentsEndpoint.startManagement(id);
   }
