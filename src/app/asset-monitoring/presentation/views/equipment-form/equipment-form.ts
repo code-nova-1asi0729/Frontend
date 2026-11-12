@@ -52,7 +52,7 @@ export class EquipmentForm extends BaseForm {
       Number(this.route.snapshot.queryParamMap.get('buildingId')) || null,
       Validators.required,
     ),
-    code: ['', [Validators.required, Validators.maxLength(30)]],
+    code: ['', [Validators.required, Validators.pattern(/^[A-Z0-9-]{2,30}$/)]],
     name: ['', [Validators.required, Validators.maxLength(140)]],
     type: this.fb.control<EquipmentType | null>(null, Validators.required),
     location: ['', [Validators.required, Validators.maxLength(140)]],

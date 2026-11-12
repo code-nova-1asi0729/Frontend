@@ -16,8 +16,9 @@
   <mat-form-field>
     <mat-label>{{ 'equipment.code' | translate }}</mat-label>
     <input matInput formControlName="code" />
+    <mat-hint>{{ 'equipment.code-hint' | translate }}</mat-hint>
     @if (isInvalidControl(form, 'code')) {
-      <mat-error>{{ errorMessageForControl(form, 'code') | translate }}</mat-error>
+    <mat-error>{{ errorMessageForControl(form, 'code') | translate }}</mat-error>
     }
   </mat-form-field>
 

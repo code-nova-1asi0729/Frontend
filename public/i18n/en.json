@@ -70,6 +70,7 @@
     "filter-building": "Building",
     "all-buildings": "All buildings",
     "code": "Code",
+    "code-hint": "Uppercase letters, digits or hyphens, for example LP-WP-01",
     "name": "Name",
     "type": "Type",
     "building": "Building",
