@@ -70,6 +70,7 @@
     "filter-building": "Edificio",
     "all-buildings": "Todos los edificios",
     "code": "Código",
+    "code-hint": "Letras mayúsculas, dígitos o guiones, por ejemplo LP-WP-01",
     "name": "Nombre",
     "type": "Tipo",
     "building": "Edificio",
