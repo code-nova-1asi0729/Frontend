@@ -9,14 +9,14 @@ import { SensorReading } from '../domain/model/sensor-reading.entity';
 
 /**
  * application state of the asset monitoring bounded context.
- * one store for the whole context: buildings, equipment, sensors, readings and alerts.
+ * one store for the whole context: buildings, devices, sensors, readings and alerts.
  */
 @Injectable({ providedIn: 'root' })
 export class AssetMonitoringStore {
   private assetMonitoringApi = inject(AssetMonitoringApi);
 
   private buildingsSignal = signal<Building[]>([]);
-  private equipmentSignal = signal<Device[]>([]);
+  private devicesSignal = signal<Device[]>([]);
   private alertsSignal = signal<Alert[]>([]);
   private sensorsSignal = signal<Sensor[]>([]);
   private readingsSignal = signal<SensorReading[]>([]);
@@ -29,23 +29,23 @@ export class AssetMonitoringStore {
   readonly readings = this.readingsSignal.asReadonly();
 
   /**
-   * equipment linked with its building.
+   * devices linked with their building.
    */
-  readonly equipment = computed(() => {
+  readonly devices = computed(() => {
     const buildings = this.buildings();
-    return this.equipmentSignal().map((item) => {
+    return this.devicesSignal().map((item) => {
       item.building = buildings.find((building) => building.id === item.buildingId) ?? null;
       return item;
     });
   });
 
   /**
-   * alerts linked with the equipment they affect.
+   * alerts linked with the device they affect.
    */
   readonly alerts = computed(() => {
-    const equipment = this.equipment();
+    const devices = this.devices();
     return this.alertsSignal().map((alert) => {
-      alert.equipment = equipment.find((item) => item.id === alert.equipmentId) ?? null;
+      alert.equipment = devices.find((item) => item.id === alert.equipmentId) ?? null;
       return alert;
     });
   });
@@ -63,12 +63,12 @@ export class AssetMonitoringStore {
   );
 
   /**
-   * sensors linked with the equipment they measure.
+   * sensors linked with the device they measure.
    */
   readonly sensors = computed(() => {
-    const equipment = this.equipment();
+    const devices = this.devices();
     return this.sensorsSignal().map((sensor) => {
-      sensor.equipment = equipment.find((item) => item.id === sensor.equipmentId) ?? null;
+      sensor.equipment = devices.find((item) => item.id === sensor.equipmentId) ?? null;
       return sensor;
     });
   });
@@ -121,52 +121,52 @@ export class AssetMonitoringStore {
   }
 
   /**
-   * returns an equipment by id, or undefined while it is not loaded.
-   * @param id - equipment identifier.
+   * returns a device by id, or undefined while it is not loaded.
+   * @param id - device identifier.
    */
-  getEquipmentById(id: number): Signal<Device | undefined> {
-    return computed(() => this.equipment().find((item) => item.id === id));
+  getDeviceById(id: number): Signal<Device | undefined> {
+    return computed(() => this.devices().find((item) => item.id === id));
   }
 
   /**
-   * returns the equipment of one building (US08).
+   * returns the devices of one building (US08).
    * @param buildingId - building identifier.
    */
-  getEquipmentByBuilding(buildingId: number): Signal<Device[]> {
-    return computed(() => this.equipment().filter((item) => item.buildingId === buildingId));
+  getDevicesByBuilding(buildingId: number): Signal<Device[]> {
+    return computed(() => this.devices().filter((item) => item.buildingId === buildingId));
   }
 
-  addEquipment(equipment: Device): void {
+  addDevice(device: Device): void {
     this.loadingSignal.set(true);
-    this.assetMonitoringApi.createDevice(equipment).subscribe({
+    this.assetMonitoringApi.createDevice(device).subscribe({
       next: (created) => {
-        this.equipmentSignal.update((items) => [...items, created]);
+        this.devicesSignal.update((items) => [...items, created]);
         this.loadingSignal.set(false);
       },
-      error: (error) => this.setError(error, 'Failed to create equipment'),
+      error: (error) => this.setError(error, 'Failed to create device'),
     });
   }
 
-  updateEquipment(equipment: Device): void {
+  updateDevice(device: Device): void {
     this.loadingSignal.set(true);
-    this.assetMonitoringApi.updateDevice(equipment).subscribe({
+    this.assetMonitoringApi.updateDevice(device).subscribe({
       next: (updated) => {
-        this.equipmentSignal.update((items) =>
+        this.devicesSignal.update((items) =>
           items.map((current) => (current.id === updated.id ? updated : current)),
         );
         this.loadingSignal.set(false);
       },
-      error: (error) => this.setError(error, 'Failed to update equipment'),
+      error: (error) => this.setError(error, 'Failed to update device'),
     });
   }
 
   /**
-   * takes an equipment out of service (US09). it is updated, never deleted.
-   * @param equipment - equipment to decommission.
+   * takes a device out of service (US09). it is updated, never deleted.
+   * @param device - device to decommission.
    */
-  decommissionEquipment(equipment: Device): void {
-    equipment.decommission();
-    this.updateEquipment(equipment);
+  decommissionDevice(device: Device): void {
+    device.decommission();
+    this.updateDevice(device);
   }
 
   /**
@@ -282,8 +282,8 @@ export class AssetMonitoringStore {
       error: (error) => this.setError(error, 'Failed to load buildings'),
     });
     this.assetMonitoringApi.getDevices().subscribe({
-      next: (equipment) => this.equipmentSignal.set(equipment),
-      error: (error) => this.setError(error, 'Failed to load equipment'),
+      next: (devices) => this.devicesSignal.set(devices),
+      error: (error) => this.setError(error, 'Failed to load devices'),
     });
     this.assetMonitoringApi.getAlerts().subscribe({
       next: (alerts) => this.alertsSignal.set(alerts),

@@ -63,7 +63,7 @@ export class IncidentForm extends BaseForm {
     const buildingId = this.buildingId();
     if (buildingId === null) return [];
     return this.assetMonitoringStore
-      .equipment()
+      .devices()
       .filter((item) => item.buildingId === buildingId && !item.isDecommissioned());
   });
 

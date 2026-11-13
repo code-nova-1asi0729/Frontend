@@ -63,7 +63,7 @@ export class EquipmentForm extends BaseForm {
   constructor() {
     super();
     if (this.equipmentId) {
-      const equipment = this.store.getEquipmentById(this.equipmentId);
+      const equipment = this.store.getDeviceById(this.equipmentId);
       // The store may still be loading when the user opens the edit URL directly
       effect(() => {
         const current = equipment();
@@ -85,8 +85,8 @@ export class EquipmentForm extends BaseForm {
       installationDate: value.installationDate!,
       status: value.status,
     });
-    if (this.isEdit) this.store.updateEquipment(equipment);
-    else this.store.addEquipment(equipment);
+    if (this.isEdit) this.store.updateDevice(equipment);
+    else this.store.addDevice(equipment);
     this.navigateBack();
   }
 

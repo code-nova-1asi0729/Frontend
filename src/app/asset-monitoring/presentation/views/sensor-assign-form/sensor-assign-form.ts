@@ -37,7 +37,7 @@ export class SensorAssignForm extends BaseForm {
    * a decommissioned equipment cannot receive sensors.
    */
   readonly availableEquipment = computed(() =>
-    this.store.equipment().filter((item) => !item.isDecommissioned()),
+    this.store.devices().filter((item) => !item.isDecommissioned()),
   );
 
   form = this.fb.nonNullable.group({

@@ -61,7 +61,7 @@ export class EquipmentList {
 
   readonly filteredEquipment = computed(() => {
     const buildingId = this.selectedBuildingId();
-    const equipment = this.store.equipment();
+    const equipment = this.store.devices();
     return buildingId === null
       ? equipment
       : equipment.filter((item) => item.buildingId === buildingId);
@@ -98,6 +98,6 @@ export class EquipmentList {
       name: equipment.name,
     });
     if (!confirm(message)) return;
-    this.store.decommissionEquipment(equipment);
+    this.store.decommissionDevice(equipment);
   }
 }

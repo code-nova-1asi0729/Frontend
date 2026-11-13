@@ -12,7 +12,7 @@
       [value]="selectedEquipmentId()"
       (selectionChange)="selectedEquipmentId.set($event.value)"
     >
-      @for (item of store.equipment(); track item.id) {
+      @for (item of store.devices(); track item.id) {
         <mat-option [value]="item.id">
           {{ item.code }} · {{ item.name }} ({{ item.building?.name }})
         </mat-option>
