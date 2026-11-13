@@ -9,6 +9,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { IncidentsStore } from '../../../application/incidents.store';
 import { Incident } from '../../../domain/model/incident.entity';
 import { IncidentStatus } from '../../../domain/model/incident-status';
+import { AssetMonitoringStore } from '../../../../asset-monitoring/application/asset-monitoring.store';
 
 /**
  * Lists the incidents and moves them through their follow-up (US25).
@@ -29,9 +30,11 @@ import { IncidentStatus } from '../../../domain/model/incident-status';
 export class IncidentList {
   readonly store = inject(IncidentsStore);
   private router = inject(Router);
+  private assetMonitoringStore = inject(AssetMonitoringStore);
 
   displayedColumns: string[] = [
     'reportedAt',
+    'building',
     'category',
     'description',
     'status',
@@ -40,6 +43,14 @@ export class IncidentList {
   ];
 
   readonly stars = [1, 2, 3, 4, 5];
+
+  /**
+   * name of the building where the incident was reported.
+   * @param buildingId - building identifier.
+   */
+  buildingName(buildingId: number): string {
+    return this.assetMonitoringStore.buildings().find((building) => building.id === buildingId)?.name ?? '—';
+  }
 
   isReported(incident: Incident): boolean {
     return incident.status === IncidentStatus.REPORTED;
