@@ -54,6 +54,7 @@
     "actions": "Acciones",
     "edit": "Editar",
     "delete": "Eliminar",
+    "delete-confirm": "¿Eliminar {{ name }}? No se puede deshacer.",
     "create": "Registrar",
     "update": "Guardar cambios",
     "cancel": "Cancelar",

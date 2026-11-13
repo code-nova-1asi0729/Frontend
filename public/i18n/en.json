@@ -54,6 +54,7 @@
     "actions": "Actions",
     "edit": "Edit",
     "delete": "Delete",
+    "delete-confirm": "Delete {{ name }}? This cannot be undone.",
     "create": "Register",
     "update": "Save changes",
     "cancel": "Cancel",
