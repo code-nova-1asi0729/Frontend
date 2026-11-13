@@ -274,5 +274,7 @@
       "title": "Contact",
       "text": "Write to privacy@codenova.pe to use your rights or ask about this policy."
     }
-  }
+  },
+
+  "legal": { "terms": "Terms and conditions", "privacy": "Privacy policy" }
 }

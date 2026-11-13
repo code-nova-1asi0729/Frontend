@@ -127,3 +127,17 @@
     padding: 16px;
   }
 }
+
+.app-footer{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px 32px 24px;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 13px;
+}
+
+.app-footer a{
+  color: inherit;
+}

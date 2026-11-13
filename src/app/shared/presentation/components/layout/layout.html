@@ -43,5 +43,10 @@
     <main class="content">
       <router-outlet />
     </main>
+    <footer class="app-footer">
+      <span>© 2026 CodeNova</span>
+      <a routerLink="/terms">{{ 'legal.terms' | translate }}</a>
+      <a routerLink="/privacy">{{ 'legal.privacy' | translate }}</a>
+    </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
