@@ -246,5 +246,33 @@
       "title": "Contact",
       "text": "For questions about these terms, write to support@codenova.pe."
     }
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "updated": "Last updated: November 2026",
+    "data": {
+      "title": "What data we collect",
+      "text": "The data of buildings, devices, sensors and readings that administrators register, and the incidents that residents report: description, category, building and rating."
+    },
+    "purpose": {
+      "title": "What we use it for",
+      "text": "Only to monitor the devices, raise alerts, follow incidents and improve the service."
+    },
+    "sharing": {
+      "title": "Who we share it with",
+      "text": "With nobody. We do not sell or rent your data. Only the people of your building and its maintenance company can see it."
+    },
+    "storage": {
+      "title": "How long we keep it",
+      "text": "While the service is active. After that, the data is deleted or anonymized."
+    },
+    "rights": {
+      "title": "Your rights",
+      "text": "You can ask for access, rectification, cancellation or opposition (ARCO rights) about your personal data, according to Peruvian Law No. 29733 on Personal Data Protection."
+    },
+    "contact": {
+      "title": "Contact",
+      "text": "Write to privacy@codenova.pe to use your rights or ask about this policy."
+    }
   }
 }
