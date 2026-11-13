@@ -53,7 +53,7 @@ export class Layout {
     { link: '/asset-monitoring/buildings', label: 'option.buildings', icon: 'apartment' },
     {
       link: '/asset-monitoring/devices',
-      label: 'option.equipment',
+      label: 'option.devices',
       icon: 'precision_manufacturing',
     },
     { link: '/asset-monitoring/alerts', label: 'option.alerts', icon: 'warning_amber' },

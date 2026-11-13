@@ -2,7 +2,7 @@
   "option": {
     "home": "Inicio",
     "buildings": "Edificios",
-    "equipment": "Equipos",
+    "devices": "Dispositivos",
     "alerts": "Alertas",
     "sensors": "Sensores",
     "readings": "Lecturas",
@@ -10,11 +10,11 @@
   },
   "home": {
     "title": "Bienvenido a Vigilia",
-    "content": "Monitorea los equipos críticos de tu condominio y actúa antes de que ocurra una falla.",
+    "content": "Monitorea los dispositivos de tu condominio y actúa antes de que ocurra una falla.",
     "roles": {
       "administrator": {
         "title": "Administrador del edificio",
-        "text": "Registra tus edificios y equipos críticos, y sigue su estado.",
+        "text": "Registra tus edificios y dispositivos, y sigue su estado.",
         "action": "Gestionar mi edificio"
       },
       "resident": {
@@ -62,11 +62,11 @@
       "INACTIVE": "Inactivo"
     }
   },
-  "equipment": {
-    "title": "Equipos críticos",
-    "new": "Nuevo equipo",
-    "new-title": "Registrar equipo",
-    "edit-title": "Editar equipo",
+  "devices": {
+    "title": "Dispositivos",
+    "new": "Nuevo dispositivo",
+    "new-title": "Registrar dispositivo",
+    "edit-title": "Editar dispositivo",
     "filter-building": "Edificio",
     "all-buildings": "Todos los edificios",
     "code": "Código",
@@ -81,7 +81,7 @@
     "edit": "Editar",
     "decommission": "Dar de baja",
     "decommission-confirm": "¿Dar de baja {{ name }}? Se conservará en el historial, pero ya no será monitoreado.",
-    "empty": "No hay equipos registrados para este edificio.",
+    "empty": "No hay dispositivos registrados en este edificio.",
     "create": "Registrar",
     "update": "Guardar cambios",
     "cancel": "Cancelar",
@@ -103,7 +103,7 @@
     "active-title": "Alertas activas",
     "show-resolved": "Mostrar resueltas",
     "severity": "Severidad",
-    "equipment": "Equipo",
+    "device": "Dispositivo",
     "metric": "Métrica",
     "last-value": "Último valor",
     "detected-at": "Detectada",

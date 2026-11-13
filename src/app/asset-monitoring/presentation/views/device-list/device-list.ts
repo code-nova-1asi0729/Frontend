@@ -92,7 +92,7 @@ export class DeviceList {
   }
 
   decommissionDevice(device: Device): void {
-    const message = this.translate.instant('equipment.decommission-confirm', {
+    const message = this.translate.instant('devices.decommission-confirm', {
       name: device.name,
     });
     if (!confirm(message)) return;

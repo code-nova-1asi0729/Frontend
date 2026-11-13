@@ -1,8 +1,8 @@
-<h1>{{ (isEdit ? 'equipment.edit-title' : 'equipment.new-title') | translate }}</h1>
+<h1>{{ (isEdit ? 'devices.edit-title' : 'devices.new-title') | translate }}</h1>
 
 <form [formGroup]="form" (ngSubmit)="submit()" class="form-container">
   <mat-form-field>
-    <mat-label>{{ 'equipment.building' | translate }}</mat-label>
+    <mat-label>{{ 'devices.building' | translate }}</mat-label>
     <mat-select formControlName="buildingId">
       @for (building of store.buildings(); track building.id) {
         <mat-option [value]="building.id">{{ building.name }}</mat-option>
@@ -14,16 +14,16 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>{{ 'equipment.code' | translate }}</mat-label>
+    <mat-label>{{ 'devices.code' | translate }}</mat-label>
     <input matInput formControlName="code" />
-    <mat-hint>{{ 'equipment.code-hint' | translate }}</mat-hint>
+    <mat-hint>{{ 'devices.code-hint' | translate }}</mat-hint>
     @if (isInvalidControl(form, 'code')) {
     <mat-error>{{ errorMessageForControl(form, 'code') | translate }}</mat-error>
     }
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>{{ 'equipment.name' | translate }}</mat-label>
+    <mat-label>{{ 'devices.name' | translate }}</mat-label>
     <input matInput formControlName="name" />
     @if (isInvalidControl(form, 'name')) {
       <mat-error>{{ errorMessageForControl(form, 'name') | translate }}</mat-error>
@@ -31,10 +31,10 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>{{ 'equipment.type' | translate }}</mat-label>
+    <mat-label>{{ 'devices.type' | translate }}</mat-label>
     <mat-select formControlName="type">
       @for (type of types; track type) {
-        <mat-option [value]="type">{{ 'equipment.types.' + type | translate }}</mat-option>
+        <mat-option [value]="type">{{ 'devices.types.' + type | translate }}</mat-option>
       }
     </mat-select>
     @if (isInvalidControl(form, 'type')) {
@@ -43,7 +43,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>{{ 'equipment.location' | translate }}</mat-label>
+    <mat-label>{{ 'devices.location' | translate }}</mat-label>
     <input matInput formControlName="location" />
     @if (isInvalidControl(form, 'location')) {
       <mat-error>{{ errorMessageForControl(form, 'location') | translate }}</mat-error>
@@ -51,7 +51,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>{{ 'equipment.installation-date' | translate }}</mat-label>
+    <mat-label>{{ 'devices.installation-date' | translate }}</mat-label>
     <input matInput [matDatepicker]="picker" [max]="today" formControlName="installationDate" />
     <mat-datepicker-toggle matIconSuffix [for]="picker" />
     <mat-datepicker #picker />
@@ -61,10 +61,10 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>{{ 'equipment.status' | translate }}</mat-label>
+    <mat-label>{{ 'devices.status' | translate }}</mat-label>
     <mat-select formControlName="status">
       @for (status of statuses; track status) {
-        <mat-option [value]="status">{{ 'equipment.statuses.' + status | translate }}</mat-option>
+        <mat-option [value]="status">{{ 'devices.statuses.' + status | translate }}</mat-option>
       }
     </mat-select>
     @if (isInvalidControl(form, 'status')) {
@@ -74,10 +74,10 @@
 
   <div class="form-actions">
     <button mat-flat-button type="submit" [disabled]="form.invalid">
-      {{ (isEdit ? 'equipment.update' : 'equipment.create') | translate }}
+      {{ (isEdit ? 'devices.update' : 'devices.create') | translate }}
     </button>
     <button mat-button type="button" (click)="navigateBack()">
-      {{ 'equipment.cancel' | translate }}
+      {{ 'devices.cancel' | translate }}
     </button>
   </div>
 </form>

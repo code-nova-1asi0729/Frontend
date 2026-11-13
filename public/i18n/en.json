@@ -2,7 +2,7 @@
   "option": {
     "home": "Home",
     "buildings": "Buildings",
-    "equipment": "Equipment",
+    "devices": "Devices",
     "alerts": "Alerts",
     "sensors": "Sensors",
     "readings": "Readings",
@@ -10,11 +10,11 @@
   },
   "home": {
     "title": "Welcome to Vigilia",
-    "content": "Monitor the critical equipment of your condominium and act before a failure happens.",
+    "content": "Monitor the devices of your condominium and act before a failure happens.",
     "roles": {
       "administrator": {
         "title": "Building administrator",
-        "text": "Register your buildings and critical equipment, and follow their status.",
+        "text": "Register your buildings and devices, and follow their status.",
         "action": "Manage my building"
       },
       "resident": {
@@ -62,11 +62,11 @@
       "INACTIVE": "Inactive"
     }
   },
-  "equipment": {
-    "title": "Critical equipment",
-    "new": "New equipment",
-    "new-title": "Register equipment",
-    "edit-title": "Edit equipment",
+  "devices": {
+    "title": "Devices",
+    "new": "New device",
+    "new-title": "Register device",
+    "edit-title": "Edit device",
     "filter-building": "Building",
     "all-buildings": "All buildings",
     "code": "Code",
@@ -81,7 +81,7 @@
     "edit": "Edit",
     "decommission": "Decommission",
     "decommission-confirm": "Decommission {{ name }}? It will stay in the history but will no longer be monitored.",
-    "empty": "There is no equipment registered for this building.",
+    "empty": "There are no devices registered for this building.",
     "create": "Register",
     "update": "Save changes",
     "cancel": "Cancel",
@@ -103,7 +103,7 @@
     "active-title": "Active alerts",
     "show-resolved": "Show resolved",
     "severity": "Severity",
-    "equipment": "Equipment",
+    "device": "Device",
     "metric": "Metric",
     "last-value": "Last value",
     "detected-at": "Detected",

@@ -1,18 +1,18 @@
 <div class="toolbar-actions">
-  <h1>{{ 'equipment.title' | translate }}</h1>
+  <h1>{{ 'devices.title' | translate }}</h1>
   <button mat-flat-button (click)="navigateToNew()">
-    <mat-icon>add</mat-icon> {{ 'equipment.new' | translate }}
+    <mat-icon>add</mat-icon> {{ 'devices.new' | translate }}
   </button>
 </div>
 
 <mat-form-field class="building-filter" floatLabel="always">
-  <mat-label>{{ 'equipment.filter-building' | translate }}</mat-label>
+  <mat-label>{{ 'devices.filter-building' | translate }}</mat-label>
   <mat-select
     [value]="selectedBuildingId()"
-    [placeholder]="'equipment.all-buildings' | translate"
+    [placeholder]="'devices.all-buildings' | translate"
     (selectionChange)="selectedBuildingId.set($event.value)"
   >
-    <mat-option [value]="null">{{ 'equipment.all-buildings' | translate }}</mat-option>
+    <mat-option [value]="null">{{ 'devices.all-buildings' | translate }}</mat-option>
     @for (building of store.buildings(); track building.id) {
       <mat-option [value]="building.id">{{ building.name }}</mat-option>
     }
@@ -28,55 +28,55 @@
 
 <table mat-table [dataSource]="dataSource()" matSort class="full-width-table">
   <ng-container matColumnDef="code">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'equipment.code' | translate }}</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'devices.code' | translate }}</th>
     <td mat-cell *matCellDef="let item">{{ item.code }}</td>
   </ng-container>
 
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'equipment.name' | translate }}</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'devices.name' | translate }}</th>
     <td mat-cell *matCellDef="let item">{{ item.name }}</td>
   </ng-container>
 
   <ng-container matColumnDef="type">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'equipment.type' | translate }}</th>
-    <td mat-cell *matCellDef="let item">{{ 'equipment.types.' + item.type | translate }}</td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'devices.type' | translate }}</th>
+    <td mat-cell *matCellDef="let item">{{ 'devices.types.' + item.type | translate }}</td>
   </ng-container>
 
   <ng-container matColumnDef="building">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>
-      {{ 'equipment.building' | translate }}
+      {{ 'devices.building' | translate }}
     </th>
     <td mat-cell *matCellDef="let item">{{ item.building?.name ?? item.buildingId }}</td>
   </ng-container>
 
   <ng-container matColumnDef="location">
-    <th mat-header-cell *matHeaderCellDef>{{ 'equipment.location' | translate }}</th>
+    <th mat-header-cell *matHeaderCellDef>{{ 'devices.location' | translate }}</th>
     <td mat-cell *matCellDef="let item">{{ item.location }}</td>
   </ng-container>
 
   <ng-container matColumnDef="installationDate">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>
-      {{ 'equipment.installation-date' | translate }}
+      {{ 'devices.installation-date' | translate }}
     </th>
     <td mat-cell *matCellDef="let item">{{ item.installationDate | date: 'dd/MM/yyyy' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'equipment.status' | translate }}</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'devices.status' | translate }}</th>
     <td mat-cell *matCellDef="let item">
       <span [class]="'status status-' + item.status">
-        {{ 'equipment.statuses.' + item.status | translate }}
+        {{ 'devices.statuses.' + item.status | translate }}
       </span>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>{{ 'equipment.actions' | translate }}</th>
+    <th mat-header-cell *matHeaderCellDef>{{ 'devices.actions' | translate }}</th>
     <td mat-cell *matCellDef="let item" class="actions">
       <button
         mat-icon-button
-        [attr.aria-label]="'equipment.edit' | translate"
-        [matTooltip]="'equipment.edit' | translate"
+        [attr.aria-label]="'devices.edit' | translate"
+        [matTooltip]="'devices.edit' | translate"
         [disabled]="item.isDecommissioned()"
         (click)="editDevice(item.id)"
       >
@@ -84,8 +84,8 @@
       </button>
       <button
         mat-icon-button
-        [attr.aria-label]="'equipment.decommission' | translate"
-        [matTooltip]="'equipment.decommission' | translate"
+        [attr.aria-label]="'devices.decommission' | translate"
+        [matTooltip]="'devices.decommission' | translate"
         [disabled]="item.isDecommissioned()"
         (click)="decommissionDevice(item)"
       >
@@ -102,7 +102,7 @@
   ></tr>
   <tr class="mat-row" *matNoDataRow>
     <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
-      {{ 'equipment.empty' | translate }}
+      {{ 'devices.empty' | translate }}
     </td>
   </tr>
 </table>
