@@ -25,6 +25,7 @@ export class Alert implements BaseEntity {
   #lastValue: number;
   #detectedAt: Date;
   #device: Device | null;
+  #thresholdValue: number;
 
   constructor(props: {
     id: number;
@@ -35,6 +36,7 @@ export class Alert implements BaseEntity {
     lastValue: number;
     detectedAt: Date;
     device?: Device | null;
+    thresholdValue: number;
   }) {
     this.#id = props.id;
     this.#deviceId = props.deviceId;
@@ -44,6 +46,7 @@ export class Alert implements BaseEntity {
     this.#lastValue = props.lastValue;
     this.#detectedAt = props.detectedAt;
     this.#device = props.device ?? null;
+    this.#thresholdValue = props.thresholdValue;
   }
 
   get id(): number {
@@ -102,6 +105,13 @@ export class Alert implements BaseEntity {
     this.#device = value;
   }
 
+  get thresholdValue(): number {
+    return this.#thresholdValue;
+  }
+  set thresholdValue(value: number) {
+    this.#thresholdValue = value;
+  }
+
   /**
    * an alert stays active until it is resolved, even while it is being managed.
    */
@@ -134,5 +144,14 @@ export class Alert implements BaseEntity {
       throw new Error('The alert is already resolved');
     }
     this.#status = AlertStatus.RESOLVED;
+  }
+
+  /**
+   * how many times the last value is above its threshold.
+   * used to attend first the alert that is most out of range.
+   */
+  exceedRatio(): number {
+    if (!this.#thresholdValue) return 0;
+    return this.#lastValue / this.#thresholdValue;
   }
 }

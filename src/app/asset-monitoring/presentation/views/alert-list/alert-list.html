@@ -55,6 +55,10 @@
       <th mat-header-cell *matHeaderCellDef>{{ 'alerts.last-value' | translate }}</th>
       <td mat-cell *matCellDef="let alert">
         {{ alert.lastValue | number: '1.0-1' }} {{ unitOf(alert.metric) }}
+        <div class="secondary">
+          {{ 'alerts.limit' | translate }}: {{ alert.thresholdValue | number: '1.0-1' }}
+          {{ unitOf(alert.metric) }}
+        </div>
       </td>
     </ng-container>
 

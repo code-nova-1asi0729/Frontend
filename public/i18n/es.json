@@ -117,7 +117,8 @@
       "CRITICAL": "Crítica",
       "HIGH": "Alta",
       "MEDIUM": "Media",
-      "LOW": "Baja"
+      "LOW": "Baja",
+      "limit": "Límite"
     },
     "statuses": {
       "ACTIVE": "Activa",

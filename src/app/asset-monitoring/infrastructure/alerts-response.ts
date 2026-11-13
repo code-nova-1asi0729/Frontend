@@ -12,6 +12,7 @@ export interface AlertResource extends BaseResource {
   lastValue: number;
   /** ISO 8601 date and time */
   detectedAt: string;
+  thresholdValue: number;
 }
 
 /**
