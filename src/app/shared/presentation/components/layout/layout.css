@@ -141,3 +141,25 @@
 .app-footer a{
   color: inherit;
 }
+
+.privacy-notice {
+  position: sticky;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 16px 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--mat-sys-inverse-surface);
+  color: var(--mat-sys-inverse-on-surface);
+}
+
+.privacy-notice a {
+  color: inherit;
+}
+
+.privacy-notice button {
+  margin-left: auto;
+}

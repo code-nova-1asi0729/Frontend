@@ -13,7 +13,7 @@ import { LanguageSwitcher } from '../language-switcher/language-switcher';
  * width below which the side menu is hidden behind a menu button.
  */
 const COMPACT_LAYOUT_QUERY = '(max-width: 959.98px)';
-
+const PRIVACY_NOTICE_KEY = 'vigilia_privacy_notice_accepted';
 /**
  * application shell: vertical side navigation and routed content.
  */
@@ -36,6 +36,8 @@ export class Layout {
   private breakpointObserver = inject(BreakpointObserver);
 
   readonly sidenav = viewChild(MatSidenav);
+
+  readonly privacyAccepted = signal(this.readPrivacyAccepted());
 
   /**
    * true on phones and small tablets, where the menu opens over the content.
@@ -67,5 +69,22 @@ export class Layout {
    */
   closeIfCompact(): void {
     if (this.isCompact()) this.sidenav()?.close();
+  }
+
+  acceptPrivacyNotice(): void {
+    try {
+      localStorage.setItem(PRIVACY_NOTICE_KEY, 'true');
+    } catch {
+      // the browser does not allow storage: the notice is hidden only for this visit
+    }
+    this.privacyAccepted.set(true);
+  }
+
+  private readPrivacyAccepted(): boolean {
+    try {
+      return localStorage.getItem(PRIVACY_NOTICE_KEY) === 'true';
+    } catch {
+      return false;
+    }
   }
 }

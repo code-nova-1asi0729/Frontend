@@ -48,5 +48,14 @@
       <a routerLink="/terms">{{ 'legal.terms' | translate }}</a>
       <a routerLink="/privacy">{{ 'legal.privacy' | translate }}</a>
     </footer>
+    @if (!privacyAccepted()){
+    <div class="privacy-notice" role="dialog" [attr.aria-label]="'legal.privacy' | translate">
+      <p>
+        {{ 'legal.notice' | translate }}
+        <a routerLink="/privacy">{{ 'legal.privacy' | translate }}</a>.
+      </p>
+      <button mat-flat-button (click)="acceptPrivacyNotice()">{{ 'legal.accept' | translate }}</button>
+    </div>
+    }
   </mat-sidenav-content>
 </mat-sidenav-container>

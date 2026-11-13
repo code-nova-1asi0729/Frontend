@@ -215,7 +215,12 @@
     "navigation": "Navegación principal",
     "open-menu": "Abrir menú"
   },
-  "legal": { "terms": "Términos y condiciones", "privacy": "Política de privacidad" },
+  "legal": {
+    "terms": "Términos y condiciones",
+    "privacy": "Política de privacidad",
+    "notice": "Usamos tus datos solo para brindar el servicio. Lee nuestra",
+    "accept": "Aceptar"
+  },
   "terms": {
     "title": "Términos y condiciones",
     "updated": "Última actualización: noviembre de 2026",

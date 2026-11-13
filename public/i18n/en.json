@@ -276,5 +276,10 @@
     }
   },
 
-  "legal": { "terms": "Terms and conditions", "privacy": "Privacy policy" }
+  "legal": {
+    "terms": "Terms and conditions",
+    "privacy": "Privacy policy",
+    "notice": "We use your data only to provide the service. Read our",
+    "accpet":"Accept"
+  }
 }
