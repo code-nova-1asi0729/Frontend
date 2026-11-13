@@ -110,7 +110,7 @@
     "detected-at": "Detected",
     "status": "Status",
     "actions": "Actions",
-    "acknowledge": "In progress",
+    "acknowledge": "Attend",
     "resolve": "Resolve",
     "empty": "There are no active alerts.",
     "severities": {

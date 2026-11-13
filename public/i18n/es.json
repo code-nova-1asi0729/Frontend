@@ -110,7 +110,7 @@
     "detected-at": "Detectada",
     "status": "Estado",
     "actions": "Acciones",
-    "acknowledge": "En gestión",
+    "acknowledge": "Atender",
     "resolve": "Resolver",
     "empty": "No hay alertas activas.",
     "severities": {
@@ -122,7 +122,7 @@
     },
     "statuses": {
       "ACTIVE": "Activa",
-      "ACKNOWLEDGED": "En gestión",
+      "ACKNOWLEDGED": "En atención",
       "RESOLVED": "Resuelta"
     }
   },
