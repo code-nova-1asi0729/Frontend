@@ -17,7 +17,7 @@ import { AssetMonitoringStore } from '../../../application/asset-monitoring.stor
 const DAYS_SHOWN_BY_DEFAULT = 7;
 
 /**
- * Reading history of an equipment in a date range (US14).
+ * Reading history of a device in a date range (US14).
  */
 @Component({
   selector: 'app-reading-history',
@@ -43,7 +43,7 @@ export class ReadingHistory {
   readonly store = inject(AssetMonitoringStore);
   private fb = inject(FormBuilder);
 
-  readonly selectedEquipmentId = signal<number | null>(null);
+  readonly selectedDeviceId = signal<number | null>(null);
 
   range = this.fb.group({
     start: this.fb.control<Date | null>(this.daysAgo(DAYS_SHOWN_BY_DEFAULT)),
@@ -59,17 +59,17 @@ export class ReadingHistory {
   });
 
   /**
-   * readings of the selected equipment inside the date range, the most recent first.
+   * readings of the selected device inside the date range, the most recent first.
    */
   readonly filteredReadings = computed(() => {
-    const equipmentId = this.selectedEquipmentId();
-    if (equipmentId === null) return [];
+    const deviceId = this.selectedDeviceId();
+    if (deviceId === null) return [];
     const { start, end } = this.rangeValue();
     const from = start ? start.getTime() : -Infinity;
     // The end date includes the whole day
     const to = end ? new Date(end).setHours(23, 59, 59, 999) : Infinity;
     return this.store
-      .getReadingsByEquipment(equipmentId)()
+      .getReadingsByDevice(deviceId)()
       .filter((reading) => {
         const time = reading.recordedAt.getTime();
         return time >= from && time <= to;

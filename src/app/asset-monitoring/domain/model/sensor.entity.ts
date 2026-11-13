@@ -3,34 +3,34 @@ import { Device } from './device.entity';
 import { SensorStatus } from './sensor-status';
 
 /**
- * IoT sensor that measures a critical equipment.
- * it belongs to only one equipment at a time.
+ * IoT sensor that measures a device.
+ * it belongs to only one device at a time.
  */
 export class Sensor implements BaseEntity {
   #id: number;
-  #equipmentId: number | null;
+  #deviceId: number | null;
   #serialNumber: string;
   #model: string;
   #status: SensorStatus;
   #lastSeenAt: Date | null;
-  #equipment: Device | null;
+  #device: Device | null;
 
   constructor(props: {
     id: number;
-    equipmentId: number | null;
+    deviceId: number | null;
     serialNumber: string;
     model: string;
     status: SensorStatus;
     lastSeenAt: Date | null;
-    equipment?: Device | null;
+    device?: Device | null;
   }) {
     this.#id = props.id;
-    this.#equipmentId = props.equipmentId;
+    this.#deviceId = props.deviceId;
     this.#serialNumber = props.serialNumber;
     this.#model = props.model;
     this.#status = props.status;
     this.#lastSeenAt = props.lastSeenAt;
-    this.#equipment = props.equipment ?? null;
+    this.#device = props.device ?? null;
   }
 
   get id(): number {
@@ -40,11 +40,11 @@ export class Sensor implements BaseEntity {
     this.#id = value;
   }
 
-  get equipmentId(): number | null {
-    return this.#equipmentId;
+  get deviceId(): number | null {
+    return this.#deviceId;
   }
-  set equipmentId(value: number | null) {
-    this.#equipmentId = value;
+  set deviceId(value: number | null) {
+    this.#deviceId = value;
   }
 
   get serialNumber(): string {
@@ -75,30 +75,30 @@ export class Sensor implements BaseEntity {
     this.#lastSeenAt = value;
   }
 
-  get equipment(): Device | null {
-    return this.#equipment;
+  get device(): Device | null {
+    return this.#device;
   }
-  set equipment(value: Device | null) {
-    this.#equipment = value;
+  set device(value: Device | null) {
+    this.#device = value;
   }
 
   /**
-   * whether the sensor is linked to an equipment.
+   * whether the sensor is linked to a device.
    */
   isAssigned(): boolean {
-    return this.#equipmentId !== null;
+    return this.#deviceId !== null;
   }
 
   /**
-   * links the sensor to an equipment (US10).
-   * a sensor that already has an equipment must be unassigned first.
-   * @param equipmentId - equipment that the sensor will measure.
+   * links the sensor to a device (US10).
+   * a sensor that already has a device must be unassigned first.
+   * @param deviceId - device that the sensor will measure.
    */
-  assignTo(equipmentId: number): void {
+  assignTo(deviceId: number): void {
     if (this.isAssigned()) {
-      throw new Error(`Sensor ${this.#serialNumber} is already assigned to another equipment`);
+      throw new Error(`Sensor ${this.#serialNumber} is already assigned to another device`);
     }
-    this.#equipmentId = equipmentId;
+    this.#deviceId = deviceId;
     this.#status = SensorStatus.ASSIGNED;
   }
 
@@ -106,8 +106,8 @@ export class Sensor implements BaseEntity {
    * releases the sensor so it can be assigned again.
    */
   unassign(): void {
-    this.#equipmentId = null;
-    this.#equipment = null;
+    this.#deviceId = null;
+    this.#device = null;
     this.#status = SensorStatus.UNASSIGNED;
   }
 }

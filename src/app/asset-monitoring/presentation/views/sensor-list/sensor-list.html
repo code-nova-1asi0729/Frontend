@@ -18,16 +18,16 @@
     <td mat-cell *matCellDef="let sensor">{{ sensor.model }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="equipment">
-    <th mat-header-cell *matHeaderCellDef>{{ 'sensors.equipment' | translate }}</th>
+  <ng-container matColumnDef="device">
+    <th mat-header-cell *matHeaderCellDef>{{ 'sensors.device' | translate }}</th>
     <td mat-cell *matCellDef="let sensor">
       @if (sensor.isAssigned()) {
-        {{ sensor.equipment?.name ?? sensor.equipmentId }}
-        @if (sensor.equipment?.building) {
-          <div class="secondary">{{ sensor.equipment.building.name }}</div>
+        {{ sensor.device?.name ?? sensor.deviceId }}
+        @if (sensor.device?.building) {
+          <div class="secondary">{{ sensor.device.building.name }}</div>
         }
       } @else {
-        <span class="secondary">{{ 'sensors.no-equipment' | translate }}</span>
+        <span class="secondary">{{ 'sensors.no-device' | translate }}</span>
       }
     </td>
   </ng-container>
