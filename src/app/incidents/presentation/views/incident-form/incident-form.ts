@@ -40,14 +40,14 @@ export class IncidentForm extends BaseForm {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private store = inject(IncidentsStore);
-  // Only read between contexts: the buildings and equipment of Asset Monitoring
+  // Only read between contexts: the buildings and devices of Asset Monitoring
   readonly assetMonitoringStore = inject(AssetMonitoringStore);
 
   readonly categories = Object.values(IncidentCategory);
 
   form = this.fb.nonNullable.group({
     buildingId: this.fb.control<number | null>(null, Validators.required),
-    equipmentId: this.fb.control<number | null>(null),
+    deviceId: this.fb.control<number | null>(null),
     category: this.fb.control<IncidentCategory | null>(null, Validators.required),
     description: ['', [Validators.required, Validators.maxLength(500)]],
   });
@@ -57,9 +57,9 @@ export class IncidentForm extends BaseForm {
   });
 
   /**
-   * equipment of the chosen building that is still in service.
+   * devices of the chosen building that is still in service.
    */
-  readonly buildingEquipment = computed(() => {
+  readonly buildingDevices = computed(() => {
     const buildingId = this.buildingId();
     if (buildingId === null) return [];
     return this.assetMonitoringStore
@@ -69,9 +69,9 @@ export class IncidentForm extends BaseForm {
 
   constructor() {
     super();
-    // The equipment belongs to one building, so it is cleared when the building changes
+    // The device belongs to one building, so it is cleared when the building changes
     this.form.controls.buildingId.valueChanges.subscribe(() =>
-      this.form.controls.equipmentId.setValue(null),
+      this.form.controls.deviceId.setValue(null),
     );
   }
 
@@ -82,7 +82,7 @@ export class IncidentForm extends BaseForm {
       id: 0,
       buildingId: value.buildingId!,
       residentId: CURRENT_RESIDENT_ID,
-      equipmentId: value.equipmentId,
+      deviceId: value.deviceId,
       category: value.category!,
       description: value.description.trim(),
       status: IncidentStatus.REPORTED,
