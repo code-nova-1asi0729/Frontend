@@ -46,7 +46,7 @@ export class AssetMonitoringStore {
   readonly alerts = computed(() => {
     const devices = this.devices();
     return this.alertsSignal().map((alert) => {
-      alert.equipment = devices.find((item) => item.id === alert.equipmentId) ?? null;
+      alert.device = devices.find((item) => item.id === alert.deviceId) ?? null;
       return alert;
     });
   });
@@ -54,12 +54,18 @@ export class AssetMonitoringStore {
   /**
    * alerts that are not resolved yet, the most severe first (US19).
    */
+  /**
+   * alerts that are not resolved yet: the most severe first (US19),
+   * then the most out of range, then the oldest.
+   */
   readonly activeAlerts = computed(() =>
     this.alerts()
       .filter((alert) => alert.isActive())
       .sort(
         (a, b) =>
-          b.severityRank() - a.severityRank() || b.detectedAt.getTime() - a.detectedAt.getTime(),
+          b.severityRank() - a.severityRank() ||
+          b.exceedRatio() - a.exceedRatio() ||
+          a.detectedAt.getTime() - b.detectedAt.getTime(),
       ),
   );
 

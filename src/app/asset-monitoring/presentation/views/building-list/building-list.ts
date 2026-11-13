@@ -6,8 +6,9 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AssetMonitoringStore } from '../../../application/asset-monitoring.store';
+import { Building } from '../../../domain/model/building.entity';
 
 /**
  * Lists the buildings of the administrator (US07).
@@ -29,6 +30,7 @@ import { AssetMonitoringStore } from '../../../application/asset-monitoring.stor
 export class BuildingList {
   readonly store = inject(AssetMonitoringStore);
   private router = inject(Router);
+  private translate = inject(TranslateService);
 
   displayedColumns: string[] = ['code', 'name', 'address', 'district', 'totalUnits', 'status', 'actions'];
 
@@ -50,7 +52,9 @@ export class BuildingList {
     this.router.navigate(['/asset-monitoring/buildings', id, 'edit']).then();
   }
 
-  deleteBuilding(id: number): void {
-    this.store.deleteBuilding(id);
+  deleteBuilding(building: Building): void {
+    const message = this.translate.instant('buildings.delete-confirm', { name: building.name });
+    if (!confirm(message)) return;
+    this.store.deleteBuilding(building.id);
   }
 }
