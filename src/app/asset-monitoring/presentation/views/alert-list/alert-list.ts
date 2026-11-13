@@ -47,7 +47,7 @@ export class AlertList {
 
   displayedColumns: string[] = [
     'severity',
-    'equipment',
+    'device',
     'metric',
     'lastValue',
     'detectedAt',

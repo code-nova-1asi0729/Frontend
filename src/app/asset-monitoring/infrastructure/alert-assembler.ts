@@ -20,7 +20,7 @@ export class AlertAssembler implements BaseAssembler<Alert, AlertResource, Alert
   toResourceFromEntity(entity: Alert): AlertResource {
     return {
       id: entity.id,
-      equipmentId: entity.equipmentId,
+      deviceId: entity.deviceId,
       metric: entity.metric,
       severity: entity.severity,
       status: entity.status,

@@ -5,7 +5,7 @@ import { BaseResource, BaseResponse } from '../../shared/infrastructure/base-res
  */
 export interface AlertResource extends BaseResource {
   id: number;
-  equipmentId: number;
+  deviceId: number;
   metric: string;
   severity: string;
   status: string;

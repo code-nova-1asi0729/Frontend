@@ -46,7 +46,7 @@ export class AssetMonitoringStore {
   readonly alerts = computed(() => {
     const devices = this.devices();
     return this.alertsSignal().map((alert) => {
-      alert.equipment = devices.find((item) => item.id === alert.equipmentId) ?? null;
+      alert.device = devices.find((item) => item.id === alert.deviceId) ?? null;
       return alert;
     });
   });
