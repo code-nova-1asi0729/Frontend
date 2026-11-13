@@ -14,36 +14,39 @@ const SEVERITY_RANK: Record<AlertSeverity, number> = {
 };
 
 /**
- * anomaly detected on a metric of a critical equipment.
+ * anomaly detected on a metric of a critical device.
  */
 export class Alert implements BaseEntity {
   #id: number;
-  #equipmentId: number;
+  #deviceId: number;
   #metric: string;
   #severity: AlertSeverity;
   #status: AlertStatus;
   #lastValue: number;
   #detectedAt: Date;
-  #equipment: Device | null;
+  #device: Device | null;
+  #thresholdValue: number;
 
   constructor(props: {
     id: number;
-    equipmentId: number;
+    deviceId: number;
     metric: string;
     severity: AlertSeverity;
     status: AlertStatus;
     lastValue: number;
     detectedAt: Date;
-    equipment?: Device | null;
+    device?: Device | null;
+    thresholdValue: number;
   }) {
     this.#id = props.id;
-    this.#equipmentId = props.equipmentId;
+    this.#deviceId = props.deviceId;
     this.#metric = props.metric;
     this.#severity = props.severity;
     this.#status = props.status;
     this.#lastValue = props.lastValue;
     this.#detectedAt = props.detectedAt;
-    this.#equipment = props.equipment ?? null;
+    this.#device = props.device ?? null;
+    this.#thresholdValue = props.thresholdValue;
   }
 
   get id(): number {
@@ -53,11 +56,11 @@ export class Alert implements BaseEntity {
     this.#id = value;
   }
 
-  get equipmentId(): number {
-    return this.#equipmentId;
+  get deviceId(): number {
+    return this.#deviceId;
   }
-  set equipmentId(value: number) {
-    this.#equipmentId = value;
+  set deviceId(value: number) {
+    this.#deviceId = value;
   }
 
   get metric(): string {
@@ -95,11 +98,18 @@ export class Alert implements BaseEntity {
     this.#detectedAt = value;
   }
 
-  get equipment(): Device | null {
-    return this.#equipment;
+  get device(): Device | null {
+    return this.#device;
   }
-  set equipment(value: Device | null) {
-    this.#equipment = value;
+  set device(value: Device | null) {
+    this.#device = value;
+  }
+
+  get thresholdValue(): number {
+    return this.#thresholdValue;
+  }
+  set thresholdValue(value: number) {
+    this.#thresholdValue = value;
   }
 
   /**
@@ -134,5 +144,14 @@ export class Alert implements BaseEntity {
       throw new Error('The alert is already resolved');
     }
     this.#status = AlertStatus.RESOLVED;
+  }
+
+  /**
+   * how many times the last value is above its threshold.
+   * used to attend first the alert that is most out of range.
+   */
+  exceedRatio(): number {
+    if (!this.#thresholdValue) return 0;
+    return this.#lastValue / this.#thresholdValue;
   }
 }

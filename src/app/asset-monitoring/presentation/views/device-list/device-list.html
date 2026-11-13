@@ -61,15 +61,18 @@
     <td mat-cell *matCellDef="let item">{{ item.installationDate | date: 'dd/MM/yyyy' }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'devices.status' | translate }}</th>
+  <ng-container matColumnDef="activeAlerts">
+    <th mat-header-cell *matHeaderCellDef>{{ 'devices.active-alerts-column' | translate }}</th>
     <td mat-cell *matCellDef="let item">
-      <span [class]="'status status-' + item.status">
-        {{ 'devices.statuses.' + item.status | translate }}
-      </span>
+      @if (activeAlertCount(item) > 0) {
+      <a class="alert-chip" routerLink="/asset-monitoring/alerts">
+        {{ activeAlertCount(item) }} {{ 'devices.active-alerts' | translate }}
+      </a>
+      } @else {
+      <span class="secondary">—</span>
+      }
     </td>
   </ng-container>
-
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>{{ 'devices.actions' | translate }}</th>
     <td mat-cell *matCellDef="let item" class="actions">

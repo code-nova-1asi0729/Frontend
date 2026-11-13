@@ -5,13 +5,14 @@ import { BaseResource, BaseResponse } from '../../shared/infrastructure/base-res
  */
 export interface AlertResource extends BaseResource {
   id: number;
-  equipmentId: number;
+  deviceId: number;
   metric: string;
   severity: string;
   status: string;
   lastValue: number;
   /** ISO 8601 date and time */
   detectedAt: string;
+  thresholdValue: number;
 }
 
 /**

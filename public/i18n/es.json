@@ -54,6 +54,7 @@
     "actions": "Acciones",
     "edit": "Editar",
     "delete": "Eliminar",
+    "delete-confirm": "¿Eliminar {{ name }}? No se puede deshacer.",
     "create": "Registrar",
     "update": "Guardar cambios",
     "cancel": "Cancelar",
@@ -85,6 +86,8 @@
     "create": "Registrar",
     "update": "Guardar cambios",
     "cancel": "Cancelar",
+    "active-alerts-column": "Alertas",
+    "active-alerts": "alertas activas",
     "types": {
       "WATER_PUMP": "Bomba de agua",
       "ELECTRICAL_PANEL": "Tablero eléctrico",
@@ -109,18 +112,19 @@
     "detected-at": "Detectada",
     "status": "Estado",
     "actions": "Acciones",
-    "acknowledge": "En gestión",
+    "acknowledge": "Atender",
     "resolve": "Resolver",
     "empty": "No hay alertas activas.",
     "severities": {
       "CRITICAL": "Crítica",
       "HIGH": "Alta",
       "MEDIUM": "Media",
-      "LOW": "Baja"
+      "LOW": "Baja",
+      "limit": "Límite"
     },
     "statuses": {
       "ACTIVE": "Activa",
-      "ACKNOWLEDGED": "En gestión",
+      "ACKNOWLEDGED": "En atención",
       "RESOLVED": "Resuelta"
     }
   },
@@ -189,6 +193,7 @@
     "actions": "Acciones",
     "start-management": "Iniciar gestión",
     "resolve": "Resolver",
+    "resolve-confirm": "¿Resolver la alerta {{ severity }} de {{ device }}? Saldrá de la lista de activas.",
     "rate": "Calificar",
     "report": "Reportar",
     "cancel": "Cancelar",
