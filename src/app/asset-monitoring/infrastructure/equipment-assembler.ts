@@ -1,29 +1,29 @@
 import { formatDate } from '@angular/common';
 import { BaseAssembler } from '../../shared/infrastructure/base-assembler';
-import { CriticalEquipment } from '../domain/model/critical-equipment.entity';
-import { EquipmentStatus } from '../domain/model/equipment-status';
-import { EquipmentType } from '../domain/model/equipment-type';
+import { Device } from '../domain/model/device.entity';
+import { DeviceStatus } from '../domain/model/device-status';
+import { DeviceType } from '../domain/model/device-type';
 import { EquipmentResource, EquipmentResponse } from './equipment-response';
 
 /**
  * maps critical equipment between the API and the domain model.
  */
 export class EquipmentAssembler implements BaseAssembler<
-  CriticalEquipment,
+  Device,
   EquipmentResource,
   EquipmentResponse
 > {
-  toEntityFromResource(resource: EquipmentResource): CriticalEquipment {
-    return new CriticalEquipment({
+  toEntityFromResource(resource: EquipmentResource): Device {
+    return new Device({
       ...resource,
-      type: resource.type as EquipmentType,
-      status: resource.status as EquipmentStatus,
+      type: resource.type as DeviceType,
+      status: resource.status as DeviceStatus,
       // Read as local date so the day does not shift with the time zone
       installationDate: new Date(`${resource.installationDate}T00:00:00`),
     });
   }
 
-  toResourceFromEntity(entity: CriticalEquipment): EquipmentResource {
+  toResourceFromEntity(entity: Device): EquipmentResource {
     return {
       id: entity.id,
       buildingId: entity.buildingId,
@@ -36,7 +36,7 @@ export class EquipmentAssembler implements BaseAssembler<
     };
   }
 
-  toEntitiesFromResponse(response: EquipmentResponse): CriticalEquipment[] {
+  toEntitiesFromResponse(response: EquipmentResponse): Device[] {
     return response.equipment.map((resource) => this.toEntityFromResource(resource));
   }
 }

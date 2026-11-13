@@ -10,9 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { TranslatePipe } from '@ngx-translate/core';
 import { BaseForm } from '../../../../shared/presentation/components/base-form/base-form';
 import { AssetMonitoringStore } from '../../../application/asset-monitoring.store';
-import { CriticalEquipment } from '../../../domain/model/critical-equipment.entity';
-import { EquipmentStatus } from '../../../domain/model/equipment-status';
-import { EquipmentType } from '../../../domain/model/equipment-type';
+import { Device } from '../../../domain/model/device.entity';
+import { DeviceStatus } from '../../../domain/model/device-status';
+import { DeviceType } from '../../../domain/model/device-type';
 
 /**
  * Registers or edits a critical equipment of a building (US11).
@@ -42,8 +42,8 @@ export class EquipmentForm extends BaseForm {
 
   isEdit = this.equipmentId !== null;
 
-  readonly types = Object.values(EquipmentType);
-  readonly statuses = Object.values(EquipmentStatus);
+  readonly types = Object.values(DeviceType);
+  readonly statuses = Object.values(DeviceStatus);
   readonly today = new Date();
 
   form = this.fb.nonNullable.group({
@@ -54,10 +54,10 @@ export class EquipmentForm extends BaseForm {
     ),
     code: ['', [Validators.required, Validators.pattern(/^[A-Z0-9-]{2,30}$/)]],
     name: ['', [Validators.required, Validators.maxLength(140)]],
-    type: this.fb.control<EquipmentType | null>(null, Validators.required),
+    type: this.fb.control<DeviceType | null>(null, Validators.required),
     location: ['', [Validators.required, Validators.maxLength(140)]],
     installationDate: this.fb.control<Date | null>(null, Validators.required),
-    status: [EquipmentStatus.OPERATIONAL, Validators.required],
+    status: [DeviceStatus.OPERATIONAL, Validators.required],
   });
 
   constructor() {
@@ -75,7 +75,7 @@ export class EquipmentForm extends BaseForm {
   submit(): void {
     if (this.form.invalid) return;
     const value = this.form.getRawValue();
-    const equipment = new CriticalEquipment({
+    const equipment = new Device({
       id: this.equipmentId ?? 0,
       buildingId: value.buildingId!,
       code: value.code,
@@ -94,7 +94,7 @@ export class EquipmentForm extends BaseForm {
     this.router.navigate(['/asset-monitoring/equipment']).then();
   }
 
-  private toFormValue(equipment: CriticalEquipment) {
+  private toFormValue(equipment: Device) {
     return {
       buildingId: equipment.buildingId,
       code: equipment.code,

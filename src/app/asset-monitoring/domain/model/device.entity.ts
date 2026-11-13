@@ -1,20 +1,20 @@
 import { BaseEntity } from '../../../shared/domain/model/base-entity';
 import { Building } from './building.entity';
-import { EquipmentStatus } from './equipment-status';
-import { EquipmentType } from './equipment-type';
+import { DeviceStatus } from './device-status';
+import { DeviceType } from './device-type';
 
 /**
- * critical equipment of a building: water pump, electrical panel, elevator or hvac.
+ * device of a building: water pump, electrical panel, elevator or hvac.
  */
-export class CriticalEquipment implements BaseEntity {
+export class Device implements BaseEntity {
   #id: number;
   #buildingId: number;
   #code: string;
   #name: string;
-  #type: EquipmentType;
+  #type: DeviceType;
   #location: string;
   #installationDate: Date;
-  #status: EquipmentStatus;
+  #status: DeviceStatus;
   #building: Building | null;
 
   constructor(props: {
@@ -22,10 +22,10 @@ export class CriticalEquipment implements BaseEntity {
     buildingId: number;
     code: string;
     name: string;
-    type: EquipmentType;
+    type: DeviceType;
     location: string;
     installationDate: Date;
-    status: EquipmentStatus;
+    status: DeviceStatus;
     building?: Building | null;
   }) {
     this.#id = props.id;
@@ -67,10 +67,10 @@ export class CriticalEquipment implements BaseEntity {
     this.#name = value;
   }
 
-  get type(): EquipmentType {
+  get type(): DeviceType {
     return this.#type;
   }
-  set type(value: EquipmentType) {
+  set type(value: DeviceType) {
     this.#type = value;
   }
 
@@ -88,10 +88,10 @@ export class CriticalEquipment implements BaseEntity {
     this.#installationDate = value;
   }
 
-  get status(): EquipmentStatus {
+  get status(): DeviceStatus {
     return this.#status;
   }
-  set status(value: EquipmentStatus) {
+  set status(value: DeviceStatus) {
     this.#status = value;
   }
 
@@ -103,24 +103,24 @@ export class CriticalEquipment implements BaseEntity {
   }
 
   /**
-   * an equipment is operational when it works without pending follow-up.
+   * a device is operational when it works without pending follow-up.
    */
   isOperational(): boolean {
-    return this.#status === EquipmentStatus.OPERATIONAL;
+    return this.#status === DeviceStatus.OPERATIONAL;
   }
 
   /**
-   * whether the equipment was taken out of service permanently (US09).
+   * whether the device was taken out of service permanently (US09).
    */
   isDecommissioned(): boolean {
-    return this.#status === EquipmentStatus.DECOMMISSIONED;
+    return this.#status === DeviceStatus.DECOMMISSIONED;
   }
 
   /**
-   * takes the equipment out of service permanently (US09).
-   * the equipment is not deleted, so its history is kept.
+   * takes the device out of service permanently (US09).
+   * the device is not deleted, so its history is kept.
    */
   decommission(): void {
-    this.#status = EquipmentStatus.DECOMMISSIONED;
+    this.#status = DeviceStatus.DECOMMISSIONED;
   }
 }

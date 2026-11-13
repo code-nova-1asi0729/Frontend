@@ -1,7 +1,7 @@
 import { Injectable, Signal, computed, inject, signal } from '@angular/core';
 import { AssetMonitoringApi } from '../infrastructure/asset-monitoring-api';
 import { Building } from '../domain/model/building.entity';
-import { CriticalEquipment } from '../domain/model/critical-equipment.entity';
+import { Device } from '../domain/model/device.entity';
 import { Alert } from '../domain/model/alert.entity';
 import { AlertStatus } from '../domain/model/alert-status';
 import { Sensor } from '../domain/model/sensor.entity';
@@ -16,7 +16,7 @@ export class AssetMonitoringStore {
   private assetMonitoringApi = inject(AssetMonitoringApi);
 
   private buildingsSignal = signal<Building[]>([]);
-  private equipmentSignal = signal<CriticalEquipment[]>([]);
+  private equipmentSignal = signal<Device[]>([]);
   private alertsSignal = signal<Alert[]>([]);
   private sensorsSignal = signal<Sensor[]>([]);
   private readingsSignal = signal<SensorReading[]>([]);
@@ -124,7 +124,7 @@ export class AssetMonitoringStore {
    * returns an equipment by id, or undefined while it is not loaded.
    * @param id - equipment identifier.
    */
-  getEquipmentById(id: number): Signal<CriticalEquipment | undefined> {
+  getEquipmentById(id: number): Signal<Device | undefined> {
     return computed(() => this.equipment().find((item) => item.id === id));
   }
 
@@ -132,11 +132,11 @@ export class AssetMonitoringStore {
    * returns the equipment of one building (US08).
    * @param buildingId - building identifier.
    */
-  getEquipmentByBuilding(buildingId: number): Signal<CriticalEquipment[]> {
+  getEquipmentByBuilding(buildingId: number): Signal<Device[]> {
     return computed(() => this.equipment().filter((item) => item.buildingId === buildingId));
   }
 
-  addEquipment(equipment: CriticalEquipment): void {
+  addEquipment(equipment: Device): void {
     this.loadingSignal.set(true);
     this.assetMonitoringApi.createEquipment(equipment).subscribe({
       next: (created) => {
@@ -147,7 +147,7 @@ export class AssetMonitoringStore {
     });
   }
 
-  updateEquipment(equipment: CriticalEquipment): void {
+  updateEquipment(equipment: Device): void {
     this.loadingSignal.set(true);
     this.assetMonitoringApi.updateEquipment(equipment).subscribe({
       next: (updated) => {
@@ -164,7 +164,7 @@ export class AssetMonitoringStore {
    * takes an equipment out of service (US09). it is updated, never deleted.
    * @param equipment - equipment to decommission.
    */
-  decommissionEquipment(equipment: CriticalEquipment): void {
+  decommissionEquipment(equipment: Device): void {
     equipment.decommission();
     this.updateEquipment(equipment);
   }

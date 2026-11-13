@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { BaseApi } from '../../shared/infrastructure/base-api';
 import { Building } from '../domain/model/building.entity';
 import { BuildingsApiEndpoint } from './buildings-api-endpoint';
-import { CriticalEquipment } from '../domain/model/critical-equipment.entity';
+import { Device } from '../domain/model/device.entity';
 import { EquipmentApiEndpoint } from './equipment-api-endpoint';
 import { Alert } from '../domain/model/alert.entity';
 import { AlertsApiEndpoint } from './alerts-api-endpoint';
@@ -41,15 +41,15 @@ export class AssetMonitoringApi extends BaseApi {
     return this.buildingsEndpoint.delete(id);
   }
 
-  getEquipment(): Observable<CriticalEquipment[]> {
+  getEquipment(): Observable<Device[]> {
     return this.equipmentEndpoint.getAll();
   }
 
-  createEquipment(equipment: CriticalEquipment): Observable<CriticalEquipment> {
+  createEquipment(equipment: Device): Observable<Device> {
     return this.equipmentEndpoint.create(equipment);
   }
 
-  updateEquipment(equipment: CriticalEquipment): Observable<CriticalEquipment> {
+  updateEquipment(equipment: Device): Observable<Device> {
     return this.equipmentEndpoint.update(equipment, equipment.id);
   }
 

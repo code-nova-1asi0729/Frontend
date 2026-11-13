@@ -1,5 +1,5 @@
 import { BaseEntity } from '../../../shared/domain/model/base-entity';
-import { CriticalEquipment } from './critical-equipment.entity';
+import { Device } from './device.entity';
 import { SensorStatus } from './sensor-status';
 
 /**
@@ -13,7 +13,7 @@ export class Sensor implements BaseEntity {
   #model: string;
   #status: SensorStatus;
   #lastSeenAt: Date | null;
-  #equipment: CriticalEquipment | null;
+  #equipment: Device | null;
 
   constructor(props: {
     id: number;
@@ -22,7 +22,7 @@ export class Sensor implements BaseEntity {
     model: string;
     status: SensorStatus;
     lastSeenAt: Date | null;
-    equipment?: CriticalEquipment | null;
+    equipment?: Device | null;
   }) {
     this.#id = props.id;
     this.#equipmentId = props.equipmentId;
@@ -75,10 +75,10 @@ export class Sensor implements BaseEntity {
     this.#lastSeenAt = value;
   }
 
-  get equipment(): CriticalEquipment | null {
+  get equipment(): Device | null {
     return this.#equipment;
   }
-  set equipment(value: CriticalEquipment | null) {
+  set equipment(value: Device | null) {
     this.#equipment = value;
   }
 

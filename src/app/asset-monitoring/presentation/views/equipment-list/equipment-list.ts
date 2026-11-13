@@ -12,7 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AssetMonitoringStore } from '../../../application/asset-monitoring.store';
-import { CriticalEquipment } from '../../../domain/model/critical-equipment.entity';
+import { Device } from '../../../domain/model/device.entity';
 
 /**
  * Lists the critical equipment by building (US08) and decommissions it (US09).
@@ -93,7 +93,7 @@ export class EquipmentList {
     this.router.navigate(['/asset-monitoring/equipment', id, 'edit']).then();
   }
 
-  decommissionEquipment(equipment: CriticalEquipment): void {
+  decommissionEquipment(equipment: Device): void {
     const message = this.translate.instant('equipment.decommission-confirm', {
       name: equipment.name,
     });

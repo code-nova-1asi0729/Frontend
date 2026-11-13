@@ -1,7 +1,7 @@
 /**
- * kinds of critical equipment monitored by Vigilia.
+ * kinds of devices monitored by Vigilia.
  */
-export enum EquipmentType {
+export enum DeviceType {
   WATER_PUMP = 'WATER_PUMP',
   ELECTRICAL_PANEL = 'ELECTRICAL_PANEL',
   ELEVATOR = 'ELEVATOR',
