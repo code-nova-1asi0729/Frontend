@@ -32,7 +32,7 @@ export class IncidentAssembler implements BaseAssembler<
       id: entity.id,
       buildingId: entity.buildingId,
       residentId: entity.residentId,
-      equipmentId: entity.equipmentId,
+      deviceId: entity.deviceId,
       category: entity.category,
       description: entity.description,
       status: entity.status,

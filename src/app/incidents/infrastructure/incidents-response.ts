@@ -7,7 +7,7 @@ export interface IncidentResource extends BaseResource {
   id: number;
   buildingId: number;
   residentId: number;
-  equipmentId: number | null;
+  deviceId: number | null;
   category: string;
   description: string;
   status: string;
