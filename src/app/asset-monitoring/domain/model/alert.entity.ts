@@ -1,7 +1,7 @@
 import { BaseEntity } from '../../../shared/domain/model/base-entity';
 import { AlertSeverity } from './alert-severity';
 import { AlertStatus } from './alert-status';
-import { CriticalEquipment } from './critical-equipment.entity';
+import { Device } from './device.entity';
 
 /**
  * rank of each severity. a higher number is more urgent.
@@ -24,7 +24,7 @@ export class Alert implements BaseEntity {
   #status: AlertStatus;
   #lastValue: number;
   #detectedAt: Date;
-  #equipment: CriticalEquipment | null;
+  #equipment: Device | null;
 
   constructor(props: {
     id: number;
@@ -34,7 +34,7 @@ export class Alert implements BaseEntity {
     status: AlertStatus;
     lastValue: number;
     detectedAt: Date;
-    equipment?: CriticalEquipment | null;
+    equipment?: Device | null;
   }) {
     this.#id = props.id;
     this.#equipmentId = props.equipmentId;
@@ -95,10 +95,10 @@ export class Alert implements BaseEntity {
     this.#detectedAt = value;
   }
 
-  get equipment(): CriticalEquipment | null {
+  get equipment(): Device | null {
     return this.#equipment;
   }
-  set equipment(value: CriticalEquipment | null) {
+  set equipment(value: Device | null) {
     this.#equipment = value;
   }
 

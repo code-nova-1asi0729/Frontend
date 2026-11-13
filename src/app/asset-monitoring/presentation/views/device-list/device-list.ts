@@ -12,13 +12,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AssetMonitoringStore } from '../../../application/asset-monitoring.store';
-import { CriticalEquipment } from '../../../domain/model/critical-equipment.entity';
+import { Device } from '../../../domain/model/device.entity';
 
 /**
- * Lists the critical equipment by building (US08) and decommissions it (US09).
+ * Lists the devices by building (US08) and decommissions it (US09).
  */
 @Component({
-  selector: 'app-equipment-list',
+  selector: 'app-device-list',
   imports: [
     DatePipe,
     MatTableModule,
@@ -32,10 +32,10 @@ import { CriticalEquipment } from '../../../domain/model/critical-equipment.enti
     MatProgressSpinnerModule,
     TranslatePipe,
   ],
-  templateUrl: './equipment-list.html',
-  styleUrl: './equipment-list.css',
+  templateUrl: './device-list.html',
+  styleUrl: './device-list.css',
 })
-export class EquipmentList {
+export class DeviceList {
   readonly store = inject(AssetMonitoringStore);
   private router = inject(Router);
   private translate = inject(TranslateService);
@@ -52,23 +52,21 @@ export class EquipmentList {
   ];
 
   /**
-   * building chosen in the filter. null shows the equipment of every building.
+   * building chosen in the filter. null shows the devices of every building.
    */
   readonly selectedBuildingId = signal<number | null>(null);
 
   readonly sort = viewChild(MatSort);
   readonly paginator = viewChild(MatPaginator);
 
-  readonly filteredEquipment = computed(() => {
+  readonly filteredDevices = computed(() => {
     const buildingId = this.selectedBuildingId();
-    const equipment = this.store.equipment();
-    return buildingId === null
-      ? equipment
-      : equipment.filter((item) => item.buildingId === buildingId);
+    const devices = this.store.devices();
+    return buildingId === null ? devices : devices.filter((item) => item.buildingId === buildingId);
   });
 
   readonly dataSource = computed(() => {
-    const source = new MatTableDataSource(this.filteredEquipment());
+    const source = new MatTableDataSource(this.filteredDevices());
     // Sort the building and date columns by a comparable value instead of the object
     source.sortingDataAccessor = (item, column) => {
       if (column === 'building') return item.building?.name ?? '';
@@ -83,21 +81,21 @@ export class EquipmentList {
   navigateToNew(): void {
     const buildingId = this.selectedBuildingId();
     this.router
-      .navigate(['/asset-monitoring/equipment/new'], {
+      .navigate(['/asset-monitoring/devices/new'], {
         queryParams: buildingId === null ? {} : { buildingId },
       })
       .then();
   }
 
-  editEquipment(id: number): void {
-    this.router.navigate(['/asset-monitoring/equipment', id, 'edit']).then();
+  editDevice(id: number): void {
+    this.router.navigate(['/asset-monitoring/devices', id, 'edit']).then();
   }
 
-  decommissionEquipment(equipment: CriticalEquipment): void {
-    const message = this.translate.instant('equipment.decommission-confirm', {
-      name: equipment.name,
+  decommissionDevice(device: Device): void {
+    const message = this.translate.instant('devices.decommission-confirm', {
+      name: device.name,
     });
     if (!confirm(message)) return;
-    this.store.decommissionEquipment(equipment);
+    this.store.decommissionDevice(device);
   }
 }

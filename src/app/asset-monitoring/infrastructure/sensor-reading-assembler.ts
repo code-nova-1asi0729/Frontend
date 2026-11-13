@@ -18,7 +18,7 @@ export class SensorReadingAssembler implements BaseAssembler<
     return {
       id: entity.id,
       sensorId: entity.sensorId,
-      equipmentId: entity.equipmentId,
+      deviceId: entity.deviceId,
       metric: entity.metric,
       value: entity.value,
       unit: entity.unit,

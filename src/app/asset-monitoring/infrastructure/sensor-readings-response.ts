@@ -6,7 +6,7 @@ import { BaseResource, BaseResponse } from '../../shared/infrastructure/base-res
 export interface SensorReadingResource extends BaseResource {
   id: number;
   sensorId: number;
-  equipmentId: number;
+  deviceId: number;
   metric: string;
   value: number;
   unit: string;

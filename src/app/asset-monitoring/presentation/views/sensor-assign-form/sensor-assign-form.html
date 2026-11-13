@@ -9,7 +9,7 @@
     <p class="warning">
       {{
         'sensors.already-assigned'
-          | translate: { equipment: sensor.equipment?.name ?? sensor.equipmentId }
+          | translate: { device: sensor.device?.name ?? sensor.deviceId }
       }}
     </p>
   }
@@ -21,16 +21,16 @@
 
 <form [formGroup]="form" (ngSubmit)="submit()" class="form-container">
   <mat-form-field>
-    <mat-label>{{ 'sensors.equipment' | translate }}</mat-label>
-    <mat-select formControlName="equipmentId">
-      @for (item of availableEquipment(); track item.id) {
+    <mat-label>{{ 'sensors.device' | translate }}</mat-label>
+    <mat-select formControlName="deviceId">
+      @for (item of availableDevices(); track item.id) {
         <mat-option [value]="item.id">
           {{ item.code }} · {{ item.name }} ({{ item.building?.name }})
         </mat-option>
       }
     </mat-select>
-    @if (isInvalidControl(form, 'equipmentId')) {
-      <mat-error>{{ errorMessageForControl(form, 'equipmentId') | translate }}</mat-error>
+    @if (isInvalidControl(form, 'deviceId')) {
+      <mat-error>{{ errorMessageForControl(form, 'deviceId') | translate }}</mat-error>
     }
   </mat-form-field>
 

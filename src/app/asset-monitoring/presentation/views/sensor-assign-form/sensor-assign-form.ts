@@ -9,7 +9,7 @@ import { BaseForm } from '../../../../shared/presentation/components/base-form/b
 import { AssetMonitoringStore } from '../../../application/asset-monitoring.store';
 
 /**
- * Assigns a sensor to a critical equipment (US10).
+ * Assigns a sensor to a device (US10).
  */
 @Component({
   selector: 'app-sensor-assign-form',
@@ -34,22 +34,22 @@ export class SensorAssignForm extends BaseForm {
   readonly sensor = computed(() => this.store.sensors().find((item) => item.id === this.sensorId));
 
   /**
-   * a decommissioned equipment cannot receive sensors.
+   * a decommissioned device cannot receive sensors.
    */
-  readonly availableEquipment = computed(() =>
-    this.store.equipment().filter((item) => !item.isDecommissioned()),
+  readonly availableDevices = computed(() =>
+    this.store.devices().filter((item) => !item.isDecommissioned()),
   );
 
   form = this.fb.nonNullable.group({
-    equipmentId: this.fb.control<number | null>(null, Validators.required),
+    deviceId: this.fb.control<number | null>(null, Validators.required),
   });
 
   submit(): void {
     const sensor = this.sensor();
-    const equipmentId = this.form.getRawValue().equipmentId;
-    if (this.form.invalid || !sensor || equipmentId === null) return;
-    this.store.assignSensor(sensor, equipmentId);
-    // The store keeps the error when the sensor already has an equipment
+    const deviceId = this.form.getRawValue().deviceId;
+    if (this.form.invalid || !sensor || deviceId === null) return;
+    this.store.assignSensor(sensor, deviceId);
+    // The store keeps the error when the sensor already has a device
     if (!this.store.error()) this.navigateBack();
   }
 

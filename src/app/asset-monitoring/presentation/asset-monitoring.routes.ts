@@ -4,10 +4,8 @@ const buildingList = () =>
   import('./views/building-list/building-list').then((m) => m.BuildingList);
 const buildingForm = () =>
   import('./views/building-form/building-form').then((m) => m.BuildingForm);
-const equipmentList = () =>
-  import('./views/equipment-list/equipment-list').then((m) => m.EquipmentList);
-const equipmentForm = () =>
-  import('./views/equipment-form/equipment-form').then((m) => m.EquipmentForm);
+const deviceList = () => import('./views/device-list/device-list').then((m) => m.DeviceList);
+const deviceForm = () => import('./views/device-form/device-form').then((m) => m.DeviceForm);
 const alertList = () => import('./views/alert-list/alert-list').then((m) => m.AlertList);
 const sensorList = () => import('./views/sensor-list/sensor-list').then((m) => m.SensorList);
 const sensorAssignForm = () =>
@@ -22,9 +20,9 @@ export const assetMonitoringRoutes: Routes = [
   { path: 'buildings', loadComponent: buildingList },
   { path: 'buildings/new', loadComponent: buildingForm },
   { path: 'buildings/:id/edit', loadComponent: buildingForm },
-  { path: 'equipment', loadComponent: equipmentList },
-  { path: 'equipment/new', loadComponent: equipmentForm },
-  { path: 'equipment/:id/edit', loadComponent: equipmentForm },
+  { path: 'devices', loadComponent: deviceList },
+  { path: 'devices/new', loadComponent: deviceForm },
+  { path: 'devices/:id/edit', loadComponent: deviceForm },
   { path: 'alerts', loadComponent: alertList },
   { path: 'sensors', loadComponent: sensorList },
   { path: 'sensors/:id/assign', loadComponent: sensorAssignForm },

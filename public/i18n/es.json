@@ -2,7 +2,7 @@
   "option": {
     "home": "Inicio",
     "buildings": "Edificios",
-    "equipment": "Equipos",
+    "devices": "Dispositivos",
     "alerts": "Alertas",
     "sensors": "Sensores",
     "readings": "Lecturas",
@@ -10,11 +10,11 @@
   },
   "home": {
     "title": "Bienvenido a Vigilia",
-    "content": "Monitorea los equipos críticos de tu condominio y actúa antes de que ocurra una falla.",
+    "content": "Monitorea los dispositivos de tu condominio y actúa antes de que ocurra una falla.",
     "roles": {
       "administrator": {
         "title": "Administrador del edificio",
-        "text": "Registra tus edificios y equipos críticos, y sigue su estado.",
+        "text": "Registra tus edificios y dispositivos, y sigue su estado.",
         "action": "Gestionar mi edificio"
       },
       "resident": {
@@ -62,14 +62,15 @@
       "INACTIVE": "Inactivo"
     }
   },
-  "equipment": {
-    "title": "Equipos críticos",
-    "new": "Nuevo equipo",
-    "new-title": "Registrar equipo",
-    "edit-title": "Editar equipo",
+  "devices": {
+    "title": "Dispositivos",
+    "new": "Nuevo dispositivo",
+    "new-title": "Registrar dispositivo",
+    "edit-title": "Editar dispositivo",
     "filter-building": "Edificio",
     "all-buildings": "Todos los edificios",
     "code": "Código",
+    "code-hint": "Letras mayúsculas, dígitos o guiones, por ejemplo LP-WP-01",
     "name": "Nombre",
     "type": "Tipo",
     "building": "Edificio",
@@ -80,7 +81,7 @@
     "edit": "Editar",
     "decommission": "Dar de baja",
     "decommission-confirm": "¿Dar de baja {{ name }}? Se conservará en el historial, pero ya no será monitoreado.",
-    "empty": "No hay equipos registrados para este edificio.",
+    "empty": "No hay dispositivos registrados en este edificio.",
     "create": "Registrar",
     "update": "Guardar cambios",
     "cancel": "Cancelar",
@@ -102,7 +103,7 @@
     "active-title": "Alertas activas",
     "show-resolved": "Mostrar resueltas",
     "severity": "Severidad",
-    "equipment": "Equipo",
+    "device": "Dispositivo",
     "metric": "Métrica",
     "last-value": "Último valor",
     "detected-at": "Detectada",
@@ -127,23 +128,25 @@
     "VIBRATION": "Vibración",
     "TEMPERATURE": "Temperatura",
     "HUMIDITY": "Humedad",
-    "POWER_CONSUMPTION": "Consumo eléctrico"
+    "POWER_CONSUMPTION": "Consumo eléctrico",
+    "CURRENT": "Corriente",
+    "PRESSURE": "Presión"
   },
   "sensors": {
     "title": "Sensores",
     "assign-title": "Asignar sensor",
     "serial-number": "Número de serie",
     "model": "Modelo",
-    "equipment": "Equipo",
+    "device": "Dispositivo",
     "status": "Estado",
     "last-seen-at": "Última señal",
     "actions": "Acciones",
     "assign": "Asignar",
     "unassign": "Desasignar",
     "cancel": "Cancelar",
-    "no-equipment": "Sin equipo",
+    "no-device": "Sin dispositivo",
     "never-seen": "Sin señal aún",
-    "already-assigned": "Este sensor ya está asignado a {{ equipment }}. Desasígnalo antes de asignarlo a otro equipo.",
+    "already-assigned": "Este sensor ya está asignado a {{ device }}. Desasígnalo antes de asignarlo a otro dispositivo.",
     "empty": "No hay sensores registrados.",
     "statuses": {
       "UNASSIGNED": "Sin asignar",
@@ -156,7 +159,7 @@
   "readings": {
     "title": "Historial de lecturas",
     "refresh": "Actualizar",
-    "equipment": "Equipo",
+    "device": "Dispositivo",
     "range": "Rango de fechas",
     "recorded-at": "Fecha",
     "metric": "Métrica",
@@ -165,7 +168,7 @@
     "status": "Estado",
     "valid": "Válida",
     "invalid": "Inválida",
-    "select-equipment": "Selecciona un equipo para ver sus lecturas.",
+    "select-device": "Selecciona un dispositivo para ver sus lecturas.",
     "empty": "No hay lecturas registradas en este periodo"
   },
   "incidents": {

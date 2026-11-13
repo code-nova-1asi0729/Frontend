@@ -18,7 +18,7 @@ export class SensorAssembler implements BaseAssembler<Sensor, SensorResource, Se
   toResourceFromEntity(entity: Sensor): SensorResource {
     return {
       id: entity.id,
-      equipmentId: entity.equipmentId,
+      deviceId: entity.deviceId,
       serialNumber: entity.serialNumber,
       model: entity.model,
       status: entity.status,

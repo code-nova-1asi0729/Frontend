@@ -2,7 +2,7 @@
   "option": {
     "home": "Home",
     "buildings": "Buildings",
-    "equipment": "Equipment",
+    "devices": "Devices",
     "alerts": "Alerts",
     "sensors": "Sensors",
     "readings": "Readings",
@@ -10,11 +10,11 @@
   },
   "home": {
     "title": "Welcome to Vigilia",
-    "content": "Monitor the critical equipment of your condominium and act before a failure happens.",
+    "content": "Monitor the devices of your condominium and act before a failure happens.",
     "roles": {
       "administrator": {
         "title": "Building administrator",
-        "text": "Register your buildings and critical equipment, and follow their status.",
+        "text": "Register your buildings and devices, and follow their status.",
         "action": "Manage my building"
       },
       "resident": {
@@ -62,14 +62,15 @@
       "INACTIVE": "Inactive"
     }
   },
-  "equipment": {
-    "title": "Critical equipment",
-    "new": "New equipment",
-    "new-title": "Register equipment",
-    "edit-title": "Edit equipment",
+  "devices": {
+    "title": "Devices",
+    "new": "New device",
+    "new-title": "Register device",
+    "edit-title": "Edit device",
     "filter-building": "Building",
     "all-buildings": "All buildings",
     "code": "Code",
+    "code-hint": "Uppercase letters, digits or hyphens, for example LP-WP-01",
     "name": "Name",
     "type": "Type",
     "building": "Building",
@@ -80,7 +81,7 @@
     "edit": "Edit",
     "decommission": "Decommission",
     "decommission-confirm": "Decommission {{ name }}? It will stay in the history but will no longer be monitored.",
-    "empty": "There is no equipment registered for this building.",
+    "empty": "There are no devices registered for this building.",
     "create": "Register",
     "update": "Save changes",
     "cancel": "Cancel",
@@ -102,7 +103,7 @@
     "active-title": "Active alerts",
     "show-resolved": "Show resolved",
     "severity": "Severity",
-    "equipment": "Equipment",
+    "device": "Device",
     "metric": "Metric",
     "last-value": "Last value",
     "detected-at": "Detected",
@@ -127,23 +128,25 @@
     "VIBRATION": "Vibration",
     "TEMPERATURE": "Temperature",
     "HUMIDITY": "Humidity",
-    "POWER_CONSUMPTION": "Power consumption"
+    "POWER_CONSUMPTION": "Power consumption",
+    "CURRENT": "Current",
+    "PRESSURE": "Pressure"
   },
   "sensors": {
     "title": "Sensors",
     "assign-title": "Assign sensor",
     "serial-number": "Serial number",
     "model": "Model",
-    "equipment": "Equipment",
+    "device": "Device",
     "status": "Status",
     "last-seen-at": "Last signal",
     "actions": "Actions",
     "assign": "Assign",
     "unassign": "Unassign",
     "cancel": "Cancel",
-    "no-equipment": "No equipment",
+    "no-device": "No device",
     "never-seen": "No signal yet",
-    "already-assigned": "This sensor is already assigned to {{ equipment }}. Unassign it before assigning it to another equipment.",
+    "already-assigned": "This sensor is already assigned to {{ device }}. Unassign it before assigning it to another device.",
     "empty": "There are no sensors registered.",
     "statuses": {
       "UNASSIGNED": "Unassigned",
@@ -156,7 +159,7 @@
   "readings": {
     "title": "Reading history",
     "refresh": "Refresh",
-    "equipment": "Equipment",
+    "device": "Device",
     "range": "Date range",
     "recorded-at": "Date",
     "metric": "Metric",
@@ -165,7 +168,7 @@
     "status": "Status",
     "valid": "Valid",
     "invalid": "Invalid",
-    "select-equipment": "Select an equipment to see its readings.",
+    "select-device": "Select a device to see its readings.",
     "empty": "There are no readings registered in this period."
   },
   "incidents": {

@@ -7,12 +7,12 @@
 
 <div class="filters">
   <mat-form-field>
-    <mat-label>{{ 'readings.equipment' | translate }}</mat-label>
+    <mat-label>{{ 'readings.device' | translate }}</mat-label>
     <mat-select
-      [value]="selectedEquipmentId()"
-      (selectionChange)="selectedEquipmentId.set($event.value)"
+      [value]="selectedDeviceId()"
+      (selectionChange)="selectedDeviceId.set($event.value)"
     >
-      @for (item of store.equipment(); track item.id) {
+      @for (item of store.devices(); track item.id) {
         <mat-option [value]="item.id">
           {{ item.code }} · {{ item.name }} ({{ item.building?.name }})
         </mat-option>
@@ -77,7 +77,7 @@
   <tr class="mat-row" *matNoDataRow>
     <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
       {{
-        (selectedEquipmentId() === null ? 'readings.select-equipment' : 'readings.empty')
+        (selectedDeviceId() === null ? 'readings.select-device' : 'readings.empty')
           | translate
       }}
     </td>

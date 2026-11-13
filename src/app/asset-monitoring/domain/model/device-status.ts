@@ -1,7 +1,7 @@
 /**
- * operating status of a critical equipment.
+ * operating status of a device.
  */
-export enum EquipmentStatus {
+export enum DeviceStatus {
   OPERATIONAL = 'OPERATIONAL',
   REQUIRES_FOLLOW_UP = 'REQUIRES_FOLLOW_UP',
   OUT_OF_SERVICE = 'OUT_OF_SERVICE',

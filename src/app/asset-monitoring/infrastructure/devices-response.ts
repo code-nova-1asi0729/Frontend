@@ -1,9 +1,9 @@
 import { BaseResource, BaseResponse } from '../../shared/infrastructure/base-response';
 
 /**
- * critical equipment as it travels through the API.
+ * device as it travels through the API.
  */
-export interface EquipmentResource extends BaseResource {
+export interface DeviceResource extends BaseResource {
   id: number;
   buildingId: number;
   code: string;
@@ -16,8 +16,8 @@ export interface EquipmentResource extends BaseResource {
 }
 
 /**
- * Envelope for equipment collections.
+ * Envelope for device collections.
  */
-export interface EquipmentResponse extends BaseResponse {
-  equipment: EquipmentResource[];
+export interface DevicesResponse extends BaseResponse {
+  devices: DeviceResource[];
 }

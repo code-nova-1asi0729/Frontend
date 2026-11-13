@@ -6,7 +6,7 @@ import { BaseEntity } from '../../../shared/domain/model/base-entity';
 export class SensorReading implements BaseEntity {
   #id: number;
   #sensorId: number;
-  #equipmentId: number;
+  #deviceId: number;
   #metric: string;
   #value: number;
   #unit: string;
@@ -16,7 +16,7 @@ export class SensorReading implements BaseEntity {
   constructor(props: {
     id: number;
     sensorId: number;
-    equipmentId: number;
+    deviceId: number;
     metric: string;
     value: number;
     unit: string;
@@ -25,7 +25,7 @@ export class SensorReading implements BaseEntity {
   }) {
     this.#id = props.id;
     this.#sensorId = props.sensorId;
-    this.#equipmentId = props.equipmentId;
+    this.#deviceId = props.deviceId;
     this.#metric = props.metric;
     this.#value = props.value;
     this.#unit = props.unit;
@@ -47,11 +47,11 @@ export class SensorReading implements BaseEntity {
     this.#sensorId = value;
   }
 
-  get equipmentId(): number {
-    return this.#equipmentId;
+  get deviceId(): number {
+    return this.#deviceId;
   }
-  set equipmentId(value: number) {
-    this.#equipmentId = value;
+  set deviceId(value: number) {
+    this.#deviceId = value;
   }
 
   get metric(): string {
