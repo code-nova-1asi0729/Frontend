@@ -86,6 +86,8 @@
     "create": "Registrar",
     "update": "Guardar cambios",
     "cancel": "Cancelar",
+    "active-alerts-column": "Alertas",
+    "active-alerts": "alertas activas",
     "types": {
       "WATER_PUMP": "Bomba de agua",
       "ELECTRICAL_PANEL": "Tablero eléctrico",
