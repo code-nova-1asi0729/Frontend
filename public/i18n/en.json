@@ -86,6 +86,8 @@
     "create": "Register",
     "update": "Save changes",
     "cancel": "Cancel",
+    "active-alerts-column": "Alerts",
+    "active-alerts": "active alerts",
     "types": {
       "WATER_PUMP": "Water pump",
       "ELECTRICAL_PANEL": "Electrical panel",
