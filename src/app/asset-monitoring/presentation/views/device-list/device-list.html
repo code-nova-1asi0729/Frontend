@@ -78,7 +78,7 @@
         [attr.aria-label]="'equipment.edit' | translate"
         [matTooltip]="'equipment.edit' | translate"
         [disabled]="item.isDecommissioned()"
-        (click)="editEquipment(item.id)"
+        (click)="editDevice(item.id)"
       >
         <mat-icon>edit</mat-icon>
       </button>
@@ -87,7 +87,7 @@
         [attr.aria-label]="'equipment.decommission' | translate"
         [matTooltip]="'equipment.decommission' | translate"
         [disabled]="item.isDecommissioned()"
-        (click)="decommissionEquipment(item)"
+        (click)="decommissionDevice(item)"
       >
         <mat-icon>block</mat-icon>
       </button>

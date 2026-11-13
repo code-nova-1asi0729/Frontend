@@ -52,7 +52,7 @@ export class Layout {
     { link: '/home', label: 'option.home', icon: 'home' },
     { link: '/asset-monitoring/buildings', label: 'option.buildings', icon: 'apartment' },
     {
-      link: '/asset-monitoring/equipment',
+      link: '/asset-monitoring/devices',
       label: 'option.equipment',
       icon: 'precision_manufacturing',
     },
