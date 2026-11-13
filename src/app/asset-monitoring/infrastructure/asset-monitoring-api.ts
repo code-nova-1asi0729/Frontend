@@ -5,7 +5,7 @@ import { BaseApi } from '../../shared/infrastructure/base-api';
 import { Building } from '../domain/model/building.entity';
 import { BuildingsApiEndpoint } from './buildings-api-endpoint';
 import { Device } from '../domain/model/device.entity';
-import { EquipmentApiEndpoint } from './equipment-api-endpoint';
+import { DevicesApiEndpoint } from './devices-api-endpoint';
 import { Alert } from '../domain/model/alert.entity';
 import { AlertsApiEndpoint } from './alerts-api-endpoint';
 import { Sensor } from '../domain/model/sensor.entity';
@@ -20,7 +20,7 @@ import { SensorReadingsApiEndpoint } from './sensor-readings-api-endpoint';
 export class AssetMonitoringApi extends BaseApi {
   private http = inject(HttpClient);
   private buildingsEndpoint = new BuildingsApiEndpoint(this.http);
-  private equipmentEndpoint = new EquipmentApiEndpoint(this.http);
+  private devicesEndpoint = new DevicesApiEndpoint(this.http);
   private alertsEndpoint = new AlertsApiEndpoint(this.http);
   private sensorsEndpoint = new SensorsApiEndpoint(this.http);
   private sensorReadingsEndpoint = new SensorReadingsApiEndpoint(this.http);
@@ -41,16 +41,16 @@ export class AssetMonitoringApi extends BaseApi {
     return this.buildingsEndpoint.delete(id);
   }
 
-  getEquipment(): Observable<Device[]> {
-    return this.equipmentEndpoint.getAll();
+  getDevices(): Observable<Device[]> {
+    return this.devicesEndpoint.getAll();
   }
 
-  createEquipment(equipment: Device): Observable<Device> {
-    return this.equipmentEndpoint.create(equipment);
+  createDevice(device: Device): Observable<Device> {
+    return this.devicesEndpoint.create(device);
   }
 
-  updateEquipment(equipment: Device): Observable<Device> {
-    return this.equipmentEndpoint.update(equipment, equipment.id);
+  updateDevice(device: Device): Observable<Device> {
+    return this.devicesEndpoint.update(device, device.id);
   }
 
   getAlerts(): Observable<Alert[]> {

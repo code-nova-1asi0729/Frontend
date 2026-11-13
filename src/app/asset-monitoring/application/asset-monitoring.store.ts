@@ -138,7 +138,7 @@ export class AssetMonitoringStore {
 
   addEquipment(equipment: Device): void {
     this.loadingSignal.set(true);
-    this.assetMonitoringApi.createEquipment(equipment).subscribe({
+    this.assetMonitoringApi.createDevice(equipment).subscribe({
       next: (created) => {
         this.equipmentSignal.update((items) => [...items, created]);
         this.loadingSignal.set(false);
@@ -149,7 +149,7 @@ export class AssetMonitoringStore {
 
   updateEquipment(equipment: Device): void {
     this.loadingSignal.set(true);
-    this.assetMonitoringApi.updateEquipment(equipment).subscribe({
+    this.assetMonitoringApi.updateDevice(equipment).subscribe({
       next: (updated) => {
         this.equipmentSignal.update((items) =>
           items.map((current) => (current.id === updated.id ? updated : current)),
@@ -281,7 +281,7 @@ export class AssetMonitoringStore {
       },
       error: (error) => this.setError(error, 'Failed to load buildings'),
     });
-    this.assetMonitoringApi.getEquipment().subscribe({
+    this.assetMonitoringApi.getDevices().subscribe({
       next: (equipment) => this.equipmentSignal.set(equipment),
       error: (error) => this.setError(error, 'Failed to load equipment'),
     });

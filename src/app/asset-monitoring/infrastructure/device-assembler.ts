@@ -3,17 +3,17 @@ import { BaseAssembler } from '../../shared/infrastructure/base-assembler';
 import { Device } from '../domain/model/device.entity';
 import { DeviceStatus } from '../domain/model/device-status';
 import { DeviceType } from '../domain/model/device-type';
-import { EquipmentResource, EquipmentResponse } from './equipment-response';
+import { DeviceResource, DevicesResponse } from './devices-response';
 
 /**
- * maps critical equipment between the API and the domain model.
+ * maps devices between the API and the domain model.
  */
-export class EquipmentAssembler implements BaseAssembler<
+export class DeviceAssembler implements BaseAssembler<
   Device,
-  EquipmentResource,
-  EquipmentResponse
+  DeviceResource,
+  DevicesResponse
 > {
-  toEntityFromResource(resource: EquipmentResource): Device {
+  toEntityFromResource(resource: DeviceResource): Device {
     return new Device({
       ...resource,
       type: resource.type as DeviceType,
@@ -23,7 +23,7 @@ export class EquipmentAssembler implements BaseAssembler<
     });
   }
 
-  toResourceFromEntity(entity: Device): EquipmentResource {
+  toResourceFromEntity(entity: Device): DeviceResource {
     return {
       id: entity.id,
       buildingId: entity.buildingId,
@@ -36,7 +36,7 @@ export class EquipmentAssembler implements BaseAssembler<
     };
   }
 
-  toEntitiesFromResponse(response: EquipmentResponse): Device[] {
-    return response.equipment.map((resource) => this.toEntityFromResource(resource));
+  toEntitiesFromResponse(response: DevicesResponse): Device[] {
+    return response.devices.map((resource) => this.toEntityFromResource(resource));
   }
 }
