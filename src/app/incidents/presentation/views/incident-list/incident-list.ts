@@ -7,7 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { IncidentsStore } from '../../../application/incidents.store';
 import { Incident } from '../../../domain/model/incident.entity';
 import { IncidentStatus } from '../../../domain/model/incident-status';
@@ -33,6 +33,7 @@ import { AssetMonitoringStore } from '../../../../asset-monitoring/application/a
 })
 export class IncidentList {
   readonly store = inject(IncidentsStore);
+  private translate = inject(TranslateService);
   private router = inject(Router);
   readonly assetMonitoringStore = inject(AssetMonitoringStore);
 
@@ -86,6 +87,7 @@ export class IncidentList {
   }
 
   resolve(incident: Incident): void {
+    if (!confirm(this.translate.instant('incidents.resolve-confirm'))) return;
     this.store.resolveIncident(incident);
   }
 
