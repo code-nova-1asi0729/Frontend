@@ -223,5 +223,72 @@
   "layout": {
     "navigation": "Main navigation",
     "open-menu": "Open menu"
+  },
+  "terms": {
+    "title": "Terms and conditions",
+    "updated": "Last updated: November 2026",
+    "acceptance": {
+      "title": "Acceptance",
+      "text": "By using the Vigilia web application you accept these terms. If you do not agree with them, please do not use the service."
+    },
+    "service": {
+      "title": "The service",
+      "text": "Vigilia is a preventive maintenance platform by CodeNova. It monitors the devices of buildings (water pumps, electrical panels, elevators and HVAC) with IoT sensors, prioritized alerts and incident management."
+    },
+    "use": {
+      "title": "Use of the application",
+      "text": "Administrators are responsible for the building and device data they register. Residents must report real incidents. The service must not be used for unlawful purposes."
+    },
+    "alerts": {
+      "title": "Alerts and responsibility",
+      "text": "Alerts help to decide what to attend first, but they do not replace the inspections and maintenance required by law or by the manufacturer. CodeNova is not liable for damage caused by device failures."
+    },
+    "data": {
+      "title": "Your data",
+      "text": "We use your data only to provide the service, as explained in our privacy policy."
+    },
+    "changes": {
+      "title": "Changes to these terms",
+      "text": "We may update these terms. Important changes will be announced in the application."
+    },
+    "contact": {
+      "title": "Contact",
+      "text": "For questions about these terms, write to support@codenova.pe."
+    }
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "updated": "Last updated: November 2026",
+    "data": {
+      "title": "What data we collect",
+      "text": "The data of buildings, devices, sensors and readings that administrators register, and the incidents that residents report: description, category, building and rating."
+    },
+    "purpose": {
+      "title": "What we use it for",
+      "text": "Only to monitor the devices, raise alerts, follow incidents and improve the service."
+    },
+    "sharing": {
+      "title": "Who we share it with",
+      "text": "With nobody. We do not sell or rent your data. Only the people of your building and its maintenance company can see it."
+    },
+    "storage": {
+      "title": "How long we keep it",
+      "text": "While the service is active. After that, the data is deleted or anonymized."
+    },
+    "rights": {
+      "title": "Your rights",
+      "text": "You can ask for access, rectification, cancellation or opposition (ARCO rights) about your personal data, according to Peruvian Law No. 29733 on Personal Data Protection."
+    },
+    "contact": {
+      "title": "Contact",
+      "text": "Write to privacy@codenova.pe to use your rights or ask about this policy."
+    }
+  },
+
+  "legal": {
+    "terms": "Terms and conditions",
+    "privacy": "Privacy policy",
+    "notice": "We use your data only to provide the service. Read our",
+    "accpet":"Accept"
   }
 }

@@ -9,6 +9,12 @@ const assetMonitoringRoutes = () =>
   );
 const incidentsRoutes = () =>
   import('./incidents/presentation/incidents.routes').then((m) => m.incidentsRoutes);
+const termsOfService = () =>
+  import('./shared/presentation/views/terms-of-service/terms-of-service').then(
+    (m) => m.TermsOfService,
+  );
+const privacyPolicy = () =>
+  import('./shared/presentation/views/privacy-policy/privacy-policy').then((m) => m.PrivacyPolicy);
 
 const baseTitle = 'Vigilia';
 
@@ -21,4 +27,6 @@ export const routes: Routes = [
   { path: 'incidents', loadChildren: incidentsRoutes },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', loadComponent: pageNotFound, title: `${baseTitle} - Page Not Found` },
+  { path: 'terms', loadComponent: termsOfService, title: `${baseTitle} - Terms and conditions` },
+  { path: 'privacy', loadComponent: privacyPolicy, title: `${baseTitle} - Privacy policy`}
 ];
