@@ -19,6 +19,8 @@ const METRIC_UNITS: Record<string, string> = {
   TEMPERATURE: '°C',
   HUMIDITY: '%',
   POWER_CONSUMPTION: 'kW',
+  CURRENT: 'A',
+  PRESSURE: 'bar',
 };
 
 /**

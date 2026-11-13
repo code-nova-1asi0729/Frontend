@@ -5,7 +5,7 @@ import { BaseResource, BaseResponse } from '../../shared/infrastructure/base-res
  */
 export interface SensorResource extends BaseResource {
   id: number;
-  equipmentId: number | null;
+  deviceId: number | null;
   serialNumber: string;
   model: string;
   status: string;

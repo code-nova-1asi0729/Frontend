@@ -1,4 +1,5 @@
 import { Injectable, Signal, computed, inject, signal } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AssetMonitoringApi } from '../infrastructure/asset-monitoring-api';
 import { Building } from '../domain/model/building.entity';
 import { Device } from '../domain/model/device.entity';
@@ -68,7 +69,7 @@ export class AssetMonitoringStore {
   readonly sensors = computed(() => {
     const devices = this.devices();
     return this.sensorsSignal().map((sensor) => {
-      sensor.equipment = devices.find((item) => item.id === sensor.equipmentId) ?? null;
+      sensor.device = devices.find((device) => device.id === sensor.deviceId) ?? null;
       return sensor;
     });
   });
@@ -200,42 +201,42 @@ export class AssetMonitoringStore {
   }
 
   /**
-   * readings of one equipment, the most recent first (US14).
-   * @param equipmentId - equipment identifier.
+   * readings of one device, the most recent first (US14).
+   * @param deviceId - device identifier.
    */
-  getReadingsByEquipment(equipmentId: number): Signal<SensorReading[]> {
+  getReadingsByDevice(deviceId: number): Signal<SensorReading[]> {
     return computed(() =>
       this.readings()
-        .filter((reading) => reading.equipmentId === equipmentId)
+        .filter((reading) => reading.deviceId === deviceId)
         .sort((a, b) => b.recordedAt.getTime() - a.recordedAt.getTime()),
     );
   }
 
   /**
-   * links a sensor to an equipment (US10).
-   * if the sensor already has an equipment, the error is kept and the API is not called.
+   * links a sensor to a device (US10).
+   * if the sensor already has a device, the error is kept and the API is not called.
    * @param sensor - sensor to assign.
-   * @param equipmentId - equipment that the sensor will measure.
+   * @param deviceId - device that the sensor will measure.
    */
-  assignSensor(sensor: Sensor, equipmentId: number): void {
+  assignSensor(sensor: Sensor, deviceId: number): void {
     this.errorSignal.set(null);
     try {
-      sensor.assignTo(equipmentId);
+      sensor.assignTo(deviceId);
     } catch (error) {
       this.setError(error, 'The sensor cannot be assigned');
       return;
     }
-    this.saveSensor(sensor);
+    this.saveSensor(this.assetMonitoringApi.assignSensor(sensor.id, deviceId));
   }
 
   /**
-   * releases a sensor so it can be assigned to another equipment.
+   * releases a sensor so it can be assigned to another device.
    * @param sensor - sensor to unassign.
    */
   unassignSensor(sensor: Sensor): void {
     this.errorSignal.set(null);
     sensor.unassign();
-    this.saveSensor(sensor);
+    this.saveSensor(this.assetMonitoringApi.releaseSensor(sensor.id));
   }
 
   /**
@@ -256,9 +257,9 @@ export class AssetMonitoringStore {
     });
   }
 
-  private saveSensor(sensor: Sensor): void {
+  private saveSensor(request: Observable<Sensor>): void {
     this.loadingSignal.set(true);
-    this.assetMonitoringApi.updateSensor(sensor).subscribe({
+    request.subscribe({
       next: (updated) => {
         this.sensorsSignal.update((sensors) =>
           sensors.map((current) => (current.id === updated.id ? updated : current)),

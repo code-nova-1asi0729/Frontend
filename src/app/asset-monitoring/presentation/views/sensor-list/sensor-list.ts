@@ -10,7 +10,7 @@ import { AssetMonitoringStore } from '../../../application/asset-monitoring.stor
 import { Sensor } from '../../../domain/model/sensor.entity';
 
 /**
- * Lists the IoT sensors and the equipment they measure (US10).
+ * Lists the IoT sensors and the device they measure (US10).
  */
 @Component({
   selector: 'app-sensor-list',
@@ -32,7 +32,7 @@ export class SensorList {
   displayedColumns: string[] = [
     'serialNumber',
     'model',
-    'equipment',
+    'device',
     'status',
     'lastSeenAt',
     'actions',

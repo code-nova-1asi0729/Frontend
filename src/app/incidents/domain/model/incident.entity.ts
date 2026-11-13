@@ -12,7 +12,7 @@ export class Incident implements BaseEntity {
   #id: number;
   #buildingId: number;
   #residentId: number;
-  #equipmentId: number | null;
+  #deviceId: number | null;
   #category: IncidentCategory;
   #description: string;
   #status: IncidentStatus;
@@ -27,7 +27,7 @@ export class Incident implements BaseEntity {
     id: number;
     buildingId: number;
     residentId: number;
-    equipmentId: number | null;
+    deviceId: number | null;
     category: IncidentCategory;
     description: string;
     status: IncidentStatus;
@@ -41,7 +41,7 @@ export class Incident implements BaseEntity {
     this.#id = props.id;
     this.#buildingId = props.buildingId;
     this.#residentId = props.residentId;
-    this.#equipmentId = props.equipmentId;
+    this.#deviceId = props.deviceId;
     this.#category = props.category;
     this.#description = props.description;
     this.#status = props.status;
@@ -74,11 +74,11 @@ export class Incident implements BaseEntity {
     this.#residentId = value;
   }
 
-  get equipmentId(): number | null {
-    return this.#equipmentId;
+  get deviceId(): number | null {
+    return this.#deviceId;
   }
-  set equipmentId(value: number | null) {
-    this.#equipmentId = value;
+  set deviceId(value: number | null) {
+    this.#deviceId = value;
   }
 
   get category(): IncidentCategory {
