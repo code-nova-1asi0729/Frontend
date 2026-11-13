@@ -191,7 +191,7 @@
     "actions": "Actions",
     "start-management": "Start management",
     "resolve": "Resolve",
-    "resolve-confirm": "Mark this incident as resolved?",
+    "resolve-confirm": "Resolve the {{ severity }} alert of {{ device }}? It will leave the active list.",
     "rate": "Rate",
     "report": "Report",
     "cancel": "Cancel",

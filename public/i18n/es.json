@@ -191,7 +191,7 @@
     "actions": "Acciones",
     "start-management": "Iniciar gestión",
     "resolve": "Resolver",
-    "resolve-confirm": "¿Marcar este incidente como resuelto?",
+    "resolve-confirm": "¿Resolver la alerta {{ severity }} de {{ device }}? Saldrá de la lista de activas.",
     "rate": "Calificar",
     "report": "Reportar",
     "cancel": "Cancelar",
