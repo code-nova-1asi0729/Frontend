@@ -128,7 +128,9 @@
     "VIBRATION": "Vibration",
     "TEMPERATURE": "Temperature",
     "HUMIDITY": "Humidity",
-    "POWER_CONSUMPTION": "Power consumption"
+    "POWER_CONSUMPTION": "Power consumption",
+    "CURRENT": "Current",
+    "PRESSURE": "Pressure"
   },
   "sensors": {
     "title": "Sensors",
