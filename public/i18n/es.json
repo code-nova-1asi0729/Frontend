@@ -104,6 +104,7 @@
     "active-title": "Alertas activas",
     "show-resolved": "Mostrar resueltas",
     "filter-building": "Edificio",
+    "filter-type": "Tipo de dispositivo",
     "all": "Todos",
     "severity": "Severidad",
     "device": "Dispositivo",

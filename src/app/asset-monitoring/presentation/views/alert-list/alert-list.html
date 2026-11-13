@@ -22,6 +22,15 @@
       }
     </mat-select>
   </mat-form-field>
+  <mat-form-field class="filter" floatLabel="always">
+    <mat-label>{{ 'alerts.filter-type' | translate }}</mat-label>
+    <mat-select [value]="typeFilter()" (selectionChange)="typeFilter.set($event.value)">
+      <mat-option [value]="null">{{ 'alerts.all' | translate }}</mat-option>
+      @for (type of deviceTypes; track type) {
+        <mat-option [value]="type">{{ 'devices.types.' + type | translate }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
   <mat-slide-toggle [checked]="showResolved()" (change)="showResolved.set($event.checked)">
     {{ 'alerts.show-resolved' | translate }}
   </mat-slide-toggle>

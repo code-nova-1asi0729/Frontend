@@ -104,6 +104,7 @@
     "active-title": "Active alerts",
     "show-resolved": "Show resolved",
     "filter-building": "Building",
+    "filter-type": "Device type",
     "all": "All",
     "severity": "Severity",
     "device": "Device",

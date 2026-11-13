@@ -12,6 +12,7 @@ import { AssetMonitoringStore } from '../../../application/asset-monitoring.stor
 import { Alert } from '../../../domain/model/alert.entity';
 import { AlertSeverity } from '../../../domain/model/alert-severity';
 import { AlertStatus } from '../../../domain/model/alert-status';
+import { DeviceType } from '../../../domain/model/device-type';
 import { TranslateService } from '@ngx-translate/core';
 
 /**
@@ -92,13 +93,25 @@ export class AlertList {
   readonly buildingFilter = signal<number | null>(null);
 
   /**
+   * device types offered in the type filter.
+   */
+  readonly deviceTypes = Object.values(DeviceType);
+
+  /**
+   * device type chosen in the filter. null shows every type.
+   */
+  readonly typeFilter = signal<string | null>(null);
+
+  /**
    * alerts of the table after the "show resolved" toggle and the filters.
    * the severity cards keep counting every active alert.
    */
   readonly visibleAlerts = computed(() => {
     const resolved = this.showResolved() ? this.store.alerts().filter((alert) => !alert.isActive()) : [];
     return [...this.store.activeAlerts(), ...resolved].filter(
-      (alert) => this.buildingFilter() === null || alert.device?.buildingId === this.buildingFilter(),
+      (alert) =>
+        (this.buildingFilter() === null || alert.device?.buildingId === this.buildingFilter()) &&
+        (this.typeFilter() === null || alert.device?.type === this.typeFilter()),
     );
   });
 
