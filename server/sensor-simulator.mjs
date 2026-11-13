@@ -13,7 +13,7 @@ const metrics = {
   POWER_CONSUMPTION: { unit: 'kW', min: 8, max: 15 },
 };
 
-const metricsByEquipmentType = {
+const metricsByDeviceType = {
   WATER_PUMP: ['VIBRATION', 'POWER_CONSUMPTION'],
   ELECTRICAL_PANEL: ['TEMPERATURE'],
   ELEVATOR: ['VIBRATION'],
@@ -39,16 +39,16 @@ const randomValue = ({ min, max }) => Math.round((min + Math.random() * (max - m
 
 async function sendReadings() {
   const sensors = await (await request(`${API_URL}/sensors?status=MONITORING_ACTIVE`)).json();
-  const equipment = await (await request(`${API_URL}/equipment`)).json();
+  const devices = await (await request(`${API_URL}/devices`)).json();
   const now = new Date().toISOString();
 
   for (const sensor of sensors) {
-    const item = equipment.find((e) => e.id === sensor.equipmentId);
+    const item = devices.find((e) => e.id === sensor.deviceId);
     if (!item) continue;
-    for (const metric of metricsByEquipmentType[item.type] ?? []) {
+    for (const metric of metricsByDeviceType[item.type] ?? []) {
       const reading = {
         sensorId: sensor.id,
-        equipmentId: item.id,
+        deviceId: item.id,
         metric,
         value: randomValue(metrics[metric]),
         unit: metrics[metric].unit,
