@@ -103,6 +103,8 @@
     "title": "Alerts dashboard",
     "active-title": "Active alerts",
     "show-resolved": "Show resolved",
+    "filter-building": "Building",
+    "all": "All",
     "severity": "Severity",
     "device": "Device",
     "metric": "Metric",

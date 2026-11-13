@@ -103,6 +103,8 @@
     "title": "Panel de alertas",
     "active-title": "Alertas activas",
     "show-resolved": "Mostrar resueltas",
+    "filter-building": "Edificio",
+    "all": "Todos",
     "severity": "Severidad",
     "device": "Dispositivo",
     "metric": "Métrica",

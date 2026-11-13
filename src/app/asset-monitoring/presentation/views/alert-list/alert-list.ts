@@ -3,6 +3,8 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -36,6 +38,8 @@ const METRIC_UNITS: Record<string, string> = {
     MatTableModule,
     MatCardModule,
     MatSlideToggleModule,
+    MatFormFieldModule,
+    MatSelectModule,
     MatButtonModule,
     MatProgressSpinnerModule,
     TranslatePipe,
@@ -82,10 +86,20 @@ export class AlertList {
     return counts;
   });
 
+  /**
+   * building chosen in the filter. null shows the alerts of every building.
+   */
+  readonly buildingFilter = signal<number | null>(null);
+
+  /**
+   * alerts of the table after the "show resolved" toggle and the filters.
+   * the severity cards keep counting every active alert.
+   */
   readonly visibleAlerts = computed(() => {
-    if (!this.showResolved()) return this.store.activeAlerts();
-    const resolved = this.store.alerts().filter((alert) => !alert.isActive());
-    return [...this.store.activeAlerts(), ...resolved];
+    const resolved = this.showResolved() ? this.store.alerts().filter((alert) => !alert.isActive()) : [];
+    return [...this.store.activeAlerts(), ...resolved].filter(
+      (alert) => this.buildingFilter() === null || alert.device?.buildingId === this.buildingFilter(),
+    );
   });
 
   unitOf(metric: string): string {
