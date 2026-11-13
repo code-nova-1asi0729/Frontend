@@ -54,7 +54,6 @@
     "actions": "Actions",
     "edit": "Edit",
     "delete": "Delete",
-    "delete-confirm": "Delete {{ name }}? This cannot be undone.",
     "create": "Register",
     "update": "Save changes",
     "cancel": "Cancel",
@@ -110,15 +109,14 @@
     "detected-at": "Detected",
     "status": "Status",
     "actions": "Actions",
-    "acknowledge": "Attend",
+    "acknowledge": "In progress",
     "resolve": "Resolve",
     "empty": "There are no active alerts.",
     "severities": {
       "CRITICAL": "Critical",
       "HIGH": "High",
       "MEDIUM": "Medium",
-      "LOW": "Low",
-      "limit": "Limit"
+      "LOW": "Low"
     },
     "statuses": {
       "ACTIVE": "Active",
@@ -191,7 +189,6 @@
     "actions": "Actions",
     "start-management": "Start management",
     "resolve": "Resolve",
-    "resolve-confirm": "Resolve the {{ severity }} alert of {{ device }}? It will leave the active list.",
     "rate": "Rate",
     "report": "Report",
     "cancel": "Cancel",

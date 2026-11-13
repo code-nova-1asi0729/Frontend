@@ -1,7 +1,7 @@
 import { BaseEntity } from '../../../shared/domain/model/base-entity';
 
 /**
- * condominium registered in Vigilia. groups the critical device.
+ * condominium registered in Vigilia. groups the critical equipment.
  */
 export class Building implements BaseEntity {
   #id: number;

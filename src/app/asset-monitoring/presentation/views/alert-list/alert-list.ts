@@ -10,7 +10,6 @@ import { AssetMonitoringStore } from '../../../application/asset-monitoring.stor
 import { Alert } from '../../../domain/model/alert.entity';
 import { AlertSeverity } from '../../../domain/model/alert-severity';
 import { AlertStatus } from '../../../domain/model/alert-status';
-import { TranslateService } from '@ngx-translate/core';
 
 /**
  * unit of each monitored metric.
@@ -45,11 +44,10 @@ const METRIC_UNITS: Record<string, string> = {
 })
 export class AlertList {
   readonly store = inject(AssetMonitoringStore);
-  private translate = inject(TranslateService);
 
   displayedColumns: string[] = [
     'severity',
-    'device',
+    'equipment',
     'metric',
     'lastValue',
     'detectedAt',
@@ -101,11 +99,6 @@ export class AlertList {
   }
 
   resolve(alert: Alert): void {
-    const message = this.translate.instant('alerts.resolve-confirm', {
-      device: alert.device?.name ?? '',
-      severity: this.translate.instant('alerts.severities.' + alert.severity),
-    });
-    if (!confirm(message)) return;
     this.store.changeAlertStatus(alert, AlertStatus.RESOLVED);
   }
 }
