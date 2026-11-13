@@ -176,6 +176,7 @@
     "rate-title": "Calificar la solución",
     "reported-at": "Reportado",
     "building": "Edificio",
+    "all-buildings": "Todos los edificios",
     "device": "Dispositivo (opcional)",
     "device-hint": "Elige el dispositivo si el problema está relacionado con uno.",
     "no-device": "Ningún dispositivo en particular",

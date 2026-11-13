@@ -5,6 +5,20 @@
   </button>
 </div>
 
+<mat-form-field class="building-filter" floatLabel="always">
+  <mat-label>{{ 'incidents.building' | translate }}</mat-label>
+  <mat-select
+    [value]="selectedBuildingId()"
+    [placeholder]="'incidents.all-buildings' | translate"
+    (selectionChange)="selectedBuildingId.set($event.value)"
+  >
+    <mat-option [value]="null">{{ 'incidents.all-buildings' | translate }}</mat-option>
+    @for (building of assetMonitoringStore.buildings(); track building.id) {
+      <mat-option [value]="building.id">{{ building.name }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
 @if (store.loading()) {
   <mat-spinner diameter="40" />
 }
@@ -12,7 +26,7 @@
   <p class="error">{{ store.error() }}</p>
 }
 
-<table mat-table [dataSource]="store.incidents()" class="full-width-table">
+<table mat-table [dataSource]="filteredIncidents()" class="full-width-table">
   <ng-container matColumnDef="reportedAt">
     <th mat-header-cell *matHeaderCellDef>{{ 'incidents.reported-at' | translate }}</th>
     <td mat-cell *matCellDef="let incident">

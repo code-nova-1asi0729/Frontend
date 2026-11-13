@@ -1,7 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -19,6 +21,8 @@ import { AssetMonitoringStore } from '../../../../asset-monitoring/application/a
   imports: [
     DatePipe,
     MatTableModule,
+    MatFormFieldModule,
+    MatSelectModule,
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
@@ -30,7 +34,7 @@ import { AssetMonitoringStore } from '../../../../asset-monitoring/application/a
 export class IncidentList {
   readonly store = inject(IncidentsStore);
   private router = inject(Router);
-  private assetMonitoringStore = inject(AssetMonitoringStore);
+  readonly assetMonitoringStore = inject(AssetMonitoringStore);
 
   displayedColumns: string[] = [
     'reportedAt',
@@ -43,6 +47,19 @@ export class IncidentList {
   ];
 
   readonly stars = [1, 2, 3, 4, 5];
+
+  /**
+   * building chosen in the filter. null shows every incident.
+   */
+  readonly selectedBuildingId = signal<number | null>(null);
+
+  readonly filteredIncidents = computed(() => {
+    const buildingId = this.selectedBuildingId();
+    const incidents = this.store.incidents();
+    return buildingId === null
+      ? incidents
+      : incidents.filter((incident) => incident.buildingId === buildingId);
+  });
 
   /**
    * name of the building where the incident was reported.

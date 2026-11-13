@@ -54,3 +54,7 @@
   background: #e6f4ea;
   color: #1e6b34;
 }
+
+.building-filter {
+  min-width: 280px;
+}

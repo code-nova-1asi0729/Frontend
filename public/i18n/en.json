@@ -176,6 +176,7 @@
     "rate-title": "Rate the solution",
     "reported-at": "Reported",
     "building": "Building",
+    "all-buildings": "All buildings",
     "device": "Device (optional)",
     "device-hint": "Choose the device if the problem is related to one.",
     "no-device": "No specific device",
