@@ -110,14 +110,15 @@
     "detected-at": "Detected",
     "status": "Status",
     "actions": "Actions",
-    "acknowledge": "In progress",
+    "acknowledge": "Attend",
     "resolve": "Resolve",
     "empty": "There are no active alerts.",
     "severities": {
       "CRITICAL": "Critical",
       "HIGH": "High",
       "MEDIUM": "Medium",
-      "LOW": "Low"
+      "LOW": "Low",
+      "limit": "Limit"
     },
     "statuses": {
       "ACTIVE": "Active",
@@ -190,7 +191,7 @@
     "actions": "Actions",
     "start-management": "Start management",
     "resolve": "Resolve",
-    "resolve-confirm": "Mark this incident as resolved?",
+    "resolve-confirm": "Resolve the {{ severity }} alert of {{ device }}? It will leave the active list.",
     "rate": "Rate",
     "report": "Report",
     "cancel": "Cancel",

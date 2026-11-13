@@ -110,18 +110,19 @@
     "detected-at": "Detectada",
     "status": "Estado",
     "actions": "Acciones",
-    "acknowledge": "En gestión",
+    "acknowledge": "Atender",
     "resolve": "Resolver",
     "empty": "No hay alertas activas.",
     "severities": {
       "CRITICAL": "Crítica",
       "HIGH": "Alta",
       "MEDIUM": "Media",
-      "LOW": "Baja"
+      "LOW": "Baja",
+      "limit": "Límite"
     },
     "statuses": {
       "ACTIVE": "Activa",
-      "ACKNOWLEDGED": "En gestión",
+      "ACKNOWLEDGED": "En atención",
       "RESOLVED": "Resuelta"
     }
   },
@@ -190,7 +191,7 @@
     "actions": "Acciones",
     "start-management": "Iniciar gestión",
     "resolve": "Resolver",
-    "resolve-confirm": "¿Marcar este incidente como resuelto?",
+    "resolve-confirm": "¿Resolver la alerta {{ severity }} de {{ device }}? Saldrá de la lista de activas.",
     "rate": "Calificar",
     "report": "Reportar",
     "cancel": "Cancelar",
