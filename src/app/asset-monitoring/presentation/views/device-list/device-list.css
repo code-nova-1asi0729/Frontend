@@ -46,14 +46,3 @@
   background: #ececec;
   color: #555555;
 }
-
-.alert-chip {
-  display: inline-block;
-  padding: 2px 10px;
-  border-radius: 12px;
-  background: var(--mat-sys-error-container);
-  color: var(--mat-sys-on-error-container);
-  font-weight: 600;
-  text-decoration: none;
-}
-

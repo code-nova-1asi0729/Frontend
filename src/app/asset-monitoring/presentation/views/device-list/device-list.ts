@@ -13,7 +13,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AssetMonitoringStore } from '../../../application/asset-monitoring.store';
 import { Device } from '../../../domain/model/device.entity';
-import { RouterLink } from '@angular/router';
 
 /**
  * Lists the devices by building (US08) and decommissions it (US09).
@@ -49,7 +48,6 @@ export class DeviceList {
     'location',
     'installationDate',
     'status',
-    'activeAlerts',
     'actions',
   ];
 
@@ -99,9 +97,5 @@ export class DeviceList {
     });
     if (!confirm(message)) return;
     this.store.decommissionDevice(device);
-  }
-
-  activeAlertCount(device: Device): number {
-    return this.store.activeAlerts().filter((alert) => alert.deviceId === device.id).length;
   }
 }
