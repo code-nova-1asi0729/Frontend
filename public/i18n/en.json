@@ -187,6 +187,7 @@
     "actions": "Actions",
     "start-management": "Start management",
     "resolve": "Resolve",
+    "resolve-confirm": "Mark this incident as resolved?",
     "rate": "Rate",
     "report": "Report",
     "cancel": "Cancel",

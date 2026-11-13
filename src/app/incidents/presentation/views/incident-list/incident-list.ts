@@ -5,7 +5,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { IncidentsStore } from '../../../application/incidents.store';
 import { Incident } from '../../../domain/model/incident.entity';
 import { IncidentStatus } from '../../../domain/model/incident-status';
@@ -28,6 +28,7 @@ import { IncidentStatus } from '../../../domain/model/incident-status';
 })
 export class IncidentList {
   readonly store = inject(IncidentsStore);
+  private translate = inject(TranslateService);
   private router = inject(Router);
 
   displayedColumns: string[] = [
@@ -58,6 +59,7 @@ export class IncidentList {
   }
 
   resolve(incident: Incident): void {
+    if (!confirm(this.translate.instant('incidents.resolve-confirm'))) return;
     this.store.resolveIncident(incident);
   }
 

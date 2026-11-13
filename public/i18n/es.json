@@ -187,6 +187,7 @@
     "actions": "Acciones",
     "start-management": "Iniciar gestión",
     "resolve": "Resolver",
+    "resolve-confirm": "¿Marcar este incidente como resuelto?",
     "rate": "Calificar",
     "report": "Reportar",
     "cancel": "Cancelar",
