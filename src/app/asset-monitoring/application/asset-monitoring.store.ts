@@ -1,4 +1,5 @@
 import { Injectable, Signal, computed, inject, signal } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AssetMonitoringApi } from '../infrastructure/asset-monitoring-api';
 import { Building } from '../domain/model/building.entity';
 import { Device } from '../domain/model/device.entity';
@@ -225,7 +226,7 @@ export class AssetMonitoringStore {
       this.setError(error, 'The sensor cannot be assigned');
       return;
     }
-    this.saveSensor(sensor);
+    this.saveSensor(this.assetMonitoringApi.assignSensor(sensor.id, deviceId));
   }
 
   /**
@@ -235,7 +236,7 @@ export class AssetMonitoringStore {
   unassignSensor(sensor: Sensor): void {
     this.errorSignal.set(null);
     sensor.unassign();
-    this.saveSensor(sensor);
+    this.saveSensor(this.assetMonitoringApi.releaseSensor(sensor.id));
   }
 
   /**
@@ -256,9 +257,9 @@ export class AssetMonitoringStore {
     });
   }
 
-  private saveSensor(sensor: Sensor): void {
+  private saveSensor(request: Observable<Sensor>): void {
     this.loadingSignal.set(true);
-    this.assetMonitoringApi.updateSensor(sensor).subscribe({
+    request.subscribe({
       next: (updated) => {
         this.sensorsSignal.update((sensors) =>
           sensors.map((current) => (current.id === updated.id ? updated : current)),

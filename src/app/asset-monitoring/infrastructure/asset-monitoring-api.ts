@@ -69,8 +69,12 @@ export class AssetMonitoringApi extends BaseApi {
     return this.sensorsEndpoint.getAll();
   }
 
-  updateSensor(sensor: Sensor): Observable<Sensor> {
-    return this.sensorsEndpoint.update(sensor, sensor.id);
+  assignSensor(id: number, deviceId: number): Observable<Sensor> {
+    return this.sensorsEndpoint.assign(id, deviceId);
+  }
+
+  releaseSensor(id: number): Observable<Sensor> {
+    return this.sensorsEndpoint.release(id);
   }
 
   getSensorReadings(): Observable<SensorReading[]> {
