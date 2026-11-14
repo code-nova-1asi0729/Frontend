@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-11-14
+
+Version of the web application delivered for AV2.
+
+### Added
+
+- Alerts: each alert shows its limit value, and among alerts of the same severity the most out-of-range one comes first.
+- Alerts: confirmation before resolving an alert, and filters by building and device type.
+- Devices: number of active alerts of each device.
+- Incidents: building of each incident, building filter and confirmation before resolving.
+- Buildings: confirmation before deleting a building.
+- Readings: current and pressure metrics.
+- Terms and conditions and privacy policy views, linked from a footer, and a privacy notice on the first visit.
+
+### Changed
+
+- **Breaking:** critical equipment is now called device in the whole app: `/asset-monitoring/devices` view, `/api/v1/devices` endpoint and `deviceId` field.
+- Alerts: the acknowledge button is now called "Attend".
+- Sensors: assigning and releasing a sensor use the `assignments` and `releases` endpoints of the RESTful API.
+- The README links the renamed Web-services repository.
+
+### Fixed
+
+- Devices: the device list shows the status column again.
+- The terms and privacy views open instead of the page not found view.
+
 ## [0.3.0] - 2026-11-09
 
 ### Added
