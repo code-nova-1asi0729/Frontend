@@ -30,9 +30,9 @@ npm install
 npm start
 ```
 
-Open <http://localhost:4200>. In development the app calls the API on `http://localhost:8080/api/v1`, so run the [backend](https://github.com/code-nova-1asi0729/backend) first.
+Open <http://localhost:4200>. In development the app calls the API on `http://localhost:8080/api/v1`, so run the [Web-services API](https://github.com/code-nova-1asi0729/Web-services) first.
 
-If you do not have the backend running, you can use the fake API from Sprint 2 instead. Run `npm run fake-api` and change the URL in `src/environments/environment.development.ts` to `http://localhost:3000/api/v1`.
+If you do not have the API running, you can use the fake API from Sprint 2 instead. Run `npm run fake-api` and change the URL in `src/environments/environment.development.ts` to `http://localhost:3000/api/v1`.
 
 ## Environments
 
