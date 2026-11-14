@@ -1,0 +1,8 @@
+<article class="legal">
+  <h1>{{ 'privacy.title' | translate }}</h1>
+  <p class="updated">{{ 'privacy.updated' | translate }}</p>
+  @for (section of sections; track section; let i = $index) {
+  <h2>{{ i + 1 }}. {{ 'privacy.' + section + '.title' | translate }}</h2>
+  <p>{{ 'privacy.' + section + '.text' | translate }}</p>
+  }
+</article>

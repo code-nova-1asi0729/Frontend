@@ -1,0 +1,17 @@
+.legal {
+  max-width: 760px;
+}
+
+.legal h2 {
+  margin-top: 24px;
+  font: var(--mat-sys-title-medium);
+}
+
+.legal p {
+  line-height: 1.6;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.updated {
+  font-size: 13px;
+}

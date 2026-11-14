@@ -105,22 +105,26 @@
     "title": "Panel de alertas",
     "active-title": "Alertas activas",
     "show-resolved": "Mostrar resueltas",
+    "filter-building": "Edificio",
+    "filter-type": "Tipo de dispositivo",
+    "all": "Todos",
     "severity": "Severidad",
     "device": "Dispositivo",
     "metric": "Métrica",
     "last-value": "Último valor",
+    "limit": "Límite",
     "detected-at": "Detectada",
     "status": "Estado",
     "actions": "Acciones",
     "acknowledge": "Atender",
     "resolve": "Resolver",
+    "resolve-confirm": "¿Resolver la alerta {{ severity }} de {{ device }}? Saldrá de la lista de activas.",
     "empty": "No hay alertas activas.",
     "severities": {
       "CRITICAL": "Crítica",
       "HIGH": "Alta",
       "MEDIUM": "Media",
-      "LOW": "Baja",
-      "limit": "Límite"
+      "LOW": "Baja"
     },
     "statuses": {
       "ACTIVE": "Activa",
@@ -193,7 +197,7 @@
     "actions": "Acciones",
     "start-management": "Iniciar gestión",
     "resolve": "Resolver",
-    "resolve-confirm": "¿Resolver la alerta {{ severity }} de {{ device }}? Saldrá de la lista de activas.",
+    "resolve-confirm": "¿Marcar este incidente como resuelto?",
     "rate": "Calificar",
     "report": "Reportar",
     "cancel": "Cancelar",
@@ -219,5 +223,71 @@
   "layout": {
     "navigation": "Navegación principal",
     "open-menu": "Abrir menú"
+  },
+  "legal": {
+    "terms": "Términos y condiciones",
+    "privacy": "Política de privacidad",
+    "notice": "Usamos tus datos solo para brindar el servicio. Lee nuestra",
+    "accept": "Aceptar"
+  },
+  "terms": {
+    "title": "Términos y condiciones",
+    "updated": "Última actualización: noviembre de 2026",
+    "acceptance": {
+      "title": "Aceptación",
+      "text": "Al usar la aplicación web de Vigilia aceptas estos términos. Si no estás de acuerdo, por favor no uses el servicio."
+    },
+    "service": {
+      "title": "El servicio",
+      "text": "Vigilia es una plataforma de mantenimiento preventivo de CodeNova. Monitorea los dispositivos de los edificios (bombas de agua, tableros eléctricos, ascensores y aire acondicionado) con sensores IoT, alertas priorizadas y gestión de incidentes."
+    },
+    "use": {
+      "title": "Uso de la aplicación",
+      "text": "Los administradores son responsables de los datos de edificios y dispositivos que registran. Los residentes deben reportar incidentes reales. El servicio no debe usarse con fines ilícitos."
+    },
+    "alerts": {
+      "title": "Alertas y responsabilidad",
+      "text": "Las alertas ayudan a decidir qué atender primero, pero no reemplazan las inspecciones ni el mantenimiento exigidos por ley o por el fabricante. CodeNova no se responsabiliza por daños causados por fallas de los dispositivos."
+    },
+    "data": {
+      "title": "Tus datos",
+      "text": "Usamos tus datos solo para brindar el servicio, como se explica en nuestra política de privacidad."
+    },
+    "changes": {
+      "title": "Cambios en estos términos",
+      "text": "Podemos actualizar estos términos. Los cambios importantes se anunciarán en la aplicación."
+    },
+    "contact": {
+      "title": "Contacto",
+      "text": "Si tienes dudas sobre estos términos, escríbenos a support@codenova.pe."
+    }
+  },
+  "privacy": {
+    "title": "Política de privacidad",
+    "updated": "Última actualización: noviembre de 2026",
+    "data": {
+      "title": "Qué datos recogemos",
+      "text": "Los datos de edificios, dispositivos, sensores y lecturas que registran los administradores, y los incidentes que reportan los residentes: descripción, categoría, edificio y calificación."
+    },
+    "purpose": {
+      "title": "Para qué los usamos",
+      "text": "Solo para monitorear los dispositivos, generar alertas, dar seguimiento a los incidentes y mejorar el servicio."
+    },
+    "sharing": {
+      "title": "Con quién los compartimos",
+      "text": "Con nadie. No vendemos ni alquilamos tus datos. Solo los ven las personas de tu edificio y su empresa de mantenimiento."
+    },
+    "storage": {
+      "title": "Cuánto tiempo los guardamos",
+      "text": "Mientras el servicio esté activo. Después se eliminan o se anonimizan."
+    },
+    "rights": {
+      "title": "Tus derechos",
+      "text": "Puedes pedir el acceso, la rectificación, la cancelación o la oposición (derechos ARCO) sobre tus datos personales, según la Ley N.º 29733 de Protección de Datos Personales."
+    },
+    "contact": {
+      "title": "Contacto",
+      "text": "Escribe a privacy@codenova.pe para ejercer tus derechos o consultar esta política."
+    }
   }
 }

@@ -13,6 +13,24 @@
 
 <div class="toolbar-actions">
   <h2>{{ 'alerts.active-title' | translate }}</h2>
+  <mat-form-field class="filter" floatLabel="always">
+    <mat-label>{{ 'alerts.filter-building' | translate }}</mat-label>
+    <mat-select [value]="buildingFilter()" (selectionChange)="buildingFilter.set($event.value)">
+      <mat-option [value]="null">{{ 'alerts.all' | translate }}</mat-option>
+      @for (building of store.buildings(); track building.id) {
+        <mat-option [value]="building.id">{{ building.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="filter" floatLabel="always">
+    <mat-label>{{ 'alerts.filter-type' | translate }}</mat-label>
+    <mat-select [value]="typeFilter()" (selectionChange)="typeFilter.set($event.value)">
+      <mat-option [value]="null">{{ 'alerts.all' | translate }}</mat-option>
+      @for (type of deviceTypes; track type) {
+        <mat-option [value]="type">{{ 'devices.types.' + type | translate }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
   <mat-slide-toggle [checked]="showResolved()" (change)="showResolved.set($event.checked)">
     {{ 'alerts.show-resolved' | translate }}
   </mat-slide-toggle>
