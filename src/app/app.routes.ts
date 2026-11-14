@@ -25,8 +25,8 @@ export const routes: Routes = [
   { path: 'home', component: Home, title: `${baseTitle} - Home` },
   { path: 'asset-monitoring', loadChildren: assetMonitoringRoutes },
   { path: 'incidents', loadChildren: incidentsRoutes },
+  { path: 'terms', loadComponent: termsOfService, title: `${baseTitle} - Terms and conditions` },
+  { path: 'privacy', loadComponent: privacyPolicy, title: `${baseTitle} - Privacy policy` },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', loadComponent: pageNotFound, title: `${baseTitle} - Page Not Found` },
-  { path: 'terms', loadComponent: termsOfService, title: `${baseTitle} - Terms and conditions` },
-  { path: 'privacy', loadComponent: privacyPolicy, title: `${baseTitle} - Privacy policy`}
 ];
